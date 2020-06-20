@@ -1,0 +1,12 @@
+body {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    text-align: center;
+    font-size: 12px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#calendar {
+    width: 750px;
+    margin: 0 auto;
+}

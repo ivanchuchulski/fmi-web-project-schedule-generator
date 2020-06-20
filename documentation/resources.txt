@@ -2,4 +2,4 @@
 https://fullcalendar.io/
 https://phppot.com/php/php-calendar-event-management-using-fullcalendar-javascript-library/
 
-
+fullcalendar version 4.4.2
