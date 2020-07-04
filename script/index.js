@@ -4,20 +4,21 @@
 
 	myheader.innerText += ", and from js";
 
-	// view the active class in the button, it determines which button is highlighed
+
+	document.getElementById("list-button").addEventListener("click", listView);
+	document.getElementById("grid-button").addEventListener("click", gridView);
+
+	// the "active" class in the button elements determines which button is highlighed
+	// by default we start with list view
     listView();
 
     sendRequest();
 })();
 
 function listView() {
-    // Get the elements with class="column"
-	var elements = document.getElementsByClassName("column");
-
-	// Declare a loop variable
-    var i;
+	let elements = document.getElementsByClassName("column");
     
-    for (i = 0; i < elements.length; i++) {
+    for (let i = 0; i < elements.length; i++) {
         elements[i].style.width = "100%";
     }
 
@@ -25,13 +26,9 @@ function listView() {
 }
 
 function gridView() {
-	// Get the elements with class="column"
-	var elements = document.getElementsByClassName("column");
+	let elements = document.getElementsByClassName("column");
 
-	// Declare a loop variable
-	var i;
-
-    for (i = 0; i < elements.length; i++) {
+    for (let i = 0; i < elements.length; i++) {
         elements[i].style.width = "50%";
     }
 
@@ -39,14 +36,17 @@ function gridView() {
 }
 
 function updateButtonHighlight() {
-    /* Optional: Add active class to the current button (highlight it) */
-	var container = document.getElementById("btnContainer");
-	var btns = container.getElementsByClassName("btn");
+	let container = document.getElementById("btnContainer");
+	let btns = container.getElementsByClassName("btn");
 
-	for (var i = 0; i < btns.length; i++) {
+	for (let i = 0; i < btns.length; i++) {
 		btns[i].addEventListener("click", function () {
-			var current = document.getElementsByClassName("active");
+			let current = document.getElementsByClassName("active");
+			
 			current[0].className = current[0].className.replace(" active", "");
+
+			console.log(this);
+
 			this.className += " active";
 		});
 	}

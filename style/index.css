@@ -1,6 +1,5 @@
 body {
 	display: grid;
-
 	grid-template-columns: 100%;
 	grid-template-rows: 150px auto 80px;
     grid-template-areas: "header" "main" "footer";
@@ -8,8 +7,8 @@ body {
     justify-items: center;
     align-items: center;
 
-	margin: 15px 50px;
-	/* text-align: center; */
+    margin: 15px 50px;
+    
 	font-size: 12px;
 	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -45,25 +44,7 @@ main h1 {
 	color: aqua;
 }
 
-.row, .column {
-    box-sizing: border-box;
-}
-
 /* source https://www.w3schools.com/howto/howto_js_list_grid_view.asp */
-/* Create two equal columns that floats next to each other */
-.column {
-    float: left;
-    width: 50%;
-    padding: 10px;
-}
-
-/* Clear floats after the columns */
-.row:after {
-    content: "";
-    display: table;
-    clear: both;
-}
-/* Style the buttons */
 .btn {
     border: none;
     outline: none;
@@ -81,6 +62,24 @@ main h1 {
     color: white;
 }
 
+/* Create two equal columns that floats next to each other */
+.column {
+    box-sizing: border-box;
+    float: left;
+    width: 50%;
+    padding: 10px;
+}
+
+.row {
+    box-sizing: border-box;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
 
 body footer {
     grid-area: footer;
