@@ -81,6 +81,29 @@ main h1 {
     clear: both;
 }
 
+.event {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    border: 1px solid black;
+}
+
+.details {
+    margin: 15px 15px;
+    border: 1px solid black;
+}
+
+.timeinfo {
+    margin: 15px 15px;
+    border: 1px solid black;
+}
+
+.prefence {
+    margin: 15px 15px;
+    border: 1px solid black;
+}
+
 body footer {
     grid-area: footer;
 }
