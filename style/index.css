@@ -57,7 +57,7 @@ main h1 {
     background-color: #ddd;
 }
 
-.btn.active {
+.active {
     background-color: #666;
     color: white;
 }
@@ -99,9 +99,16 @@ main h1 {
     border: 1px solid black;
 }
 
-.prefence {
+.preference {
+    display: flex;
+    flex-direction: column;
     margin: 15px 15px;
     border: 1px solid black;
+}
+
+.preference .preferenceButton {
+    margin: 5px 3px;
+    padding: 5px 3px;
 }
 
 body footer {

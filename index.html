@@ -6,6 +6,7 @@
 		<title>Project</title>
 		<link rel="stylesheet" href="style/index.css" />
 		<script src="script/index.js" defer></script>
+		<script src="script/preferences.js" defer></script>
 	</head>
 	<body>
 		<header>
@@ -48,14 +49,15 @@
 					<p>Some text..</p>
 				</div>
 			</div>
+
 			<div class="event">
 				<div class="details">
-					<p>author 1</p>
-					<p>theme 1</p>
+					<p class="author">author 1</p>
+					<p class="theme">theme 1</p>
 				</div>
 				<div class="timeinfo">
-					<p>date 1</p>
-					<p>link 1</p>
+					<p class="date">date 1</p>
+					<p class="presentationSite">link 1</p>
 				</div>
 				<form class="preference">
 					<label for="cars">Добави към:</label>
@@ -75,54 +77,34 @@
 			</div>
 			<div class="event">
 				<div class="details">
-					<p>author 1</p>
-					<p>theme 1</p>
+					<p class="author">author 2</p>
+					<p class="theme">theme 2</p>
 				</div>
 				<div class="timeinfo">
-					<p>date 1</p>
-					<p>link 1</p>
+					<p class="date">date 2</p>
+					<p class="presentationSite">link 2</p>
 				</div>
-				<form class="preference">
-					<label for="cars">Добави към:</label>
-					<select name="cars" id="cars">
-						<optgroup label="Swedish Cars">
-							<option value="volvo">Volvo</option>
-							<option value="saab">Saab</option>
-						</optgroup>
-						<optgroup label="German Cars">
-							<option value="mercedes">Mercedes</option>
-							<option value="audi">Audi</option>
-						</optgroup>
-					</select>
-					<br /><br />
-					<input type="submit" value="Submit" />
-				</form>
+				<div class="preference">
+					<button class="preferenceButton willAttend">will attend</button>
+					<button class="preferenceButton couldAttend">could attend</button>
+				</div>
 			</div>
 			<div class="event">
 				<div class="details">
-					<p>author 1</p>
-					<p>theme 1</p>
+					<p class="author">author 3</p>
+					<p class="theme">theme 3</p>
 				</div>
 				<div class="timeinfo">
-					<p>date 1</p>
-					<p>link 1</p>
+					<p class="date">date 3</p>
+					<p class="presentationSite">link 3</p>
 				</div>
-				<form class="preference">
-					<label for="cars">Добави към:</label>
-					<select name="cars" id="cars">
-						<optgroup label="Swedish Cars">
-							<option value="volvo">Volvo</option>
-							<option value="saab">Saab</option>
-						</optgroup>
-						<optgroup label="German Cars">
-							<option value="mercedes">Mercedes</option>
-							<option value="audi">Audi</option>
-						</optgroup>
-					</select>
-					<br /><br />
-					<input type="submit" value="Submit" />
-				</form>
+				<div class="preference">
+					<button class="preferenceButton willAttend">will attend</button>
+					<button class="preferenceButton couldAttend">could attend</button>
+				</div>
 			</div>
+
+
 		</main>
 		<footer>
 			<p>created by : Daniel, Viktor, Ivan</p>
