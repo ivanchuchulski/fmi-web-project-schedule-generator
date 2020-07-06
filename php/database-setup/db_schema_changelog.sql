@@ -24,6 +24,7 @@ CREATE TABLE `presentation` (
   `theme` VARCHAR(255) NOT NULL,
   `presentDate` DATETIME NOT NULL,
   `presenterName` VARCHAR(255) NOT NULL,
+  `place` VARCHAR(255) NOT NULL,
   CONSTRAINT `presentation_pk` PRIMARY KEY (`theme`)
 );
 

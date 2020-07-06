@@ -2,8 +2,7 @@
 -- these are prepared statements
 
 -- insert
-INSERT INTO users (firstname, surname, major, course, studentGroup, facultynum) 
-VALUES(:firstname, :surname, :major, :course, :studentGroup, motivation, :facultynum);
+INSERT INTO user (username, password, email) VALUES(:username, :password, :email);
 
 -- select by facultynum
-SELECT * FROM users WHERE facultynum=:facultynum;
+SELECT * FROM user WHERE username=:username;

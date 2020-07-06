@@ -29,7 +29,7 @@ function register(clickEvent) {
         console.log("formData :");
         printObject(formData);
 
-        // sendAjaxRequest('backend/register.php', 'POST', `formData=${JSON.stringify(formData)}`);
+        sendRegistrationRequest('php/api.php/registration', 'POST', `formData=${JSON.stringify(formData)}`);
     }
     catch (exception) {
         displayRegistrationError(exception);
@@ -58,8 +58,8 @@ function login(clickEvent) {
 }
 
 function validateEmail(elementId) {
-    const lowerLimit = 3;
-    const upperLimit = 35;
+    const lowerLimit = 5;
+    const upperLimit = 50;
     const pattern = `^[A-Za-z_-]{${lowerLimit},${upperLimit}}@[a-z]+\.[a-z]+$`;
     const regex = new RegExp(pattern);
 
@@ -78,7 +78,7 @@ function validateEmail(elementId) {
 
 function validateUsername(elementId) {
     const lowerLimit = 3;
-    const upperLimit = 20;
+    const upperLimit = 50;
     const pattern = `^[A-Za-z-_]{${lowerLimit},${upperLimit}}$`;
     const regex = new RegExp(pattern);
 
@@ -97,7 +97,7 @@ function validateUsername(elementId) {
 
 function validatePassword(elementId) {
     const lowerLimit = 6;
-    const upperLimit = 10;
+    const upperLimit = 20;
     const pattern = `^[A-Za-z0-9]{${lowerLimit},${upperLimit}}$`;
     const regex = new RegExp(pattern);
 
@@ -194,24 +194,25 @@ function removeHTMLSpecialCharacters(str) {
       return str.replace(/[&<>"']/g, function(symbol) { return htmlSpecialCharactersMap[symbol]; });
 }
 
-function sendAjaxRequest(url, method, data) {
+function sendRegistrationRequest(url, method, data) {
     let xhr = new XMLHttpRequest();
 
-    xhr.addEventListener('load', r => requestHandler(xhr));
+    xhr.addEventListener('load', r => registrationRequestHandler(xhr));
 
     xhr.open(method, url, true);
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhr.send(data);
 }
 
-function requestHandler(xhr) {
+function registrationRequestHandler(xhr) {
     let response = JSON.parse(xhr.responseText);
     
     if (response.success) {
-        displaySuccessPage('success.html');
+        console.log('success');
+        // displaySuccessPage('success.html');
     }
     else {
-        displayErrors(response.error);
+        displayRegistrationError(response.error);
     }
 }
 
