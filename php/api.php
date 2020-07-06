@@ -76,11 +76,11 @@ function validateEmail($nameOfTheField) {
 	$textField = $formData[$nameOfTheField];
 
 	if (!$textField) {
-		throw new Exception("грешка : имейл е задължително поле");
+		throw new Exception("грешка: имейлът е задължително поле");
 	}
 
 	if (!preg_match($pattern, $textField)) {
-		throw new Exception("грешка : имейлът трябва да е във формат : examplep@domain.com");
+		throw new Exception("грешка: имейлът трябва да е във формат example@domain.com");
 	}
 
 	return formatInput($textField);
@@ -95,11 +95,11 @@ function validateUsername($nameOfTheField) {
 	$textField = $formData[$nameOfTheField];
 
 	if (!$textField) {
-		throw new Exception("грешка : потребителското име е задължително поле");
+		throw new Exception("грешка: потребителското име е задължително поле");
 	}
 
 	if (!preg_match($pattern, $textField)) {
-		throw new Exception("грешка : потребителското име трябва да съдържа само букви, цифри и _");
+		throw new Exception("грешка: потребителското име трябва да съдържа само букви, цифри и _");
 	}
 
 	return formatInput($textField);
@@ -114,11 +114,11 @@ function validatePassword($nameOfTheField) {
 	$textField = $formData[$nameOfTheField];
 
 	if (!$textField) {
-		throw new Exception("грешка : потребителското име е задължително поле");
+		throw new Exception("грешка: паролата е задължително поле");
 	}
 
 	if (!preg_match($pattern, $textField)) {
-		throw new Exception("грешка : потребителското име трябва да съдържа само букви, цифри и _");
+		throw new Exception("грешка: паролата трябва да съдържа само букви или цифри");
 	}
 
 	return formatInput($textField);

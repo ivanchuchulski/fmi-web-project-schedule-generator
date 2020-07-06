@@ -66,11 +66,11 @@ function validateEmail(elementId) {
     let email = document.getElementById(`${elementId}`).value;
 
     if (email === '') {
-        throw 'error : email is required';
+        throw 'грешка: имейлът е задължително поле';
     }
 
     if (!email.match(regex)) {
-        throw 'error : email must have the following form : example@domain-name.com';
+        throw 'грешка: имейлът трябва да е във формат example@domain.com';
     }
     
     return formatInput(email);
@@ -85,11 +85,11 @@ function validateUsername(elementId) {
     let username = document.getElementById(`${elementId}`).value;
 
     if (username === '') {
-        throw 'error : username is required';
+        throw 'грешка: потребителското име е задължително поле';
     }
 
     if (!username.match(regex)) {
-        throw `error : username must contain only letters and be between ${lowerLimit} and ${upperLimit} symbols`;
+        throw `грешка: потребителското име трябва да съдържа само букви, цифри и _`;
     }
     
     return formatInput(username);
@@ -112,19 +112,19 @@ function validatePassword(elementId) {
     // }
 
     if (password === '') {
-        throw `error : ${elementId} is required`;
+        throw `грешка: ${elementId} е задължително поле`;
     }
 
     if (!containsUppercaseLetter(password)) {
-        throw `error : ${elementId} must contain only at least one uppercase letter`;
+        throw `грешка: ${elementId} трябва да съдържа поне една главна буква`;
     }
 
     if (!containsDigit(password)) {
-        throw `error : ${elementId} must contain only at least one digit`;
+        throw `грешка: ${elementId} трябва да съдържа поне една цифра`;
     }
 
     if (!password.match(regex)) {
-        throw `error : password must contain only at least one uppercase letter, at least one digit and be between ${lowerLimit} and ${upperLimit} symbols`;
+        throw `грешка: ${elementId} трябва да има дължина между ${lowerLimit} и ${upperLimit} символа`;
     }
     
     return formatInput(password);
@@ -134,7 +134,7 @@ function validateLoginUsername(elementId) {
     let username = document.getElementById(`${elementId}`).value;
 
     if (username === '') {
-        throw 'грешка : потребителското име е задължително';
+        throw 'грешка: потребителското име е задължително';
     }
 
     
@@ -145,7 +145,7 @@ function validateLoginPassword(elementId) {
     let password = document.getElementById(`${elementId}`).value;
 
     if (password === '') {
-        throw 'грешка : паролата е задължително поле';
+        throw 'грешка: паролата е задължително поле';
     }
 
     return formatInput(password);
@@ -153,7 +153,7 @@ function validateLoginPassword(elementId) {
 
 function checkIfPasswordsMatch(password, passwordRepeated) {
     if (password !== passwordRepeated) {
-        throw 'passwords do not match';
+        throw 'грешка: паролите трябва да съвпадат';
     }
 }
 
