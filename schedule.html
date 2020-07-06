@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Project</title>
+		<link rel="stylesheet" href="style/index.css" />
+		<script src="script/index.js" defer></script>
+		<script src="script/preferences.js" defer></script>
+	</head>
+	<body>
+		<header>
+			<nav>
+				<button><a href="index.html">schedule</a></button>
+				<button><a href="personalised-schedule.html">view personalised schedule</a></button>
+				<button><a href="export-schedule.html">export schedule</a></button>
+			</nav>
+		</header>
+		<main>
+			<h1 id="myh1">hello world</h1>
+			<h2>List View or Grid View</h2>
+
+			<p>Click on a button to choose list view or grid view.</p>
+
+			<div id="btnContainer">
+				<button id="list-button" class="btn active">List</button>
+				<button id="grid-button" class="btn">Grid</button>
+			</div>
+			<br />
+
+			<div class="row">
+				<div class="column" style="background-color: #aaa;">
+					<h2>Column 1</h2>
+					<p>Some text..</p>
+				</div>
+				<div class="column" style="background-color: #bbb;">
+					<h2>Column 2</h2>
+					<p>Some text..</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="column" style="background-color: #ccc;">
+					<h2>Column 3</h2>
+					<p>Some text..</p>
+				</div>
+				<div class="column" style="background-color: #ddd;">
+					<h2>Column 4</h2>
+					<p>Some text..</p>
+				</div>
+			</div>
+			<div class="event">
+				<div class="details">
+					<p class="presenter">presenter 2 <span class="studentDetails"></span></p>
+					<p class="theme">theme 2</p>
+				</div>
+				<div class="timeinfo">
+					<p class="date">date 2</p>
+					<p class="presentationSite">link 2</p>
+				</div>
+				<div class="preference">
+					<button class="preferenceButton willAttend">will attend</button>
+					<button class="preferenceButton couldAttend">could attend</button>
+				</div>
+			</div>
+			<div class="event">
+				<div class="details">
+					<p class="presenter">presenter 3</p>
+					<p class="theme">theme 3</p>
+				</div>
+				<div class="timeinfo">
+					<p class="date">date 3</p>
+					<p class="presentationSite">link 3</p>
+				</div>
+				<div class="preference">
+					<button class="preferenceButton willAttend">will attend</button>
+					<button class="preferenceButton couldAttend">could attend</button>
+				</div>
+			</div>
+
+
+		</main>
+		<footer>
+			<p>created by : Daniel, Viktor, Ivan</p>
+		</footer>
+	</body>
+</html>

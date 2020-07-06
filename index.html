@@ -2,83 +2,91 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Project</title>
+		<title>login</title>
 		<link rel="stylesheet" href="style/index.css" />
-		<script src="script/index.js" defer></script>
-		<script src="script/preferences.js" defer></script>
 	</head>
 	<body>
 		<header>
-			<nav>
-				<button><a href="index.html">schedule</a></button>
-				<button><a href="personalised-schedule.html">view personalised schedule</a></button>
-				<button><a href="export-schedule.html">export schedule</a></button>
-			</nav>
+			<h2 id="main-heading">Система за генериране на разписание</h2>
+
+			<h4 id="subheading">
+				За да разгледате разписанието създайте нов акаунт или влезте в съществуващ такъв
+			</h4>
 		</header>
-		<main>
-			<h1 id="myh1">hello world</h1>
-			<h2>List View or Grid View</h2>
 
-			<p>Click on a button to choose list view or grid view.</p>
+		<div id="container">
+			<div id="registration-form">
+				<div id="registration-heading">
+					<h2>Регистрация</h2>
+				</div>
 
-			<div id="btnContainer">
-				<button id="list-button" class="btn active">List</button>
-				<button id="grid-button" class="btn">Grid</button>
-			</div>
-			<br />
+				<form action="register.php" method="POST">
+					<div class="input-box">
+						<input
+							type="text"
+							name="reg-username"
+							id="reg-username"
+							placeholder="Потребителско име"
+						/>
+					</div>
 
-			<div class="row">
-				<div class="column" style="background-color: #aaa;">
-					<h2>Column 1</h2>
-					<p>Some text..</p>
-				</div>
-				<div class="column" style="background-color: #bbb;">
-					<h2>Column 2</h2>
-					<p>Some text..</p>
-				</div>
-			</div>
-			<div class="row">
-				<div class="column" style="background-color: #ccc;">
-					<h2>Column 3</h2>
-					<p>Some text..</p>
-				</div>
-				<div class="column" style="background-color: #ddd;">
-					<h2>Column 4</h2>
-					<p>Some text..</p>
-				</div>
-			</div>
-			<div class="event">
-				<div class="details">
-					<p class="presenter">presenter 2 <span class="studentDetails"></span></p>
-					<p class="theme">theme 2</p>
-				</div>
-				<div class="timeinfo">
-					<p class="date">date 2</p>
-					<p class="presentationSite">link 2</p>
-				</div>
-				<div class="preference">
-					<button class="preferenceButton willAttend">will attend</button>
-					<button class="preferenceButton couldAttend">could attend</button>
-				</div>
-			</div>
-			<div class="event">
-				<div class="details">
-					<p class="presenter">presenter 3</p>
-					<p class="theme">theme 3</p>
-				</div>
-				<div class="timeinfo">
-					<p class="date">date 3</p>
-					<p class="presentationSite">link 3</p>
-				</div>
-				<div class="preference">
-					<button class="preferenceButton willAttend">will attend</button>
-					<button class="preferenceButton couldAttend">could attend</button>
-				</div>
-			</div>
+					<div class="input-box">
+						<input type="email" name="email" id="email" placeholder="E-mail" />
+					</div>
 
+					<div class="input-box">
+						<input
+							type="password"
+							name="reg-password"
+							id="reg-password"
+							placeholder="Парола"
+						/>
+					</div>
 
-		</main>
+					<div class="input-box">
+						<input
+							type="password"
+							name="passwordRepeated"
+							id="passwordRepeated"
+							placeholder="Потвърди паролата"
+						/>
+					</div>
+
+					<div id="register-box">
+						<input type="submit" value="Регистрирай се" id="register-button" />
+					</div>
+				</form>
+			</div>
+			<div id="login-form">
+				<div id="login-heading">
+					<h2>Вход</h2>
+				</div>
+
+				<form action="login.php" method="POST">
+					<div class="input-box">
+						<input
+							type="text"
+							name="login-username"
+							id="login-username"
+							placeholder="Потребителско име"
+						/>
+					</div>
+
+					<div class="input-box">
+						<input
+							type="password"
+							name="login-password"
+							id="login-password"
+							placeholder="Парола"
+						/>
+					</div>
+
+					<div id="enter-box">
+						<input type="submit" value="Влез" id="enter-button" />
+					</div>
+				</form>
+			</div>
+		</div>
 		<footer>
 			<p>created by : Daniel, Viktor, Ivan</p>
 		</footer>
