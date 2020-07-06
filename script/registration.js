@@ -1,9 +1,11 @@
+// TODO
+// make error messages in bulgarian
 (function() {
     let registerButton = document.getElementById('register-button');
     let enterButton = document.getElementById('enter-button');
 
     registerButton.addEventListener('click', register);
-    // enterButton.addEventListener('click', login);
+    enterButton.addEventListener('click', login);
 })();
 
 function register(clickEvent) {
@@ -26,7 +28,6 @@ function register(clickEvent) {
 
         console.log("formData :");
         printObject(formData);
-        fail;
 
         // sendAjaxRequest('backend/register.php', 'POST', `formData=${JSON.stringify(formData)}`);
     }
@@ -36,9 +37,24 @@ function register(clickEvent) {
 }
 
 function login(clickEvent) {
-    clickEvent.preventDefault();
+    try {
+        clickEvent.preventDefault();
 
-    console.log('login');
+        let formData = {
+                usernameRegister : null,
+                passwordRegister : null
+        };
+    
+        formData['usernameRegister'] = validateLoginUsername('login-username');
+        formData['passwordRegister'] = validateLoginPassword('login-password');
+        
+        console.log("formData :");
+        printObject(formData);
+
+    }
+    catch (exception) {
+        displayLoginError(exception);
+    }
 }
 
 function validateEmail(elementId) {
@@ -87,8 +103,16 @@ function validatePassword(elementId) {
 
     let password = document.getElementById(`${elementId}`).value;
 
+    // display error messages depending on the calling field
+    // if (`${elementId}` === 'register-password-repeated') {
+
+    // }
+    // else {
+
+    // }
+
     if (password === '') {
-        throw 'error : password is required';
+        throw `error : ${elementId} is required`;
     }
 
     if (!containsUppercaseLetter(password)) {
@@ -106,10 +130,28 @@ function validatePassword(elementId) {
     return formatInput(password);
 }
 
+function validateLoginUsername(elementId) {
+    let username = document.getElementById(`${elementId}`).value;
+
+    if (username === '') {
+        throw 'грешка : потребителското име е задължително';
+    }
+
+    
+    return formatInput(username);
+}
+
+function validateLoginPassword(elementId) {
+    let password = document.getElementById(`${elementId}`).value;
+
+    if (password === '') {
+        throw 'грешка : паролата е задължително поле';
+    }
+
+    return formatInput(password);
+}
+
 function checkIfPasswordsMatch(password, passwordRepeated) {
-    console.log('opa');
-    console.log(password);
-    console.log(passwordRepeated);
     if (password !== passwordRepeated) {
         throw 'passwords do not match';
     }
