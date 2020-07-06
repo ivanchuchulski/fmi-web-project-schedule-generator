@@ -13,9 +13,9 @@ function register(clickEvent) {
         clickEvent.preventDefault();
 
         let formData = {
-                emailRegister : null,
-                usernameRegister : null,
-                passwordRegister : null
+            emailRegister : null,
+            usernameRegister : null,
+            passwordRegister : null
         };
 
         // Qwerty1234
@@ -29,7 +29,9 @@ function register(clickEvent) {
         console.log("formData :");
         printObject(formData);
 
-        sendRegistrationRequest('php/api.php/registration', 'POST', `formData=${JSON.stringify(formData)}`);
+        const REGISTER_REQUEST_URL = 'php/api.php/registration';
+        const REGISTER_METHOD = 'POST';
+        sendRegistrationRequest(REGISTER_REQUEST_URL, REGISTER_METHOD, `formData=${JSON.stringify(formData)}`);
     }
     catch (exception) {
         displayRegistrationError(exception);
@@ -41,16 +43,20 @@ function login(clickEvent) {
         clickEvent.preventDefault();
 
         let formData = {
-                usernameRegister : null,
-                passwordRegister : null
+            usernameLogin : null,
+            passwordLogin : null
         };
     
-        formData['usernameRegister'] = validateLoginUsername('login-username');
-        formData['passwordRegister'] = validateLoginPassword('login-password');
+        formData['usernameLogin'] = validateLoginUsername('login-username');
+        formData['passwordLogin'] = validateLoginPassword('login-password');
         
         console.log("formData :");
         printObject(formData);
 
+        const LOGIN_REQUEST_URL = 'php/api.php/login';
+        const LOGIN_METHOD = 'POST';
+
+        sendLoginRequest(LOGIN_REQUEST_URL, LOGIN_METHOD, `formData=${JSON.stringify(formData)}`);
     }
     catch (exception) {
         displayLoginError(exception);
@@ -204,19 +210,43 @@ function sendRegistrationRequest(url, method, data) {
     xhr.send(data);
 }
 
+function sendLoginRequest(url, method, data) {
+    let xhr = new XMLHttpRequest();
+
+    xhr.addEventListener('load', r => loginRequestHandler(xhr));
+
+    xhr.open(method, url, true);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhr.send(data);
+}
+
 function registrationRequestHandler(xhr) {
     let response = JSON.parse(xhr.responseText);
     
     if (response.success) {
         console.log('success');
-        // displaySuccessPage('success.html');
+        let regForm = document.getElementById('registration');
+        regForm.reset();
+        displayRegistrationError("успешна регистрация");
     }
     else {
         displayRegistrationError(response.error);
     }
 }
 
-function displaySuccessPage(pageURL) {
+function loginRequestHandler(xhr) {
+    let response = JSON.parse(xhr.responseText);
+    
+    if (response.success) {
+        console.log('success');
+        displaySchedulePage('schedule.html')
+    }
+    else {
+        displayLoginError(response.error);
+    }
+}
+
+function displaySchedulePage(pageURL) {
     window.location = pageURL;
 }
 
