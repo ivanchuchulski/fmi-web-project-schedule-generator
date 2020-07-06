@@ -18,6 +18,9 @@ function start() {
 	elseif (preg_match("/logout$/", $requestURL)) {
 		logout();
 	}
+	elseif (preg_match("/loadSchedule$/", $requestURL)) {
+		loadSchedule();
+	}
 	else {
 		echo json_encode(["error" => "Не е намерен такъв URL"]);
 	}
@@ -181,6 +184,23 @@ function formatInput($formField): string {
 	$formField = htmlspecialchars($formField);
 
 	return $formField;
+}
+
+function loadSchedule() {
+	try {
+		$events = file_get_contents("json/presentations.json");
+
+		if (!isset($events)) {
+			throw new Exception("грешка : файлът с презентациите не може да бъде намерен");
+		}
+
+		$response = ['success' => true, 'data' => $events];
+		echo json_encode($response);
+	}
+	catch (Exception $exception) {
+		$response = ['success' => false, 'error' => $exception->getMessage()];
+		echo json_encode($response);
+	}
 }
 
 ?>

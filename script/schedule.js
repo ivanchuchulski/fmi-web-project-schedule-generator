@@ -1,5 +1,7 @@
 // using the javascript immediately-invoked function expression (IIFE)
 (function () {
+    window.onload = () => loadEvents();
+
 	let myheader = document.getElementById("myh1");
 
 	myheader.innerText += ", and from js";
@@ -12,7 +14,7 @@
 	// by default we start with list view
     listView();
 
-    sendRequest();
+
 })();
 
 function listView() {
@@ -52,12 +54,11 @@ function updateButtonHighlight() {
 	}
 }
 
-function sendRequest() {
-	const url = "php/test.php";
-	const method = "POST";
-	let data = "opa";
+function loadEvents() {
+	const LOAD_SCHEDULE_URL = "php/api.php/loadSchedule";
+	const LOAD_SCHEDULE_METHOD = "GET";
 
-	ajaxRequest(url, method, `data=${JSON.stringify(data)}`);
+	ajaxRequest(LOAD_SCHEDULE_URL, LOAD_SCHEDULE_METHOD);
 }
 
 function ajaxRequest(url, method, data) {
@@ -66,24 +67,47 @@ function ajaxRequest(url, method, data) {
 	xhr.addEventListener("load", () => requestHandler(xhr));
 
 	xhr.open(method, url, true);
-	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhr.setRequestHeader("Content-type", "application/json");
 	xhr.send(data);
 }
 
 function requestHandler(xhr) {
-	const SUCCESS = 200;
 	let response = JSON.parse(xhr.responseText);
 
-	if (xhr.status === SUCCESS) {
-		printObject(response);
-	} else {
-		logError(response);
-	}
+	if (response.success) {
+        console.log('success load schedule');
+		printObject(response.data);
+		drawEvents(response.data);
+    }
+    else {
+		console.log('error : load schedule');
+    }
 }
 
 function printObject(object) {
-	console.log("response : ");
+	let jsonAsString = JSON.parse(object);
+	
+	console.log("print object : ");
 	console.log(JSON.stringify(object, null, 4));
+	console.log(jsonAsString);
+}
+
+function drawEvents(events) {
+	let eventParent = document.getElementById('event-list');
+
+	console.log("events : ");
+	console.log(events);
+	console.log(JSON.stringify(JSON.parse(events), null, 4));
+	
+	let eventList = JSON.parse(events); 
+	console.log(JSON.stringify(eventList, null, 4));
+
+	// draw in html
+}
+
+function drawEvents(events) {
+	let eventParent = document.getElementById('event-list');
+
 }
 
 function logError(object) {
