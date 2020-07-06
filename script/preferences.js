@@ -6,11 +6,14 @@
 	for (let i = 0; i < preferenceButtons.length; i++) {
 		preferenceButtons[i].addEventListener("click", addToPreferences);
 	}
+
 })();
 
 // maybe not directly write to db when manipulating preferences, but add them to some list 
 // which is passed as parameter, and at clicking on 'generate personal' pass the list at once
 function addToPreferences() {
+	const ACITVE_CLASSNAME = "active";
+
 	// first check if the this button is active
 	if (this.classList.contains("active")) {
         removeHightlight(this);
@@ -25,7 +28,6 @@ function addToPreferences() {
 
 
 	// if its not, then find its active sibiling and remove it 
-
 	let preferenceButtons = this.parentElement.getElementsByClassName("preferenceButton");
 
 	for (let i = 0; i < preferenceButtons.length; i++) {

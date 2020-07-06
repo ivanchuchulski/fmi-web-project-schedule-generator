@@ -63,7 +63,7 @@ function sendRequest() {
 function ajaxRequest(url, method, data) {
 	let xhr = new XMLHttpRequest();
 
-	xhr.addEventListener("load", (r) => requestHandler(xhr));
+	xhr.addEventListener("load", () => requestHandler(xhr));
 
 	xhr.open(method, url, true);
 	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
