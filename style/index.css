@@ -44,20 +44,11 @@ h4[id="subheading"] {
 div[id="registration-form"] {
     float: left;
     width: 314px;
-    height: 320px;
+    height: 360px;
     margin-left: 18px;
     margin-right: 1px;
 
     /* background-color: aqua; */
-}
-
-div[id="login-form"] {
-    float: right;
-    width: 314px;
-    height: 320px;
-    margin-right: 18px;
-
-    background-color: #2c6460;
 }
 
 div[id="registration-heading"] {
@@ -71,6 +62,26 @@ div[id="registration-heading"] {
     color: #2c6460;
     font-size: 12px;
     text-transform: uppercase;
+    text-align: center;
+}
+
+
+#register-error, #login-error {
+    display: block;
+    padding: 7px;
+
+    font-size: 17px;
+    text-align: center;
+    color: red;
+}
+
+div[id="login-form"] {
+    float: right;
+    width: 314px;
+    height: 335px;
+    margin-right: 18px;
+
+    background-color: #2c6460;
 }
 
 div[id="login-heading"] {
@@ -84,6 +95,7 @@ div[id="login-heading"] {
     color: white;
     font-size: 12px;
     text-transform: uppercase;
+    text-align: center;
 }
 
 div[class="input-box"] {
@@ -94,10 +106,10 @@ div[class="input-box"] {
     padding-bottom: 10px;
 }
 
-input[id="email"],
-input[id="reg-username"],
-input[id="reg-password"],
-input[id="passwordRepeated"],
+input[id="register-email"],
+input[id="register-username"],
+input[id="register-password"],
+input[id="register-password-repeated"],
 input[id="login-username"],
 input[id="login-password"],
 input[id="about-me"] {

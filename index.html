@@ -4,6 +4,7 @@
 		<meta charset="UTF-8" />
 		<title>login</title>
 		<link rel="stylesheet" href="style/index.css" />
+		<script src="script/registration.js" defer></script>
 	</head>
 	<body>
 		<header>
@@ -19,35 +20,24 @@
 				<div id="registration-heading">
 					<h2>Регистрация</h2>
 				</div>
-
-				<form action="register.php" method="POST">
+				<form>
+					<label id="register-error"></label>
 					<div class="input-box">
-						<input
-							type="text"
-							name="reg-username"
-							id="reg-username"
-							placeholder="Потребителско име"
-						/>
+						<input type="email" name="email" id="register-email" placeholder="E-mail" />
 					</div>
 
 					<div class="input-box">
-						<input type="email" name="email" id="email" placeholder="E-mail" />
+						<input type="text" id="register-username" placeholder="Потребителско име" />
 					</div>
 
 					<div class="input-box">
-						<input
-							type="password"
-							name="reg-password"
-							id="reg-password"
-							placeholder="Парола"
-						/>
+						<input type="password" id="register-password" placeholder="Парола" />
 					</div>
 
 					<div class="input-box">
 						<input
 							type="password"
-							name="passwordRepeated"
-							id="passwordRepeated"
+							id="register-password-repeated"
 							placeholder="Потвърди паролата"
 						/>
 					</div>
@@ -62,23 +52,14 @@
 					<h2>Вход</h2>
 				</div>
 
-				<form action="login.php" method="POST">
+				<form>
+					<label id="login-error"></label>
 					<div class="input-box">
-						<input
-							type="text"
-							name="login-username"
-							id="login-username"
-							placeholder="Потребителско име"
-						/>
+						<input type="text" id="login-username" placeholder="Потребителско име" />
 					</div>
 
 					<div class="input-box">
-						<input
-							type="password"
-							name="login-password"
-							id="login-password"
-							placeholder="Парола"
-						/>
+						<input type="password" id="login-password" placeholder="Парола" />
 					</div>
 
 					<div id="enter-box">
