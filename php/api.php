@@ -21,6 +21,9 @@ function start() {
 	elseif (preg_match("/loadSchedule$/", $requestURL)) {
 		loadSchedule();
 	}
+	elseif (preg_match("/generatePersonalSchedule$/", $requestURL)) {
+		generatePersonalSchedule();
+	}
 	else {
 		echo json_encode(["error" => "Не е намерен такъв URL"]);
 	}
@@ -82,6 +85,28 @@ function loadSchedule() {
 	catch (Exception $exception) {
 		$response = ['success' => false, 'error' => $exception->getMessage()];
 		echo json_encode($response);
+	}
+}
+
+function generatePersonalSchedule() {
+	try {
+		// TODO : check if its empty
+
+		$preferencesData = json_decode($_POST['preferencesData'], true);
+
+		foreach ($preferencesData as $preference) {
+			var_dump($preference);
+
+			$theme = $preference['theme'];
+			$presenter = $preference['presenter'];
+			$preference = $preference['preference'];
+		}
+
+		var_dump($preferencesData);
+
+	}
+	catch (Exception $exception) {
+
 	}
 }
 

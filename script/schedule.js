@@ -20,40 +20,20 @@ function loadEvents() {
 	const LOAD_SCHEDULE_URL = "php/api.php/loadSchedule";
 	const LOAD_SCHEDULE_METHOD = "GET";
 
-	ajaxRequest(LOAD_SCHEDULE_URL, LOAD_SCHEDULE_METHOD);
+	ajaxLoadRequest(LOAD_SCHEDULE_URL, LOAD_SCHEDULE_METHOD);
 }
 
-function ajaxRequest(url, method, data) {
+function ajaxLoadRequest(url, method, data) {
 	let xhr = new XMLHttpRequest();
 
-	xhr.addEventListener("load", () => requestHandler(xhr));
+	xhr.addEventListener("load", () => ajaxLoadHandler(xhr));
 
 	xhr.open(method, url, true);
 	xhr.setRequestHeader("Content-type", "application/json");
 	xhr.send(data);
 }
 
-function generatePersonalisedSchedule() {
-	const ACITVE_CLASSNAME = "active";
-	let preferences = [];
-	let preferenceButtons = document.getElementsByClassName("preferenceButton");
-
-	for (let i = 0; i < preferenceButtons.length; i++) {
-		if (preferenceButtons[i].classList.contains(ACITVE_CLASSNAME)) {
-			preferences.push(generatePreferenceDetails(preferenceButtons[i]));
-		}
-	}
-
-	console.log("preferences");
-	console.log(preferences);
-
-	// const LOAD_SCHEDULE_URL = "php/api.php/loadSchedule";
-	// const LOAD_SCHEDULE_METHOD = "GET";
-
-	// ajaxRequest(LOAD_SCHEDULE_URL, LOAD_SCHEDULE_METHOD);
-}
-
-function requestHandler(xhr) {
+function ajaxLoadHandler(xhr) {
 	let response = JSON.parse(xhr.responseText);
 
 	if (response.success) {
@@ -149,6 +129,32 @@ function removeHightlight(preferenceButton) {
 	preferenceButton.className = preferenceButton.className.replace(" active", "");
 }
 
+function generatePersonalisedSchedule() {
+	const ACITVE_CLASSNAME = "active";
+	let preferences = [];
+	let preferenceButtons = document.getElementsByClassName("preferenceButton");
+
+	for (let i = 0; i < preferenceButtons.length; i++) {
+		if (preferenceButtons[i].classList.contains(ACITVE_CLASSNAME)) {
+			preferences.push(generatePreferenceDetails(preferenceButtons[i]));
+		}
+	}
+
+	if (preferences.length === 0) {
+		displayMessage("не сте избрали никакви събития!");
+		// goToPersonalSchedulePage('personalised-schedule.html');
+		return;
+	}
+
+	console.log("preferences");
+	console.log(preferences);
+
+	const LOAD_SCHEDULE_URL = "php/api.php/generatePersonalSchedule";
+	const LOAD_SCHEDULE_METHOD = "POST";
+
+	ajaxPersonalScheduleRequest(LOAD_SCHEDULE_URL, LOAD_SCHEDULE_METHOD, `preferencesData=${JSON.stringify(preferences)}`);
+}
+
 function generatePreferenceDetails(preferenceButton) {
 	const PRESENTER_CLASSNAME = "presenter";
 	const THEME_CLASSNAME = "theme";
@@ -158,10 +164,35 @@ function generatePreferenceDetails(preferenceButton) {
 	let preferenceObj = {
 		presenter: event.getElementsByClassName(PRESENTER_CLASSNAME)[0].innerText,
 		theme: event.getElementsByClassName(THEME_CLASSNAME)[0].innerText,
-		preference: preferenceButton.innerText,
+		preference: preferenceButton.innerText
 	};
 
 	return preferenceObj;
+}
+
+function ajaxPersonalScheduleRequest(url, method, data) {
+	let xhr = new XMLHttpRequest();
+
+	xhr.addEventListener("load", () => ajaxPersonalScheduleHandler(xhr));
+
+	xhr.open(method, url, true);
+	xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	xhr.send(data);
+}
+
+function ajaxPersonalScheduleHandler(xhr) {
+	let response = JSON.parse(xhr.responseText);
+
+	if (response.success) {
+		console.log("success generate personalised schedule");
+		goToPersonalSchedulePage('personalised-schedule.html');
+	} else {
+		console.log("error : generate personalised schedule");
+	}
+}
+
+function goToPersonalSchedulePage(pageUrl) {
+	window.location = pageUrl;
 }
 
 function listView() {
@@ -199,6 +230,12 @@ function updateButtonHighlight() {
 			this.className += " active";
 		});
 	}
+}
+
+function displayMessage(text) {
+	let messageLabel = document.getElementById('messageLabel');
+
+	messageLabel.innerText += text;
 }
 
 function logError(object) {

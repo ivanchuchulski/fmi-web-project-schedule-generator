@@ -42,6 +42,10 @@ main {
     width: 750px;
 }
 
+#messageLabel {
+    font-size: 16pt;
+}
+
 main h1 {
 	color: aqua;
 }
