@@ -12,8 +12,13 @@
 		preferenceButtons[i].addEventListener("click", addToPreferences);
 	}
 
-	let personalisedScheduleButton = document.getElementById("personalised-schedule-button");
-	personalisedScheduleButton.addEventListener("click", generatePersonalisedSchedule);
+	let personalisedScheduleButton = document
+		.getElementById("personalised-schedule-button")
+		.addEventListener("click", generatePersonalisedSchedule);
+
+	let logoutButton = document
+		.getElementById("logout-button")
+		.addEventListener("click", logoutRequest);
 })();
 
 function loadEvents() {
@@ -41,6 +46,9 @@ function ajaxLoadHandler(xhr) {
 		drawEvents(response.data);
 	} else {
 		console.log("error : load schedule");
+		displayMessage(
+			"грешка : не е започната сесия или сесията е изтелкла(или файлът със събитията не може да бъде зареден)"
+		);
 	}
 }
 
@@ -152,7 +160,11 @@ function generatePersonalisedSchedule() {
 	const LOAD_SCHEDULE_URL = "php/api.php/generatePersonalSchedule";
 	const LOAD_SCHEDULE_METHOD = "POST";
 
-	ajaxPersonalScheduleRequest(LOAD_SCHEDULE_URL, LOAD_SCHEDULE_METHOD, `preferencesData=${JSON.stringify(preferences)}`);
+	ajaxPersonalScheduleRequest(
+		LOAD_SCHEDULE_URL,
+		LOAD_SCHEDULE_METHOD,
+		`preferencesData=${JSON.stringify(preferences)}`
+	);
 }
 
 function generatePreferenceDetails(preferenceButton) {
@@ -164,7 +176,7 @@ function generatePreferenceDetails(preferenceButton) {
 	let preferenceObj = {
 		presenter: event.getElementsByClassName(PRESENTER_CLASSNAME)[0].innerText,
 		theme: event.getElementsByClassName(THEME_CLASSNAME)[0].innerText,
-		preference: preferenceButton.innerText
+		preference: preferenceButton.innerText,
 	};
 
 	return preferenceObj;
@@ -176,7 +188,7 @@ function ajaxPersonalScheduleRequest(url, method, data) {
 	xhr.addEventListener("load", () => ajaxPersonalScheduleHandler(xhr));
 
 	xhr.open(method, url, true);
-	xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhr.send(data);
 }
 
@@ -185,7 +197,7 @@ function ajaxPersonalScheduleHandler(xhr) {
 
 	if (response.success) {
 		console.log("success generate personalised schedule");
-		goToPersonalSchedulePage('personalised-schedule.html');
+		goToPersonalSchedulePage("personalised-schedule.html");
 	} else {
 		console.log("error : generate personalised schedule");
 	}
@@ -193,6 +205,38 @@ function ajaxPersonalScheduleHandler(xhr) {
 
 function goToPersonalSchedulePage(pageUrl) {
 	window.location = pageUrl;
+}
+
+function logoutRequest() {
+	const LOGOUT_URL = "php/api.php/logout";
+	const LOGOUT_METHOD = "POST";
+
+	ajaxLogoutRequest(LOGOUT_URL, LOGOUT_METHOD);
+}
+
+function ajaxLogoutRequest(url, method, data) {
+	let xhr = new XMLHttpRequest();
+
+	xhr.addEventListener("load", () => ajaxLogoutHandler(xhr));
+
+	xhr.open(method, url, true);
+	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhr.send(data);
+}
+
+function ajaxLogoutHandler(xhr) {
+	let response = JSON.parse(xhr.responseText);
+
+	if (response.success) {
+		console.log("success : logout request");
+		goToLoginPage("index.html");
+	} else {
+		console.log("error : logout request");
+	}
+}
+
+function goToLoginPage(loginPageUrl) {
+	window.location = loginPageUrl;
 }
 
 function listView() {
@@ -233,7 +277,7 @@ function updateButtonHighlight() {
 }
 
 function displayMessage(text) {
-	let messageLabel = document.getElementById('messageLabel');
+	let messageLabel = document.getElementById("messageLabel");
 
 	messageLabel.innerText = text;
 }
