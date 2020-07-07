@@ -235,7 +235,7 @@ function updateButtonHighlight() {
 function displayMessage(text) {
 	let messageLabel = document.getElementById('messageLabel');
 
-	messageLabel.innerText += text;
+	messageLabel.innerText = text;
 }
 
 function logError(object) {

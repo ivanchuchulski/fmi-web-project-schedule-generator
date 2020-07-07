@@ -2,10 +2,12 @@
 
 require_once "user.php";
 require_once "presentation.php";
+
 start();
 
 function start()
 {
+    session_start();
     header("Content-type: application/json");
 
     $requestURL = $_SERVER["REQUEST_URI"];
@@ -55,9 +57,12 @@ function login()
 
         $user->checkIfUserExists($formFields);
 
+        $_SESSION['loggedIn'] = true;
+
         $response = ['success' => true];
         echo json_encode($response);
-    } catch (Exception $exception) {
+    }
+    catch (Exception $exception) {
         $response = ['success' => false, 'error' => $exception->getMessage()];
         echo json_encode($response);
     }
@@ -71,6 +76,14 @@ function logout()
 function loadSchedule()
 {
     try {
+        if(!isset($_SESSION['loggedIn'])) {
+            throw new Exception("грешка: няма започната сесия");
+        }
+
+        if ($_SESSION['loggedIn'] === false) {
+            throw new Exception("грешка: потребителят не е вписан в системата");
+        }
+
         $events = file_get_contents("json/presentations.json");
 
         if (!isset($events)) {
@@ -83,15 +96,14 @@ function loadSchedule()
         $presentation = new Presentation();
 
         foreach ($decode_events as $event) {
-            if(!$presentation->presentationExists($event)) {
+            if (!$presentation->presentationExists($event)) {
                 $presentation->addPresentationData($event);
             }
         }
 
         $response = ['success' => true, 'data' => $events];
         echo json_encode($response);
-    }
-    catch (Exception $exception) {
+    } catch (Exception $exception) {
         $response = ['success' => false, 'error' => $exception->getMessage()];
         echo json_encode($response);
     }
