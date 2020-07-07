@@ -1,21 +1,82 @@
+// TODO : make event listeners on added buttons from loadEvents work
 // using the javascript immediately-invoked function expression (IIFE)
 (function () {
     window.onload = () => loadEvents();
 
-	let myheader = document.getElementById("myh1");
-
-	myheader.innerText += ", and from js";
-
-
 	document.getElementById("list-button").addEventListener("click", listView);
 	document.getElementById("grid-button").addEventListener("click", gridView);
+	listView();
+	
+	let preferences = [];
 
-	// the "active" class in the button elements determines which button is highlighed
-	// by default we start with list view
-    listView();
+	let preferenceButtons = document.getElementsByClassName("preferenceButton");
 
+	for (let i = 0; i < preferenceButtons.length; i++) {
+		preferenceButtons[i].addEventListener("click", addToPreferences);
+	}
 
 })();
+
+// maybe not directly write to db when manipulating preferences, but add them to some list 
+// which is passed as parameter, and at clicking on 'generate personal' pass the list at once
+function addToPreferences() {
+	const ACITVE_CLASSNAME = "active";
+
+	// first check if the this button is active
+	if (this.classList.contains("active")) {
+        removeHightlight(this);
+		
+		generatePreferenceDetails(this);
+		// remove the preference to db, or pass boolean to the call above(better not to do that, SRP)
+		// make this method it a promise and return the button and boolean to indicate the action?
+		// https://stackoverflow.com/a/14220323
+        
+		return;
+	}
+
+
+	// if its not, then find its active sibiling and remove it 
+	let preferenceButtons = this.parentElement.getElementsByClassName("preferenceButton");
+
+	for (let i = 0; i < preferenceButtons.length; i++) {
+		if (preferenceButtons[i].classList.contains("active")) {
+            removeHightlight(preferenceButtons[i]);
+            generatePreferenceDetails(preferenceButtons[i]);
+            // remove the preference to db
+		}
+	}
+
+	addHighlight(this);
+	generatePreferenceDetails(this);
+    // add the preference to db
+}
+
+function addHighlight(preferenceButton) {
+	preferenceButton.className += " active";
+}
+
+function removeHightlight(preferenceButton) {
+	preferenceButton.className = preferenceButton.className.replace(" active", "");
+}
+
+// if this method is used to define a query to db, then the author name and theme name 
+// could be used to join the two tables
+function generatePreferenceDetails(preferenceButton) {
+	const PRESENTER_CLASSNAME = "presenter";
+	const THEME_CLASSNAME = "theme";
+
+	let event = preferenceButton.parentElement.parentElement;
+	
+	let preferenceObj = {
+		presenter : event.getElementsByClassName(PRESENTER_CLASSNAME)[0].innerHTML,
+		theme : event.getElementsByClassName(THEME_CLASSNAME)[0].innerHTML,
+		preference : preferenceButton.innerHTML
+	}
+
+	console.log("event : " + preferenceObj.presenter);
+	console.log("theme : " + preferenceObj.theme);
+	console.log("preference : " + preferenceObj.preference);
+}
 
 function listView() {
 	let elements = document.getElementsByClassName("column");
@@ -75,8 +136,7 @@ function requestHandler(xhr) {
 	let response = JSON.parse(xhr.responseText);
 
 	if (response.success) {
-        console.log('success load schedule');
-		printObject(response.data);
+		console.log('success load schedule');
 		drawEvents(response.data);
     }
     else {
@@ -84,30 +144,46 @@ function requestHandler(xhr) {
     }
 }
 
-function printObject(object) {
-	let jsonAsString = JSON.parse(object);
-	
-	console.log("print object : ");
-	console.log(JSON.stringify(object, null, 4));
-	console.log(jsonAsString);
-}
-
 function drawEvents(events) {
 	let eventParent = document.getElementById('event-list');
-
-	console.log("events : ");
-	console.log(events);
-	console.log(JSON.stringify(JSON.parse(events), null, 4));
 	
 	let eventList = JSON.parse(events); 
+
 	console.log(JSON.stringify(eventList, null, 4));
+	console.log(eventList);
 
-	// draw in html
-}
+	Object.keys(eventList).forEach((event) => {
+		let theme = eventList[event].theme;
+		let presentDate = eventList[event].presentDate;
+		let presenterName = eventList[event].presenterName;
+		let place = eventList[event].place;
 
-function drawEvents(events) {
-	let eventParent = document.getElementById('event-list');
+		// console.log("event : ");
+		// console.log(theme);
+		// console.log(presentDate);
+		// console.log(presenterName);
+		// console.log(place);
+		
+		let eventElement = document.createElement("div");
+		let details = document.createElement("div");
+		let timeinfo = document.createElement("div");
+		let preference = document.createElement("div");
 
+		eventElement.className += "event";
+
+		details.className += "details";
+		timeinfo.className += "timeinfo";
+		preference.className += "preference";
+
+		details.innerHTML = `<p class="presenter">${presenterName}</p> <p class="theme">${theme}</p>`
+		timeinfo.innerHTML = `<p class="date">${presentDate}</p> <p class="presentationSite">${place}</p>`
+		preference.innerHTML = `<button class="preferenceButton willAttend">will attend</button> <button class="preferenceButton couldAttend">could attend</button>`
+
+		eventParent.appendChild(eventElement);
+		eventElement.appendChild(details);
+		eventElement.appendChild(timeinfo);
+		eventElement.appendChild(preference);
+	})
 }
 
 function logError(object) {

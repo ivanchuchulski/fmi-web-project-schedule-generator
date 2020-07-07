@@ -64,6 +64,27 @@ function login() {
 	}
 }
 
+function logout() {
+
+}
+
+function loadSchedule() {
+	try {
+		$events = file_get_contents("json/presentations.json");
+
+		if (!isset($events)) {
+			throw new Exception("грешка : файлът с презентациите не може да бъде намерен");
+		}
+
+		$response = ['success' => true, 'data' => $events];
+		echo json_encode($response);
+	}
+	catch (Exception $exception) {
+		$response = ['success' => false, 'error' => $exception->getMessage()];
+		echo json_encode($response);
+	}
+}
+
 function checkServerRequestMethod() {
 	if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 		throw new Exception("error : use post method");
@@ -186,21 +207,6 @@ function formatInput($formField): string {
 	return $formField;
 }
 
-function loadSchedule() {
-	try {
-		$events = file_get_contents("json/presentations.json");
 
-		if (!isset($events)) {
-			throw new Exception("грешка : файлът с презентациите не може да бъде намерен");
-		}
-
-		$response = ['success' => true, 'data' => $events];
-		echo json_encode($response);
-	}
-	catch (Exception $exception) {
-		$response = ['success' => false, 'error' => $exception->getMessage()];
-		echo json_encode($response);
-	}
-}
 
 ?>
