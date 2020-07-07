@@ -33,7 +33,7 @@ CREATE TABLE `preference` (
   `preferenceId` INT NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(255) NOT NULL,
   `presentationTheme` VARCHAR(255) NOT NULL, 
-  `preferencyType` ENUM('willGo', 'couldGo', 'mayGo'),
+  `preferenceType` ENUM('will attend', 'could attend', 'may attend'),
   CONSTRAINT `preference_pk` PRIMARY KEY (`preferenceId`),
   CONSTRAINT `preference_fk_user` FOREIGN KEY (`username`) REFERENCES `user`(`username`) ON UPDATE CASCADE ON DELETE CASCADE,
   CONSTRAINT `preference_fk_presentation` FOREIGN KEY (`presentationTheme`) REFERENCES `presentation`(`theme`) ON UPDATE CASCADE ON DELETE CASCADE

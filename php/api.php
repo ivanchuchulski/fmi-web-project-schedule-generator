@@ -2,6 +2,7 @@
 
 require_once "user.php";
 require_once "presentation.php";
+require_once "preference.php";
 
 start();
 
@@ -89,18 +90,11 @@ function logout() {
 		$response = ['success' => false, 'error' => $exception->getMessage()];
 		echo json_encode($response);
 	}
-
 }
 
 function loadSchedule() {
 	try {
-		if (!isset($_SESSION['loggedIn'])) {
-			throw new Exception("грешка: няма започната сесия");
-		}
-
-		if ($_SESSION['loggedIn'] === false) {
-			throw new Exception("грешка: потребителят не е вписан в системата");
-		}
+		checkSessionSet();
 
 		$events = file_get_contents("json/presentations.json");
 
@@ -109,7 +103,6 @@ function loadSchedule() {
 		}
 
 		$decode_events = json_decode($events, true);
-//		var_dump($decode_events);
 
 		$presentation = new Presentation();
 
@@ -130,23 +123,49 @@ function loadSchedule() {
 
 function generatePersonalSchedule() {
 	try {
+		checkSessionSet();
+
 		// TODO : check if its empty
 
 		$preferencesData = json_decode($_POST['preferencesData'], true);
+		$preference = new Preference();
 
-		foreach ($preferencesData as $preference) {
-			var_dump($preference);
+		$username = $_SESSION['username'];
 
-			$theme = $preference['theme'];
-			$presenter = $preference['presenter'];
-			$preference = $preference['preference'];
+		foreach ($preferencesData as $preferenceDetails) {
+			$preferenceDetails['username'] = $username;
+
+			$preferencesRows = $preference->selectPreferenceByUsernameAndTheme($preferenceDetails);
+
+			if (empty($preferencesRows)) {
+				$preference->addPreferenceData($preferenceDetails);
+			}
+			else {
+				var_dump($preferencesRows);
+				$preference->updatePreference($preferenceDetails);
+			}
 		}
 
-		var_dump($preferencesData);
-
+		$response = ['success' => true];
+		echo json_encode($response);
 	}
 	catch (Exception $exception) {
+		$response = ['success' => false, 'error' => $exception->getMessage()];
+		echo json_encode($response);
+	}
+}
 
+function checkSessionSet() {
+	if (!isset($_SESSION['loggedIn'])) {
+		throw new Exception("грешка: няма започната сесия");
+	}
+
+	if ($_SESSION['loggedIn'] === false) {
+		throw new Exception("грешка: потребителят не е вписан в системата");
+	}
+
+	if ($_SESSION['username'] === false) {
+		throw new Exception("грешка: потребителското име не е в сесията");
 	}
 }
 

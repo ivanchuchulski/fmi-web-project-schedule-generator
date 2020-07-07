@@ -174,9 +174,8 @@ function generatePreferenceDetails(preferenceButton) {
 	let event = preferenceButton.parentElement.parentElement;
 
 	let preferenceObj = {
-		presenter: event.getElementsByClassName(PRESENTER_CLASSNAME)[0].innerText,
-		theme: event.getElementsByClassName(THEME_CLASSNAME)[0].innerText,
-		preference: preferenceButton.innerText,
+		presentationTheme: event.getElementsByClassName(THEME_CLASSNAME)[0].innerText,
+		preferenceType: preferenceButton.innerText,
 	};
 
 	return preferenceObj;

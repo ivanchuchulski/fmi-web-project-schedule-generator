@@ -3,42 +3,37 @@ require_once "database.php";
 
 class Presentation
 {
-    private $database;
+	private $database;
 
-    public function __construct()
-    {
-        $this->database = new Database();
-    }
+	public function __construct() {
+		$this->database = new Database();
+	}
 
-    public function addPresentationData(array &$presentationDetails)
-    {
-        $query = $this->database->insertPresentation($presentationDetails);
+	public function addPresentationData(array &$presentationDetails) {
+		$query = $this->database->insertPresentation($presentationDetails);
 
-        if (!$query) {
-            throw new Exception("error : insert presentation failed");
-        }
-    }
+		if (!$query) {
+			throw new Exception("error : insert presentation failed");
+		}
+	}
 
 
-    public function presentationExists(array& $presentationTheme)
-    {
-        $presentation = $this->selectPresentationByTheme($presentationTheme['theme']);
+	public function presentationExists(array &$presentationDetails) {
+		$presentation = $this->selectPresentationByTheme($presentationDetails['theme']);
 
-        //    var_dump($user); echo '<br>';
+		if (empty($presentation)) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
 
-        if (empty($presentation)) {
-//            throw new Exception('грешка : вече съществува такава презентация');
-            return false;
-        }
-        return true;
-    }
+	private function selectPresentationByTheme($presentationTheme) {
+		$query = $this->database->selectPresentationByTheme($presentationTheme);
 
-    private function selectPresentationByTheme($presentationTheme)
-    {
-        $query = $this->database->selectPresentationByTheme($presentationTheme);
-
-        return $query->fetch(PDO::FETCH_ASSOC);
-    }
+		return $query->fetch(PDO::FETCH_ASSOC);
+	}
 }
 
 ?>
