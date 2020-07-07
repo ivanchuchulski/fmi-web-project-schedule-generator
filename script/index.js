@@ -225,7 +225,8 @@ function registrationRequestHandler(xhr) {
     
     if (response.success) {
         console.log('success');
-        let regForm = document.getElementById('registration');
+        //changed from 'registration' to match form id
+        let regForm = document.getElementById('registration-form');
         regForm.reset();
         displayRegistrationError("успешна регистрация");
     }
@@ -251,7 +252,7 @@ function displaySchedulePage(pageURL) {
 }
 
 function displayRegistrationError(error) {
-    let errorLabel = document.getElementById('register-error');
+    let errorLabel = document.getElementById('registration-error');
     errorLabel.innerHTML = error; 
 }
 
