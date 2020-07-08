@@ -4,7 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Персонализиран график</title>
-		<link rel="stylesheet" href="style/schedule.css" />
+		<link rel="stylesheet" href="style/personal-schedule.css" />
 		<script src="script/personal-schedule.js" defer></script>
 	</head>
 	<body>
@@ -16,33 +16,12 @@
 				<button id="logout-button">Изход от системата</button>
 			</nav>
 		</header>
+		<section id="information">
+			<h2 id="username">Здравей</h2>
+			<button id="apply-changes">Приложи промените</button>
+		</section>
 		<main id="personal-events">
-
-			<h3 id="username">Здравей</h3>
 			<label id="messageLabel"></label>
-
-			<p>Click on a button to choose list view or grid view.</p>
-			<div id="btnContainer">
-				<button id="list-button" class="btn active">List</button>
-				<button id="grid-button" class="btn">Grid</button>
-			</div>
-			<br />
-			<div class="event">
-				<div class="details">
-					<p class="presenter">presenter 2</p>
-					<p class="theme">theme 2</p>
-				</div>
-				<div class="timeinfo">
-					<p class="date">date 2</p>
-					<p class="presentationSite">link 2</p>
-				</div>
-				<div class="preference">
-					<button class="preferenceButton willAttend">ще отида</button>
-					<button class="preferenceButton couldAttend">може би ще отида</button>
-					<button class="preferenceButton cancelAttend">премахни събитието</button>
-				</div>
-			</div>
-
 		</main>
 		<footer>
 			<p>Разработено от: Даниел Димитров, Виктор Христов, Иван Чучулски</p>

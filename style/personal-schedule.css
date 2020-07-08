@@ -1,122 +1,114 @@
 body {
-    display: grid;
-    grid-template-columns: 100%;
-    grid-template-rows: 150px auto 80px;
-    grid-template-areas: "header" "main" "footer";
+	display: grid;
+	grid-template-columns: 100%;
+	grid-template-rows: 150px auto auto 80px;
+	grid-template-areas: "header" "information" "main" "footer";
 
-    justify-items: center;
-    align-items: center;
+	justify-items: center;
+	align-items: center;
 
-    margin: 15px 50px;
+	margin: 15px 50px;
 
-    font-size: 12px;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	font-size: 12px;
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 header {
-    grid-area: header;
-    width: 750px;
+	grid-area: header;
+	width: 750px;
 }
 
 header nav {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
 }
 
 header button {
-    /* position: relative; */
-    width: 180px;
-    height: 60px;
-    padding: 15px 10px;
+	width: 180px;
+	height: 60px;
+	padding: 15px 10px;
 }
 
-button a {
-    text-decoration: none;
-    color: black;
+#information {
+	grid-area: information;
+    text-align: center;
+    margin: 10px 10px;
+}
+
+#apply-changes {
+	width: 160px;
+	height: 45px;
+	padding: 15px 10px;
 }
 
 main {
-    grid-area: main;
-    width: 750px;
+	grid-area: main;
+	width: 750px;
+    text-align: center;
 }
 
 #messageLabel {
-    font-size: 16pt;
+	font-size: 16pt;
 }
 
 main h1 {
-    color: aqua;
+	color: aqua;
 }
 
 /* source https://www.w3schools.com/howto/howto_js_list_grid_view.asp */
 .btn {
-    border: none;
-    outline: none;
-    padding: 12px 16px;
-    background-color: #f1f1f1;
-    cursor: pointer;
+	border: none;
+	outline: none;
+	padding: 12px 16px;
+	background-color: #f1f1f1;
+	cursor: pointer;
 }
 
 .btn:hover {
-    background-color: #ddd;
+	background-color: #ddd;
+}
+
+#apply-changes {
+	grid-area: ;
 }
 
 .active {
-    background-color: #666;
-    color: white;
-}
-
-/* Create two equal columns that floats next to each other */
-.column {
-    box-sizing: border-box;
-    float: left;
-    width: 50%;
-    padding: 10px;
-}
-
-.row {
-    box-sizing: border-box;
-}
-
-/* Clear floats after the columns */
-.row:after {
-    content: "";
-    display: table;
-    clear: both;
+	background-color: #666;
+	color: white;
 }
 
 .event {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    border: 1px solid black;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-around;
+	border: 1px solid black;
 }
 
 .details {
-    margin: 15px 15px;
-    border: 1px solid black;
+	margin: 15px 15px;
+	border: 1px solid black;
 }
 
 .timeinfo {
-    margin: 15px 15px;
-    border: 1px solid black;
+	margin: 15px 15px;
+	border: 1px solid black;
 }
 
 .preference {
-    display: flex;
-    flex-direction: column;
-    margin: 15px 15px;
-    border: 1px solid black;
+	display: flex;
+	flex-direction: column;
+	margin: 15px 15px;
+	border: 1px solid black;
 }
 
 .preference .preferenceButton {
-    margin: 5px 3px;
-    padding: 5px 3px;
+	margin: 5px 3px;
+	padding: 5px 3px;
 }
 
 body footer {
-    grid-area: footer;
+	grid-area: footer;
 }

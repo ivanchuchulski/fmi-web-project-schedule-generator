@@ -14,7 +14,7 @@
 		
 	let personalisedScheduleButton = document
 		.getElementById("personalised-schedule-button")
-		.addEventListener("click", generatePersonalisedSchedule);
+		.addEventListener("click", () => { window.location = "personal-schedule.html"});
 
 	let logoutButton = document
 		.getElementById("logout-button")
