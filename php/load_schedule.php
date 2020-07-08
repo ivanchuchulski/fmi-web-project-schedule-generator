@@ -2,6 +2,7 @@
 
 require_once "utility.php";
 require_once "presentation.php";
+require_once "preference.php";
 
 function loadSchedule() {
 	try {
@@ -14,18 +15,29 @@ function loadSchedule() {
 		}
 
 		$decode_events = json_decode($events, true);
-
 		$presentation = new Presentation();
+		$preference = new Preference();
+		$username = $_SESSION['username'];
+		$EMPTY_PRESENTATION_PREFERENCE= 'empty';
 
-		foreach ($decode_events as $event) {
+		foreach ($decode_events as &$event) {
 			if (!$presentation->presentationExists($event)) {
 				$presentation->addPresentationData($event);
 			}
+
+			// here  $event['theme'] is from the JSON
+			$preferenceDetails = array('username' => $username, 'presentationTheme' => $event['theme']);
+			$eventPreference = $preference->getPreferenceByUsernameAndTheme($preferenceDetails);
+
+			if (!empty($eventPreference)) {
+				$event['preferenceType'] = $eventPreference['preferenceType'];
+			}
+			else {
+				$event['preferenceType'] = $EMPTY_PRESENTATION_PREFERENCE;
+			}
 		}
 
-		$username = $_SESSION['username'];
-
-		$response = ['success' => true, 'data' => $events, 'username' => $username];
+		$response = ['success' => true, 'data' => json_encode($decode_events), 'username' => $username];
 		echo json_encode($response);
 	}
 	catch (Exception $exception) {

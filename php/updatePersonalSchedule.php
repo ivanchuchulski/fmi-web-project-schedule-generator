@@ -23,7 +23,7 @@ function updatePersonalSchedule() {
 			$preferencesRow = $preference->getPreferenceByUsernameAndTheme($preferenceDetails);
 
 			if (empty($preferencesRow)) {
-				throw new Exception("грешка : префернцията не съществува");
+				throw new Exception("грешка : преференцията не съществува");
 			}
 
 			if (strcmp($preferenceType, $CANCEL_PREFERENCE) == 0) {

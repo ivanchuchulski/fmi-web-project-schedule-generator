@@ -172,9 +172,8 @@ function updatePersonalSchedule() {
 		return;
 	}
 
-	
-	console.log("preferences");
-	console.log(preferences);
+	// console.log("preferences");
+	// console.log(preferences);
 		
 	const UPDATE_SCHEDULE_URL = "php/api.php/updatePersonalSchedule";
 	const UPDATE_SCHEDULE_METHOD = "POST";

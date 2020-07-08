@@ -9,8 +9,8 @@
 	}
 
 	let schedulePageButton = document
-	.getElementById("schedule-page-button")
-	.addEventListener("click", goToSchedulePage.bind(null, "schedule.html"));
+		.getElementById("schedule-page-button")
+		.addEventListener("click", goToSchedulePage.bind(null, "schedule.html"));
 
 	let personalisedScheduleButton = document
 		.getElementById("personalised-schedule-button")
@@ -55,11 +55,10 @@ function ajaxLoadHandler(xhr) {
 function drawEvents(response) {
 	let username = response.username;
 	document.getElementById("username").innerText += " " + username + "!";
-	
+
 	let eventsData = response.data;
 	let eventList = JSON.parse(eventsData);
-	
-	// console.log(JSON.stringify(eventList, null, 4));
+
 	// console.log(eventList);
 
 	let eventParent = document.getElementById("event-list");
@@ -69,6 +68,7 @@ function drawEvents(response) {
 		let presentDate = eventList[event].presentDate;
 		let presenterName = eventList[event].presenterName;
 		let place = eventList[event].place;
+		let preferenceType = eventList[event].preferenceType;
 
 		let eventElement = document.createElement("div");
 		let details = document.createElement("div");
@@ -102,6 +102,25 @@ function drawEvents(response) {
 
 		willGoButton.addEventListener("click", addToPreferences);
 		couldGoButton.addEventListener("click", addToPreferences);
+
+		// variant 1 : hide the other button and remove the event listener for the active button
+		if (preferenceType === "willAttend") {
+			addHighlight(willGoButton);
+		
+			willGoButton.removeEventListener("click", addToPreferences);
+		
+			couldGoButton.style.display = 'none';
+		} 
+		else if (preferenceType === "couldAttend") {
+			addHighlight(couldGoButton);
+		
+			couldGoButton.removeEventListener("click", addToPreferences);
+
+			willGoButton.style.display = 'none';
+		} 
+		else {
+			;
+		}
 	});
 }
 
@@ -148,7 +167,7 @@ function generatePersonalisedSchedule() {
 
 	if (preferences.length === 0) {
 		// displayMessage("не сте избрали никакви събития!");
-		goToPersonalSchedulePage('personal-schedule.html');
+		goToPersonalSchedulePage("personal-schedule.html");
 		return;
 	}
 
@@ -173,9 +192,8 @@ function generatePreferenceDetails(preferenceButton) {
 
 	let preferenceObj = {
 		presentationTheme: event.getElementsByClassName(THEME_CLASSNAME)[0].innerText,
-		preferenceType: preferenceButton.classList[PREFERENCE_CLASSNAME_INDEX]
+		preferenceType: preferenceButton.classList[PREFERENCE_CLASSNAME_INDEX],
 	};
-
 
 	return preferenceObj;
 }

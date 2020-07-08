@@ -44,7 +44,6 @@ class Preference
 	public function getPreferredPresentationsForUser(string& $username) {
 		$query = $this->database->selectPreferredPresentationsForUser($username);
 
-		//	TODO : fix results
 		return $query->fetchAll(PDO::FETCH_ASSOC);
 	}
 }
