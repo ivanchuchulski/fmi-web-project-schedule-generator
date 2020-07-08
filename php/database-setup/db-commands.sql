@@ -30,8 +30,8 @@ SET preferenceType=:preference
 WHERE username=:username and presentationTheme=:presentationTheme;
 
 
-SELECT * 
+SELECT presentation.theme, presentation.presentDate, presentation.presenterName, presentation.place, preference.preferenceType, preference.username
 FROM preference INNER JOIN presentation ON preference.presentationTheme = presentation.theme
 WHERE presentationTheme IN (SELECT preference.presentationTheme
-                            FROM preference
-                            WHERE username=:username)
+                                FROM preference
+                                WHERE username=:username);

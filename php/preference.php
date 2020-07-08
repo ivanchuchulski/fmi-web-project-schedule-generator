@@ -36,7 +36,7 @@ class Preference
 		$query = $this->database->selectPreferredPresentationsForUser($username);
 
 		//	TODO : fix results
-		return $query->fetchAll(PDO::FETCH_UNIQUE);
+		return $query->fetchAll(PDO::FETCH_ASSOC);
 	}
 }
 

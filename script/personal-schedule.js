@@ -1,109 +1,223 @@
 // using the javascript immediately-invoked function expression (IIFE)
 (function () {
-    window.onload = () => loadPersonalEvents();
+	window.onload = () => loadPersonalEvents();
 
-    document.getElementById("list-button").addEventListener("click", listView);
-    document.getElementById("grid-button").addEventListener("click", gridView);
-    listView();
+	let preferenceButtons = document.getElementsByClassName("preferenceButton");
 
-    let preferenceButtons = document.getElementsByClassName("preferenceButton");
+	for (let i = 0; i < preferenceButtons.length; i++) {
+		preferenceButtons[i].addEventListener("click", addToPreferences);
+	}
 
-    for (let i = 0; i < preferenceButtons.length; i++) {
-        preferenceButtons[i].addEventListener("click", addToPreferences);
-    }
+	let personalisedScheduleButton = document
+		.getElementById("personalised-schedule-button")
+		.addEventListener("click", generatePersonalisedSchedule);
 
-    let personalisedScheduleButton = document
-        .getElementById("personalised-schedule-button")
-        .addEventListener("click", generatePersonalisedSchedule);
-
-    let logoutButton = document
-        .getElementById("logout-button")
-        .addEventListener("click", logoutRequest);
+	let logoutButton = document
+		.getElementById("logout-button")
+		.addEventListener("click", logoutRequest);
 })();
 
 function loadPersonalEvents() {
-    const PERSONAL_SCHEDULE_URL = "php/api.php/loadPersonalSchedule";
-    const PERSONAL_SCHEDULE_METHOD = "GET";
+	const PERSONAL_SCHEDULE_URL = "php/api.php/loadPersonalSchedule";
+	const PERSONAL_SCHEDULE_METHOD = "GET";
 
-    ajaxLoadPersonalScheduleRequest(PERSONAL_SCHEDULE_URL, PERSONAL_SCHEDULE_METHOD);
+	ajaxLoadPersonalScheduleRequest(PERSONAL_SCHEDULE_URL, PERSONAL_SCHEDULE_METHOD);
 }
 
 function ajaxLoadPersonalScheduleRequest(url, method, data) {
-    let xhr = new XMLHttpRequest();
+	let xhr = new XMLHttpRequest();
 
-    xhr.addEventListener("load", () => ajaxLoadPersonalScheduleHandler(xhr));
+	xhr.addEventListener("load", () => ajaxLoadPersonalScheduleHandler(xhr));
 
-    xhr.open(method, url, true);
-    xhr.setRequestHeader("Content-type", "application/json");
-    xhr.send(data);
+	xhr.open(method, url, true);
+	xhr.setRequestHeader("Content-type", "application/json");
+	xhr.send(data);
 }
 
 function ajaxLoadPersonalScheduleHandler(xhr) {
-    let response = JSON.parse(xhr.responseText);
+	let response = JSON.parse(xhr.responseText);
 
-    if (response.success) {
-        console.log("success load personal schedule");
-        drawPersonalEvents(response.data);
-    } else {
-        console.log("error : load schedule");
-        displayMessage(
-            "грешка : не е започната сесия или сесията е изтелкла(или файлът със събитията не може да бъде зареден)"
-        );
-    }
+	if (response.success) {
+		// console.log("success load personal schedule");
+		drawPersonalEvents(response.data);
+	} else {
+		// console.log("error : load schedule");
+		displayMessage(
+			"грешка : не е започната сесия или сесията е изтелкла(или персоналните събития не може да бъдат заредени)"
+		);
+	}
 }
 
 function drawPersonalEvents(events) {
-    let eventParent = document.getElementById("personal-events");
+	let eventParent = document.getElementById("personal-events");
 
-    let eventList = JSON.parse(events);
+	let username = events[0].username;
+	document.getElementById("username").innerText += " " + username + "!";
 
-    console.log(JSON.stringify(eventList, null, 4));
-    console.log(eventList);
+	Object.keys(events).forEach((event) => {
+		let theme = events[event].theme;
+		let presentDate = events[event].presentDate;
+		let presenterName = events[event].presenterName;
+		let place = events[event].place;
+		let preferenceType = events[event].preferenceType;
 
-    exit;
+		let eventElement = document.createElement("div");
 
-    Object.keys(eventList).forEach((event) => {
-        let theme = eventList[event].theme;
-        let presentDate = eventList[event].presentDate;
-        let presenterName = eventList[event].presenterName;
-        let place = eventList[event].place;
+		let details = document.createElement("div");
+		let timeinfo = document.createElement("div");
+		let preference = document.createElement("div");
 
-        // console.log("event : ");
-        // console.log(theme);
-        // console.log(presentDate);
-        // console.log(presenterName);
-        // console.log(place);
+		let willGoButton = document.createElement("button");
+		let couldGoButton = document.createElement("button");
+		let removeButton = document.createElement("button");
 
-        let eventElement = document.createElement("div");
-        let details = document.createElement("div");
-        let timeinfo = document.createElement("div");
-        let preference = document.createElement("div");
-        let willGoButton = document.createElement("button");
-        let couldGoButton = document.createElement("button");
+		eventElement.className += "event";
+		details.className += "details";
+		timeinfo.className += "timeinfo";
+		preference.className += "preference";
 
-        eventElement.className += "event";
+		willGoButton.className += "preferenceButton willAttend";
+		couldGoButton.className += "preferenceButton couldAttend";
+		removeButton.className += "preferenceButton cancelAttend";
 
-        details.className += "details";
-        timeinfo.className += "timeinfo";
-        preference.className += "preference";
-        willGoButton.className += "preferenceButton willAttend";
-        couldGoButton.className += "preferenceButton couldAttend";
+		details.innerHTML = `<p class="presenter">${presenterName}</p> <p class="theme">${theme}</p>`;
+		timeinfo.innerHTML = `<p class="date">${presentDate}</p> <p class="presentationSite">${place}</p>`;
 
-        details.innerHTML = `<p class="presenter">${presenterName}</p> <p class="theme">${theme}</p>`;
-        timeinfo.innerHTML = `<p class="date">${presentDate}</p> <p class="presentationSite">${place}</p>`;
+		willGoButton.innerText += "ще отида";
+		couldGoButton.innerText += "може би ще отида";
+		removeButton.innerText += "премахни събитието";
 
-        willGoButton.innerText += "will attend";
-        couldGoButton.innerText += "could attend";
+		eventParent.appendChild(eventElement);
 
-        eventParent.appendChild(eventElement);
+		eventElement.appendChild(details);
+		eventElement.appendChild(timeinfo);
+		eventElement.appendChild(preference);
 
-        eventElement.appendChild(details);
-        eventElement.appendChild(timeinfo);
-        eventElement.appendChild(preference);
+		preference.appendChild(willGoButton);
+		preference.appendChild(couldGoButton);
+		preference.appendChild(removeButton);
 
-        preference.appendChild(willGoButton);
-        preference.appendChild(couldGoButton);
+		// set the button highlight preference
+		if (preferenceType === "will attend") {
+			addHighlight(willGoButton);
+		} else {
+			addHighlight(couldGoButton);
+		}
 
-        willGoButton.addEventListener("click", addToPreferences);
-    });
+		willGoButton.addEventListener("click", addToPreferences);
+		couldGoButton.addEventListener("click", addToPreferences);
+		removeButton.addEventListener("click", addToPreferences);
+	});
+}
+
+function addToPreferences() {
+	const ACITVE_CLASSNAME = "active";
+
+	// first check if the this button is active
+	if (this.classList.contains(ACITVE_CLASSNAME)) {
+		removeHightlight(this);
+		return;
+	}
+
+	let preferenceButtons = this.parentElement.getElementsByClassName("preferenceButton");
+
+	for (let i = 0; i < preferenceButtons.length; i++) {
+		if (preferenceButtons[i].classList.contains(ACITVE_CLASSNAME)) {
+			removeHightlight(preferenceButtons[i]);
+			generatePreferenceDetails(preferenceButtons[i]);
+		}
+	}
+
+	addHighlight(this);
+	generatePreferenceDetails(this);
+}
+
+function addHighlight(preferenceButton) {
+	preferenceButton.className += " active";
+}
+
+function removeHightlight(preferenceButton) {
+	preferenceButton.className = preferenceButton.className.replace(" active", "");
+}
+
+function generatePersonalisedSchedule() {
+	const ACITVE_CLASSNAME = "active";
+	let preferences = [];
+	let preferenceButtons = document.getElementsByClassName("preferenceButton");
+
+	for (let i = 0; i < preferenceButtons.length; i++) {
+		if (preferenceButtons[i].classList.contains(ACITVE_CLASSNAME)) {
+			preferences.push(generatePreferenceDetails(preferenceButtons[i]));
+		}
+	}
+
+	if (preferences.length === 0) {
+		// displayMessage("не сте избрали никакви събития!");
+		goToPersonalSchedulePage("personal-schedule.html");
+		return;
+	}
+
+	console.log("preferences");
+	console.log(preferences);
+
+	const LOAD_SCHEDULE_URL = "php/api.php/generatePersonalSchedule";
+	const LOAD_SCHEDULE_METHOD = "POST";
+
+	ajaxPersonalScheduleRequest(
+		LOAD_SCHEDULE_URL,
+		LOAD_SCHEDULE_METHOD,
+		`preferencesData=${JSON.stringify(preferences)}`
+	);
+}
+
+function generatePreferenceDetails(preferenceButton) {
+	const PRESENTER_CLASSNAME = "presenter";
+	const THEME_CLASSNAME = "theme";
+
+	let event = preferenceButton.parentElement.parentElement;
+
+	let preferenceObj = {
+		presentationTheme: event.getElementsByClassName(THEME_CLASSNAME)[0].innerText,
+		preferenceType: preferenceButton.innerText,
+	};
+
+	return preferenceObj;
+}
+
+function logoutRequest() {
+	const LOGOUT_URL = "php/api.php/logout";
+	const LOGOUT_METHOD = "POST";
+
+	ajaxLogoutRequest(LOGOUT_URL, LOGOUT_METHOD);
+}
+
+function ajaxLogoutRequest(url, method, data) {
+	let xhr = new XMLHttpRequest();
+
+	xhr.addEventListener("load", () => ajaxLogoutHandler(xhr));
+
+	xhr.open(method, url, true);
+	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhr.send(data);
+}
+
+function ajaxLogoutHandler(xhr) {
+	let response = JSON.parse(xhr.responseText);
+
+	if (response.success) {
+		console.log("success : logout request");
+		goToLoginPage("index.html");
+	} else {
+		console.log("error : logout request");
+	}
+}
+
+function goToLoginPage(loginPageUrl) {
+	window.location = loginPageUrl;
+}
+
+function displayMessage(text) {
+	let messageLabel = document.getElementById("messageLabel");
+
+	messageLabel.innerText = text;
 }

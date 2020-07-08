@@ -115,7 +115,7 @@ class Database
 
 	public function selectPreferredPresentationsForUser(string &$username) {
 		try {
-			$sql = "SELECT *
+			$sql = "SELECT presentation.theme, presentation.presentDate, presentation.presenterName, presentation.place, preference.preferenceType, preference.username
 					FROM preference INNER JOIN presentation ON preference.presentationTheme = presentation.theme
 					WHERE presentationTheme IN (SELECT preference.presentationTheme
 												FROM preference
