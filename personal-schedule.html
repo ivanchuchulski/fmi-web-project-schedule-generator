@@ -3,9 +3,46 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>personal</title>
+		<title>Персонализиран график</title>
+		<link rel="stylesheet" href="style/schedule.css" />
+		<script src="script/personal-schedule.js" defer></script>
 	</head>
 	<body>
-        <p>personal schedule</p>
-    </body>
+		<header>
+			<nav>
+				<button><a href="schedule.html">График на презентации</a></button>
+				<button id="personalised-schedule-button">Направете персонализиран график</a></button>
+				<button>Разпечатай разписанието</button>
+				<button id="logout-button">Изход от системата</button>
+			</nav>
+		</header>
+		<main id="personal-events">
+
+			<label id="messageLabel"></label>
+
+			<p>Click on a button to choose list view or grid view.</p>
+			<div id="btnContainer">
+				<button id="list-button" class="btn active">List</button>
+				<button id="grid-button" class="btn">Grid</button>
+			</div>
+			<br />
+			<div class="event">
+				<div class="details">
+					<p class="presenter">presenter 2</p>
+					<p class="theme">theme 2</p>
+				</div>
+				<div class="timeinfo">
+					<p class="date">date 2</p>
+					<p class="presentationSite">link 2</p>
+				</div>
+				<div class="preference">
+					<button class="remove">премахни събитието</button>
+				</div>
+			</div>
+
+		</main>
+		<footer>
+			<p>Разработено от: Даниел Димитров, Виктор Христов, Иван Чучулски</p>
+		</footer>
+	</body>
 </html>

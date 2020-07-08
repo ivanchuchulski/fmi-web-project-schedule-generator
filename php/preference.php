@@ -26,10 +26,17 @@ class Preference
 		}
 	}
 
-	public function selectPreferenceByUsernameAndTheme(array &$presentationTheme) {
+	public function getPreferenceByUsernameAndTheme(array &$presentationTheme) {
 		$query = $this->database->selectPreferencesByUsernameAndTheme($presentationTheme);
 
 		return $query->fetch(PDO::FETCH_ASSOC);
+	}
+
+	public function getPreferredPresentationsForUser(string& $username) {
+		$query = $this->database->selectPreferredPresentationsForUser($username);
+
+		//	TODO : fix results
+		return $query->fetchAll(PDO::FETCH_UNIQUE);
 	}
 }
 

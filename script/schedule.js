@@ -149,8 +149,8 @@ function generatePersonalisedSchedule() {
 	}
 
 	if (preferences.length === 0) {
-		displayMessage("не сте избрали никакви събития!");
-		// goToPersonalSchedulePage('personalised-schedule.html');
+		// displayMessage("не сте избрали никакви събития!");
+		goToPersonalSchedulePage('personal-schedule.html');
 		return;
 	}
 
@@ -196,8 +196,9 @@ function ajaxPersonalScheduleHandler(xhr) {
 
 	if (response.success) {
 		console.log("success generate personalised schedule");
-		goToPersonalSchedulePage("personalised-schedule.html");
+		goToPersonalSchedulePage("personal-schedule.html");
 	} else {
+		displayMessage("грешка : невъзможност за генеране на персонален график");
 		console.log("error : generate personalised schedule");
 	}
 }

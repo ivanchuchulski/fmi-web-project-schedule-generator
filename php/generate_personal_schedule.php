@@ -8,6 +8,7 @@ function generatePersonalSchedule() {
 		checkSessionSet();
 
 		// TODO : check if its empty
+		// TODO : check if preferences are correct
 
 		$preferencesData = json_decode($_POST['preferencesData'], true);
 		$preference = new Preference();
@@ -17,7 +18,7 @@ function generatePersonalSchedule() {
 		foreach ($preferencesData as $preferenceDetails) {
 			$preferenceDetails['username'] = $username;
 
-			$preferencesRows = $preference->selectPreferenceByUsernameAndTheme($preferenceDetails);
+			$preferencesRows = $preference->getPreferenceByUsernameAndTheme($preferenceDetails);
 
 			if (empty($preferencesRows)) {
 				$preference->addPreferenceData($preferenceDetails);

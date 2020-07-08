@@ -9,6 +9,7 @@ require_once "login.php";
 require_once "logout.php";
 require_once "load_schedule.php";
 require_once "generate_personal_schedule.php";
+require_once "load_personal_schedule.php";
 
 start();
 
@@ -32,6 +33,10 @@ function start() {
 	}
 	elseif (preg_match("/generatePersonalSchedule$/", $requestURL)) {
 		generatePersonalSchedule();
+	}
+	//	this returns the personal schedule for logged user to the front-end to be rendered
+	elseif (preg_match("/loadPersonalSchedule$/", $requestURL)) {
+		loadPersonalSchedule();
 	}
 	else {
 		echo json_encode(["error" => "грешка : не е намерен такъв URL"]);

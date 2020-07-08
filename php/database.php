@@ -113,6 +113,25 @@ class Database
 		}
 	}
 
+	public function selectPreferredPresentationsForUser(string &$username) {
+		try {
+			$sql = "SELECT *
+					FROM preference INNER JOIN presentation ON preference.presentationTheme = presentation.theme
+					WHERE presentationTheme IN (SELECT preference.presentationTheme
+												FROM preference
+													WHERE username=:username);";
+
+			$selectStatement = $this->connection->prepare($sql);
+
+			$selectStatement->execute(array("username" => $username));
+
+			return $selectStatement;
+		}
+		catch (PDOException $exception) {
+			throw $exception;
+		}
+	}
+
 	public function insertPreference($data) {
 		try {
 			$sql = "INSERT INTO preference (username, presentationTheme, preferenceType) 

@@ -28,3 +28,10 @@ VALUES(:username, :presentationTheme, :preferenceType);
 UPDATE preference
 SET preferenceType=:preference
 WHERE username=:username and presentationTheme=:presentationTheme;
+
+
+SELECT * 
+FROM preference INNER JOIN presentation ON preference.presentationTheme = presentation.theme
+WHERE presentationTheme IN (SELECT preference.presentationTheme
+                            FROM preference
+                            WHERE username=:username)
