@@ -18,7 +18,16 @@ class Preference
 		}
 	}
 
-	public function updatePreference(array &$preferenceDetails) {
+	public function removeUserPreference(array &$preferenceDetails) {
+
+		$query = $this->database->deletePreference($preferenceDetails);
+
+		if (!$query) {
+			throw new Exception("error : delete preference failed");
+		}
+	}
+
+	public function updateUserPreference(array &$preferenceDetails) {
 		$query = $this->database->updatePreference($preferenceDetails);
 
 		if (!$query) {

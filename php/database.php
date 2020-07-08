@@ -97,6 +97,23 @@ class Database
 		}
 	}
 
+	public function deletePreference(array &$preferenceDetails) {
+		try {
+//			var_dump($preferenceDetails);
+			$sql = "DELETE FROM preference
+					WHERE username=:username and presentationTheme=:presentationTheme;";
+
+			$deleteStatement = $this->connection->prepare($sql);
+
+			$result = $deleteStatement->execute($preferenceDetails);
+
+			return $result;
+		}
+		catch (PDOException $exception) {
+			throw $exception;
+		}
+	}
+
 	public function selectPreferencesByUsernameAndTheme(array &$preferenceDetails) {
 		try {
 			$sql = "SELECT * FROM preference WHERE username=:username and presentationTheme=:presentationTheme;";

@@ -166,15 +166,16 @@ function generatePersonalisedSchedule() {
 }
 
 function generatePreferenceDetails(preferenceButton) {
-	const PRESENTER_CLASSNAME = "presenter";
 	const THEME_CLASSNAME = "theme";
+	const PREFERENCE_CLASSNAME_INDEX = 1;
 
 	let event = preferenceButton.parentElement.parentElement;
 
 	let preferenceObj = {
 		presentationTheme: event.getElementsByClassName(THEME_CLASSNAME)[0].innerText,
-		preferenceType: preferenceButton.innerText,
+		preferenceType: preferenceButton.classList[PREFERENCE_CLASSNAME_INDEX]
 	};
+
 
 	return preferenceObj;
 }

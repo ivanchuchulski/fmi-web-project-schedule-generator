@@ -11,14 +11,20 @@
 	let schedulePageButton = document
 		.getElementById("schedule-page-button")
 		.addEventListener("click", goToSchedulePage.bind(null, "schedule.html"));
-		
+
 	let personalisedScheduleButton = document
 		.getElementById("personalised-schedule-button")
-		.addEventListener("click", () => { window.location = "personal-schedule.html"});
+		.addEventListener("click", () => {
+			window.location = "personal-schedule.html";
+		});
 
 	let logoutButton = document
 		.getElementById("logout-button")
 		.addEventListener("click", logoutRequest);
+
+	let applyChangesButton = document
+		.getElementById("apply-changes")
+		.addEventListener("click", updatePersonalSchedule);
 })();
 
 function loadPersonalEvents() {
@@ -42,10 +48,8 @@ function ajaxLoadPersonalScheduleHandler(xhr) {
 	let response = JSON.parse(xhr.responseText);
 
 	if (response.success) {
-		// console.log("success load personal schedule");
 		drawPersonalEvents(response);
 	} else {
-		// console.log("error : load schedule");
 		displayMessage(
 			"грешка : не е започната сесия или сесията е изтелкла(или персоналните събития не може да бъдат заредени)"
 		);
@@ -62,6 +66,8 @@ function drawPersonalEvents(response) {
 
 	if (events.length === 0) {
 		displayMessage("Нямате избрани презентации!");
+		let applyChangesButton = document.getElementById('apply-changes');
+		applyChangesButton.style.display = 'none';
 	} else {
 		Object.keys(events).forEach((event) => {
 			let theme = events[event].theme;
@@ -107,7 +113,7 @@ function drawPersonalEvents(response) {
 			preference.appendChild(removeButton);
 
 			// set the button highlight preference
-			if (preferenceType === "will attend") {
+			if (preferenceType === "willAttend") {
 				addHighlight(willGoButton);
 			} else {
 				addHighlight(couldGoButton);
@@ -150,7 +156,7 @@ function removeHightlight(preferenceButton) {
 	preferenceButton.className = preferenceButton.className.replace(" active", "");
 }
 
-function generatePersonalisedSchedule() {
+function updatePersonalSchedule() {
 	const ACITVE_CLASSNAME = "active";
 	let preferences = [];
 	let preferenceButtons = document.getElementsByClassName("preferenceButton");
@@ -162,33 +168,56 @@ function generatePersonalisedSchedule() {
 	}
 
 	if (preferences.length === 0) {
-		// displayMessage("не сте избрали никакви събития!");
-		goToPersonalSchedulePage("personal-schedule.html");
+		displayMessage('грешка : моля изберете действие за събитието');
 		return;
 	}
 
+	
 	console.log("preferences");
 	console.log(preferences);
+		
+	const UPDATE_SCHEDULE_URL = "php/api.php/updatePersonalSchedule";
+	const UPDATE_SCHEDULE_METHOD = "POST";
 
-	const LOAD_SCHEDULE_URL = "php/api.php/generatePersonalSchedule";
-	const LOAD_SCHEDULE_METHOD = "POST";
-
-	ajaxPersonalScheduleRequest(
-		LOAD_SCHEDULE_URL,
-		LOAD_SCHEDULE_METHOD,
+	ajaxUpdatePersonalScheduleRequest(
+		UPDATE_SCHEDULE_URL,
+		UPDATE_SCHEDULE_METHOD,
 		`preferencesData=${JSON.stringify(preferences)}`
 	);
 }
 
+
+function ajaxUpdatePersonalScheduleRequest(url, method, data) {
+	let xhr = new XMLHttpRequest();
+
+	xhr.addEventListener("load", () => ajaxUpdatePersonalScheduleHandler(xhr));
+
+	xhr.open(method, url, true);
+	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhr.send(data);
+}
+
+function ajaxUpdatePersonalScheduleHandler(xhr) {
+	let response = JSON.parse(xhr.responseText);
+
+	if (response.success) {
+		console.log("success update personalised schedule");
+		goToPersonalSchedulePage("personal-schedule.html");
+	} else {
+		console.log("error : generate personalised schedule");
+		displayMessage("грешка : невъзможност за обновяваве на персонален график");
+	}
+}
+
 function generatePreferenceDetails(preferenceButton) {
-	const PRESENTER_CLASSNAME = "presenter";
 	const THEME_CLASSNAME = "theme";
+	const PREFERENCE_CLASSNAME_INDEX = 1;
 
 	let event = preferenceButton.parentElement.parentElement;
 
 	let preferenceObj = {
 		presentationTheme: event.getElementsByClassName(THEME_CLASSNAME)[0].innerText,
-		preferenceType: preferenceButton.innerText,
+		preferenceType: preferenceButton.classList[PREFERENCE_CLASSNAME_INDEX]
 	};
 
 	return preferenceObj;
@@ -223,6 +252,10 @@ function ajaxLogoutHandler(xhr) {
 }
 
 function goToSchedulePage(schedulePageUrl) {
+	window.location = schedulePageUrl;
+}
+
+function goToPersonalSchedulePage(schedulePageUrl) {
 	window.location = schedulePageUrl;
 }
 
