@@ -24,7 +24,6 @@ function generatePersonalSchedule() {
 				$preference->addPreferenceData($preferenceDetails);
 			}
 			else {
-				var_dump($preferencesRows);
 				$preference->updatePreference($preferenceDetails);
 			}
 		}
