@@ -43,7 +43,7 @@ function ajaxLoadHandler(xhr) {
 
 	if (response.success) {
 		console.log("success load schedule");
-		drawEvents(response.data);
+		drawEvents(response);
 	} else {
 		console.log("error : load schedule");
 		displayMessage(
@@ -52,25 +52,23 @@ function ajaxLoadHandler(xhr) {
 	}
 }
 
-function drawEvents(events) {
-	let eventParent = document.getElementById("event-list");
-
-	let eventList = JSON.parse(events);
-
+function drawEvents(response) {
+	let username = response.username;
+	document.getElementById("username").innerText += " " + username + "!";
+	
+	let eventsData = response.data;
+	let eventList = JSON.parse(eventsData);
+	
 	// console.log(JSON.stringify(eventList, null, 4));
 	// console.log(eventList);
+
+	let eventParent = document.getElementById("event-list");
 
 	Object.keys(eventList).forEach((event) => {
 		let theme = eventList[event].theme;
 		let presentDate = eventList[event].presentDate;
 		let presenterName = eventList[event].presenterName;
 		let place = eventList[event].place;
-
-		// console.log("event : ");
-		// console.log(theme);
-		// console.log(presentDate);
-		// console.log(presenterName);
-		// console.log(place);
 
 		let eventElement = document.createElement("div");
 		let details = document.createElement("div");
@@ -90,8 +88,8 @@ function drawEvents(events) {
 		details.innerHTML = `<p class="presenter">${presenterName}</p> <p class="theme">${theme}</p>`;
 		timeinfo.innerHTML = `<p class="date">${presentDate}</p> <p class="presentationSite">${place}</p>`;
 
-		willGoButton.innerText += "will attend";
-		couldGoButton.innerText += "could attend";
+		willGoButton.innerText += "ще отида";
+		couldGoButton.innerText += "може би ще отида";
 
 		eventParent.appendChild(eventElement);
 

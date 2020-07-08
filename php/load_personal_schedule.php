@@ -10,9 +10,10 @@ function loadPersonalSchedule() {
 
 		$username = $_SESSION['username'];
 		$preference = new Preference();
+
 		$preferencesRows = $preference->getPreferredPresentationsForUser($username);
 
-		$response = ['success' => true, 'data' => $preferencesRows];
+		$response = ['success' => true, 'data' => $preferencesRows, 'username' => $username];
 		echo json_encode($response);
 	}
 	catch (Exception $exception) {

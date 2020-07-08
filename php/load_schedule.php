@@ -23,7 +23,9 @@ function loadSchedule() {
 			}
 		}
 
-		$response = ['success' => true, 'data' => $events];
+		$username = $_SESSION['username'];
+
+		$response = ['success' => true, 'data' => $events, 'username' => $username];
 		echo json_encode($response);
 	}
 	catch (Exception $exception) {

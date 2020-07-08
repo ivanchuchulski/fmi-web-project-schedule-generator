@@ -8,6 +8,10 @@
 		preferenceButtons[i].addEventListener("click", addToPreferences);
 	}
 
+	let schedulePageButton = document
+		.getElementById("schedule-page-button")
+		.addEventListener("click", goToSchedulePage.bind(null, "schedule.html"));
+		
 	let personalisedScheduleButton = document
 		.getElementById("personalised-schedule-button")
 		.addEventListener("click", generatePersonalisedSchedule);
@@ -39,7 +43,7 @@ function ajaxLoadPersonalScheduleHandler(xhr) {
 
 	if (response.success) {
 		// console.log("success load personal schedule");
-		drawPersonalEvents(response.data);
+		drawPersonalEvents(response);
 	} else {
 		// console.log("error : load schedule");
 		displayMessage(
@@ -48,66 +52,72 @@ function ajaxLoadPersonalScheduleHandler(xhr) {
 	}
 }
 
-function drawPersonalEvents(events) {
+function drawPersonalEvents(response) {
 	let eventParent = document.getElementById("personal-events");
 
-	let username = events[0].username;
+	let username = response.username;
 	document.getElementById("username").innerText += " " + username + "!";
 
-	Object.keys(events).forEach((event) => {
-		let theme = events[event].theme;
-		let presentDate = events[event].presentDate;
-		let presenterName = events[event].presenterName;
-		let place = events[event].place;
-		let preferenceType = events[event].preferenceType;
+	let events = response.data;
 
-		let eventElement = document.createElement("div");
+	if (events.length === 0) {
+		displayMessage("Нямате избрани презентации!");
+	} else {
+		Object.keys(events).forEach((event) => {
+			let theme = events[event].theme;
+			let presentDate = events[event].presentDate;
+			let presenterName = events[event].presenterName;
+			let place = events[event].place;
+			let preferenceType = events[event].preferenceType;
 
-		let details = document.createElement("div");
-		let timeinfo = document.createElement("div");
-		let preference = document.createElement("div");
+			let eventElement = document.createElement("div");
 
-		let willGoButton = document.createElement("button");
-		let couldGoButton = document.createElement("button");
-		let removeButton = document.createElement("button");
+			let details = document.createElement("div");
+			let timeinfo = document.createElement("div");
+			let preference = document.createElement("div");
 
-		eventElement.className += "event";
-		details.className += "details";
-		timeinfo.className += "timeinfo";
-		preference.className += "preference";
+			let willGoButton = document.createElement("button");
+			let couldGoButton = document.createElement("button");
+			let removeButton = document.createElement("button");
 
-		willGoButton.className += "preferenceButton willAttend";
-		couldGoButton.className += "preferenceButton couldAttend";
-		removeButton.className += "preferenceButton cancelAttend";
+			eventElement.className += "event";
+			details.className += "details";
+			timeinfo.className += "timeinfo";
+			preference.className += "preference";
 
-		details.innerHTML = `<p class="presenter">${presenterName}</p> <p class="theme">${theme}</p>`;
-		timeinfo.innerHTML = `<p class="date">${presentDate}</p> <p class="presentationSite">${place}</p>`;
+			willGoButton.className += "preferenceButton willAttend";
+			couldGoButton.className += "preferenceButton couldAttend";
+			removeButton.className += "preferenceButton cancelAttend";
 
-		willGoButton.innerText += "ще отида";
-		couldGoButton.innerText += "може би ще отида";
-		removeButton.innerText += "премахни събитието";
+			details.innerHTML = `<p class="presenter">${presenterName}</p> <p class="theme">${theme}</p>`;
+			timeinfo.innerHTML = `<p class="date">${presentDate}</p> <p class="presentationSite">${place}</p>`;
 
-		eventParent.appendChild(eventElement);
+			willGoButton.innerText += "ще отида";
+			couldGoButton.innerText += "може би ще отида";
+			removeButton.innerText += "премахни събитието";
 
-		eventElement.appendChild(details);
-		eventElement.appendChild(timeinfo);
-		eventElement.appendChild(preference);
+			eventParent.appendChild(eventElement);
 
-		preference.appendChild(willGoButton);
-		preference.appendChild(couldGoButton);
-		preference.appendChild(removeButton);
+			eventElement.appendChild(details);
+			eventElement.appendChild(timeinfo);
+			eventElement.appendChild(preference);
 
-		// set the button highlight preference
-		if (preferenceType === "will attend") {
-			addHighlight(willGoButton);
-		} else {
-			addHighlight(couldGoButton);
-		}
+			preference.appendChild(willGoButton);
+			preference.appendChild(couldGoButton);
+			preference.appendChild(removeButton);
 
-		willGoButton.addEventListener("click", addToPreferences);
-		couldGoButton.addEventListener("click", addToPreferences);
-		removeButton.addEventListener("click", addToPreferences);
-	});
+			// set the button highlight preference
+			if (preferenceType === "will attend") {
+				addHighlight(willGoButton);
+			} else {
+				addHighlight(couldGoButton);
+			}
+
+			willGoButton.addEventListener("click", addToPreferences);
+			couldGoButton.addEventListener("click", addToPreferences);
+			removeButton.addEventListener("click", addToPreferences);
+		});
+	}
 }
 
 function addToPreferences() {
@@ -210,6 +220,10 @@ function ajaxLogoutHandler(xhr) {
 	} else {
 		console.log("error : logout request");
 	}
+}
+
+function goToSchedulePage(schedulePageUrl) {
+	window.location = schedulePageUrl;
 }
 
 function goToLoginPage(loginPageUrl) {
