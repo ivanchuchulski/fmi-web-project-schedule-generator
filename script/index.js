@@ -66,7 +66,7 @@ function login(clickEvent) {
 function validateEmail(elementId) {
     const lowerLimit = 5;
     const upperLimit = 50;
-    const pattern = `^[A-Za-z_-]{${lowerLimit},${upperLimit}}@[a-z]+\.[a-z]+$`;
+    const pattern = `^[A-Za-z0-9_-]{${lowerLimit},${upperLimit}}@[a-z]+\.[a-z]+$`;
     const regex = new RegExp(pattern);
 
     let email = document.getElementById(`${elementId}`).value;
@@ -85,7 +85,7 @@ function validateEmail(elementId) {
 function validateUsername(elementId) {
     const lowerLimit = 3;
     const upperLimit = 50;
-    const pattern = `^[A-Za-z-_]{${lowerLimit},${upperLimit}}$`;
+    const pattern = `^[A-Za-z0-9_-]{${lowerLimit},${upperLimit}}$`;
     const regex = new RegExp(pattern);
 
     let username = document.getElementById(`${elementId}`).value;
@@ -95,7 +95,7 @@ function validateUsername(elementId) {
     }
 
     if (!username.match(regex)) {
-        throw `грешка: потребителското име трябва да съдържа само букви, цифри и _`;
+        throw `грешка: потребителското име трябва да съдържа само букви, цифри, _ и -`;
     }
     
     return formatInput(username);
