@@ -2,15 +2,15 @@
 (function () {
 	window.onload = () => loadEvents();
 
-	document.getElementById("list-button").addEventListener("click", listView);
-	document.getElementById("grid-button").addEventListener("click", gridView);
-	listView();
-
 	let preferenceButtons = document.getElementsByClassName("preferenceButton");
 
 	for (let i = 0; i < preferenceButtons.length; i++) {
 		preferenceButtons[i].addEventListener("click", addToPreferences);
 	}
+
+	let schedulePageButton = document
+	.getElementById("schedule-page-button")
+	.addEventListener("click", goToSchedulePage.bind(null, "schedule.html"));
 
 	let personalisedScheduleButton = document
 		.getElementById("personalised-schedule-button")
@@ -237,41 +237,8 @@ function goToLoginPage(loginPageUrl) {
 	window.location = loginPageUrl;
 }
 
-function listView() {
-	let elements = document.getElementsByClassName("column");
-
-	for (let i = 0; i < elements.length; i++) {
-		elements[i].style.width = "100%";
-	}
-
-	updateButtonHighlight();
-}
-
-function gridView() {
-	let elements = document.getElementsByClassName("column");
-
-	for (let i = 0; i < elements.length; i++) {
-		elements[i].style.width = "50%";
-	}
-
-	updateButtonHighlight();
-}
-
-function updateButtonHighlight() {
-	let container = document.getElementById("btnContainer");
-	let btns = container.getElementsByClassName("btn");
-
-	for (let i = 0; i < btns.length; i++) {
-		btns[i].addEventListener("click", function () {
-			let current = document.getElementsByClassName("active");
-
-			current[0].className = current[0].className.replace(" active", "");
-
-			console.log(this);
-
-			this.className += " active";
-		});
-	}
+function goToSchedulePage(schedulePageUrl) {
+	window.location = schedulePageUrl;
 }
 
 function displayMessage(text) {
