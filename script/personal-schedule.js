@@ -12,11 +12,11 @@
 		.getElementById("schedule-page-button")
 		.addEventListener("click", goToSchedulePage.bind(null, "schedule.html"));
 
-	let personalisedScheduleButton = document
-		.getElementById("personalised-schedule-button")
-		.addEventListener("click", () => {
-			window.location = "personal-schedule.html";
-		});
+	let personalisedScheduleButton = document.getElementById("personalised-schedule-button");
+	personalisedScheduleButton.addEventListener("click", () => {
+		window.location = "personal-schedule.html";
+	});
+	addHighlight(personalisedScheduleButton);
 
 	let logoutButton = document
 		.getElementById("logout-button")
@@ -66,8 +66,8 @@ function drawPersonalEvents(response) {
 
 	if (events.length === 0) {
 		displayMessage("Нямате избрани презентации!");
-		let applyChangesButton = document.getElementById('apply-changes');
-		applyChangesButton.style.display = 'none';
+		let applyChangesButton = document.getElementById("apply-changes");
+		applyChangesButton.style.display = "none";
 	} else {
 		Object.keys(events).forEach((event) => {
 			let theme = events[event].theme;
@@ -168,13 +168,13 @@ function updatePersonalSchedule() {
 	}
 
 	if (preferences.length === 0) {
-		displayMessage('грешка : моля изберете действие за събитието');
+		displayMessage("грешка : моля изберете действие за събитието");
 		return;
 	}
 
 	// console.log("preferences");
 	// console.log(preferences);
-		
+
 	const UPDATE_SCHEDULE_URL = "php/api.php/updatePersonalSchedule";
 	const UPDATE_SCHEDULE_METHOD = "POST";
 
@@ -184,7 +184,6 @@ function updatePersonalSchedule() {
 		`preferencesData=${JSON.stringify(preferences)}`
 	);
 }
-
 
 function ajaxUpdatePersonalScheduleRequest(url, method, data) {
 	let xhr = new XMLHttpRequest();
@@ -216,7 +215,7 @@ function generatePreferenceDetails(preferenceButton) {
 
 	let preferenceObj = {
 		presentationTheme: event.getElementsByClassName(THEME_CLASSNAME)[0].innerText,
-		preferenceType: preferenceButton.classList[PREFERENCE_CLASSNAME_INDEX]
+		preferenceType: preferenceButton.classList[PREFERENCE_CLASSNAME_INDEX],
 	};
 
 	return preferenceObj;

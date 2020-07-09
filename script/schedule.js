@@ -8,13 +8,19 @@
 		preferenceButtons[i].addEventListener("click", addToPreferences);
 	}
 
-	let schedulePageButton = document
-		.getElementById("schedule-page-button")
-		.addEventListener("click", goToSchedulePage.bind(null, "schedule.html"));
+	let schedulePageButton = document.getElementById("schedule-page-button");
+	schedulePageButton.addEventListener("click", goToSchedulePage.bind(null, "schedule.html"));
+	addHighlight(schedulePageButton);
 
-	let personalisedScheduleButton = document
-		.getElementById("personalised-schedule-button")
+	let personalScheduleButton = document
+		.getElementById("make-personal")
 		.addEventListener("click", generatePersonalisedSchedule);
+
+	let personalSchedule = document
+		.getElementById("personalised-schedule-button")
+		.addEventListener("click", () => {
+			window.location = "personal-schedule.html";
+		});
 
 	let logoutButton = document
 		.getElementById("logout-button")
@@ -106,20 +112,17 @@ function drawEvents(response) {
 		// variant 1 : hide the other button and remove the event listener for the active button
 		if (preferenceType === "willAttend") {
 			addHighlight(willGoButton);
-		
+
 			willGoButton.removeEventListener("click", addToPreferences);
-		
-			couldGoButton.style.display = 'none';
-		} 
-		else if (preferenceType === "couldAttend") {
+
+			couldGoButton.style.display = "none";
+		} else if (preferenceType === "couldAttend") {
 			addHighlight(couldGoButton);
-		
+
 			couldGoButton.removeEventListener("click", addToPreferences);
 
-			willGoButton.style.display = 'none';
-		} 
-		else {
-			;
+			willGoButton.style.display = "none";
+		} else {
 		}
 	});
 }
