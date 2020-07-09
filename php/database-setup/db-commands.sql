@@ -39,4 +39,6 @@ WHERE presentationTheme IN (SELECT preference.presentationTheme
                                 FROM preference
                                 WHERE username=:username);
 
-
+-- get presentation from db with formatted date
+SELECT `theme`, DATE_FORMAT(`presentDate`, "%H:%i %d %M %Y"), `presenterName`, `place`
+FROM presentation
