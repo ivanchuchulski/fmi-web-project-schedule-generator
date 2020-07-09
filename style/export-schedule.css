@@ -1,0 +1,74 @@
+body {
+	display: grid;
+	grid-template-columns: 100%;
+	grid-template-rows: 150px auto auto 80px;
+	grid-template-areas: "header" "information" "main" "footer";
+
+	justify-items: center;
+	align-items: center;
+
+	margin: 15px 50px;
+
+	font-size: 12px;
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+header {
+	grid-area: header;
+	width: 750px;
+}
+
+header nav {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+
+header button {
+	width: 180px;
+	height: 60px;
+    padding: 5px 5px;
+    color: #2c6460;
+    font-weight: bold;
+}
+
+#information {
+	grid-area: information;
+	text-align: center;
+	margin: 10px 10px;
+	color: #2c6460;
+}
+
+#messageLabel {
+	display: block;
+	font-size: 16pt;
+}
+
+main {
+    grid-area: main;
+    
+    display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+    width: 770px;   
+}
+
+.export-option {
+	width: 160px;
+	height: 50px;
+	padding: 10px 10px;
+	color: #2c6460;
+    font-weight: bold;
+}
+
+.active {
+	background-color: #666;
+	color: white;
+}
+
+
+body footer {
+	grid-area: footer;
+}

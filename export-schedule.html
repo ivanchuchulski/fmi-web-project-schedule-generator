@@ -3,9 +3,9 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Персонализиран график</title>
-		<link rel="stylesheet" href="style/personal-schedule.css" />
-		<script src="script/personal-schedule.js" defer></script>
+		<title>Експортирай графика</title>
+		<link rel="stylesheet" href="style/export-schedule.css" />
+		<script src="script/export-schedule.js" defer></script>
 	</head>
 	<body>
 		<header>
@@ -17,12 +17,11 @@
 			</nav>
 		</header>
 		<section id="information">
-			<h2 id="username">Здравейте</h2>
-			<h2 id="username">Това е вашият персонален график.</h2>
-			<button id="apply-changes">Приложи промените</button>
+			<h2 id="username">Изберете опция за експортиране на вашия график</h2>
 			<label id="messageLabel"></label>
 		</section>
-		<main id="personal-events">
+		<main>
+            <button id="export-pdf" class="export-option">Експортирай графика в PDF</button>
 		</main>
 		<footer>
 			<p>Разработено от: Даниел Димитров, Виктор Христов, Иван Чучулски</p>

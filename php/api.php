@@ -11,6 +11,7 @@ require_once "load_schedule.php";
 require_once "generate_personal_schedule.php";
 require_once "load_personal_schedule.php";
 require_once "updatePersonalSchedule.php";
+require_once "export_schedule_in_pdf.php";
 
 start();
 
@@ -42,9 +43,13 @@ function start() {
 	elseif (preg_match("/updatePersonalSchedule$/", $requestURL)) {
 		updatePersonalSchedule();
 	}
+	elseif (preg_match("/exportScheduleInPdf$/", $requestURL)) {
+		exportScheduleInPdf();
+	}
 	else {
 		echo json_encode(["error" => "грешка : не е намерен такъв URL"]);
 	}
+
 }
 
 ?>

@@ -2,19 +2,9 @@
 (function () {
 	window.onload = () => loadEvents();
 
-	let preferenceButtons = document.getElementsByClassName("preferenceButton");
-
-	for (let i = 0; i < preferenceButtons.length; i++) {
-		preferenceButtons[i].addEventListener("click", addToPreferences);
-	}
-
 	let schedulePageButton = document.getElementById("schedule-page-button");
 	schedulePageButton.addEventListener("click", goToSchedulePage.bind(null, "schedule.html"));
 	addHighlight(schedulePageButton);
-
-	let personalScheduleButton = document
-		.getElementById("make-personal")
-		.addEventListener("click", generatePersonalisedSchedule);
 
 	let personalSchedule = document
 		.getElementById("personalised-schedule-button")
@@ -22,9 +12,19 @@
 			window.location = "personal-schedule.html";
 		});
 
+	let exportScheduleButton = document
+		.getElementById("export-schedule")
+		.addEventListener("click", () => {
+			window.location = "export-schedule.html";
+		});
+
 	let logoutButton = document
 		.getElementById("logout-button")
 		.addEventListener("click", logoutRequest);
+
+	let personalScheduleButton = document
+		.getElementById("make-personal")
+		.addEventListener("click", generatePersonalisedSchedule);
 })();
 
 function loadEvents() {
@@ -78,16 +78,15 @@ function drawEvents(response) {
 		// building date from json date
 		let date = new Date(eventList[event].presentDate);
 
-        let time = date.toLocaleTimeString();
-        let temp = time.split(":");
-        time = temp[0] + ":" + temp[1];
+		let time = date.toLocaleTimeString();
+		let temp = time.split(":");
+		time = temp[0] + ":" + temp[1];
 
+		let ymd = date.toDateString();
+		let tempYMD = ymd.split(" ");
+		ymd = `${tempYMD[2]} ${tempYMD[1]} ${tempYMD[3]}`;
 
-        let ymd = date.toDateString();
-        let tempYMD = ymd.split(" ");
-        ymd = `${tempYMD[2]} ${tempYMD[1]} ${tempYMD[3]}`;
-
-        let presentDate = time + " " + ymd;
+		let presentDate = time + " " + ymd;
 
 		let eventElement = document.createElement("div");
 		let details = document.createElement("div");

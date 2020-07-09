@@ -2,12 +2,6 @@
 (function () {
 	window.onload = () => loadPersonalEvents();
 
-	let preferenceButtons = document.getElementsByClassName("preferenceButton");
-
-	for (let i = 0; i < preferenceButtons.length; i++) {
-		preferenceButtons[i].addEventListener("click", addToPreferences);
-	}
-
 	let schedulePageButton = document
 		.getElementById("schedule-page-button")
 		.addEventListener("click", goToSchedulePage.bind(null, "schedule.html"));
@@ -17,6 +11,12 @@
 		window.location = "personal-schedule.html";
 	});
 	addHighlight(personalisedScheduleButton);
+
+	let exportScheduleButton = document
+		.getElementById("export-schedule")
+		.addEventListener("click", () => {
+			window.location = "export-schedule.html";
+	});
 
 	let logoutButton = document
 		.getElementById("logout-button")
