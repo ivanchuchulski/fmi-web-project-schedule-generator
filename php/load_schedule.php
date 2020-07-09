@@ -8,36 +8,36 @@ function loadSchedule() {
 	try {
 		checkSessionSet();
 
-		$events = file_get_contents("json/presentations.json");
+		$presentationsJSONString = file_get_contents("json/presentations.json");
 
-		if (!isset($events)) {
+		if (!isset($presentationsJSONString)) {
 			throw new Exception("грешка : файлът с презентациите не може да бъде намерен");
 		}
 
-		$decode_events = json_decode($events, true);
+		$decodedPresentations = json_decode($presentationsJSONString, true);
 		$presentation = new Presentation();
 		$preference = new Preference();
 		$username = $_SESSION['username'];
 		$EMPTY_PRESENTATION_PREFERENCE= 'empty';
 
-		foreach ($decode_events as &$event) {
-			if (!$presentation->presentationExists($event)) {
-				$presentation->addPresentationData($event);
+		foreach ($decodedPresentations as &$decodedPresentation) {
+			if (!$presentation->presentationExists($decodedPresentation)) {
+				$presentation->addPresentationData($decodedPresentation);
 			}
 
-			// here  $event['theme'] is from the JSON
-			$preferenceDetails = array('username' => $username, 'presentationTheme' => $event['theme']);
-			$eventPreference = $preference->getPreferenceByUsernameAndTheme($preferenceDetails);
+			// here  $decodedPresentation['theme'] is from the JSON
+			$preferenceDetails = array('username' => $username, 'presentationTheme' => $decodedPresentation['theme']);
+			$presentationPreference = $preference->getPreferenceByUsernameAndTheme($preferenceDetails);
 
-			if (!empty($eventPreference)) {
-				$event['preferenceType'] = $eventPreference['preferenceType'];
+			if (!empty($presentationPreference)) {
+				$decodedPresentation['preferenceType'] = $presentationPreference['preferenceType'];
 			}
 			else {
-				$event['preferenceType'] = $EMPTY_PRESENTATION_PREFERENCE;
+				$decodedPresentation['preferenceType'] = $EMPTY_PRESENTATION_PREFERENCE;
 			}
 		}
 
-		$response = ['success' => true, 'data' => json_encode($decode_events), 'username' => $username];
+		$response = ['success' => true, 'data' => json_encode($decodedPresentations), 'username' => $username];
 		echo json_encode($response);
 	}
 	catch (Exception $exception) {

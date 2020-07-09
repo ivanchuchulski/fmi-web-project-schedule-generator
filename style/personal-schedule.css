@@ -56,7 +56,6 @@ header button {
 main {
 	grid-area: main;
 	width: 770px;
-	background-color: #ececec;
 }
 
 .active {
@@ -69,7 +68,9 @@ main {
 	flex-direction: row;
 	align-items: stretch;
 	justify-content: space-between;
-	border: 1px solid black;
+	margin: 10px 0px;
+	background-color: #ececec;
+	border: 2px solid black;
 }
 
 .details {
