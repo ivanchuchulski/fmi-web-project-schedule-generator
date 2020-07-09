@@ -71,10 +71,23 @@ function drawEvents(response) {
 
 	Object.keys(eventList).forEach((event) => {
 		let theme = eventList[event].theme;
-		let presentDate = eventList[event].presentDate;
 		let presenterName = eventList[event].presenterName;
 		let place = eventList[event].place;
 		let preferenceType = eventList[event].preferenceType;
+
+		// building date from json date
+		let date = new Date(eventList[event].presentDate);
+
+        let time = date.toLocaleTimeString();
+        let temp = time.split(":");
+        time = temp[0] + ":" + temp[1];
+
+
+        let ymd = date.toDateString();
+        let tempYMD = ymd.split(" ");
+        ymd = `${tempYMD[2]} ${tempYMD[1]} ${tempYMD[3]}`;
+
+        let presentDate = time + " " + ymd;
 
 		let eventElement = document.createElement("div");
 		let details = document.createElement("div");
