@@ -1,8 +1,8 @@
 body {
 	display: grid;
 	grid-template-columns: 100%;
-	grid-template-rows: 150px auto auto 80px;
-	grid-template-areas: "header" "information" "main" "footer";
+	grid-template-rows: 150px auto auto auto 80px;
+	grid-template-areas: "header" "information" "filters" "main" "footer";
 
 	justify-items: center;
 	align-items: center;
@@ -33,11 +33,19 @@ header button {
     font-weight: bold;
 }
 
+
 #information {
 	grid-area: information;
 	text-align: center;
 	margin: 10px 10px;
 	color: #2c6460;
+}
+
+#filters {
+	grid-area: filters;
+	text-align: center;
+    margin: 10px 10px;
+    color: #2c6460;
 }
 
 #apply-changes {

@@ -25,7 +25,102 @@
 	let applyChangesButton = document
 		.getElementById("apply-changes")
 		.addEventListener("click", updatePersonalSchedule);
+
+	let applyFilterButton = document
+		.getElementById("apply-filter")
+		.addEventListener("click", generateScheduleByFilters);
+	
+	
+	let resetFilterButton = document
+		.getElementById("reset-filter")
+		.addEventListener("click", removeFilters);
+
+
 })();
+
+function generateScheduleByFilters() {
+
+	let daySelectElement = document.getElementById("filter-by-day"); 
+	let groupSelectElement = document.getElementById("filter-by-group"); 
+
+	let filterByDay = daySelectElement.options[daySelectElement.selectedIndex].value;
+	let filterByGroup = groupSelectElement.options[groupSelectElement.selectedIndex].value;
+		
+	let events = document.getElementsByClassName("event");
+
+	displayAllEvents();
+
+	if (filterByDay) {
+		filterEventsByDay(events, filterByDay.slice(-1));
+	}
+
+	if(filterByGroup) {
+		filterEventsByGroup(events, filterByGroup.slice(-1));
+	}
+}
+
+function filterEventsByDay(events, dayFilter) {
+	for (let index = 0; index < events.length; index++) {
+		const event = events[index];
+		let eventDay = event.getElementsByClassName("day-number")[0].innerText.split(" ")[1];
+
+		//console.log(eventDay);
+
+		if (eventDay != dayFilter) {
+			hideEvent(event);
+		}
+	}
+}
+
+function hideEvent(event) {
+	event.style.display = "none";
+}
+
+
+function removeFilters() {
+		displayAllEvents();
+		removeSelectedFilters();
+}
+
+function displayAllEvents() {
+
+	let daySelectElement = document.getElementById("filter-by-day"); 
+	let groupSelectElement = document.getElementById("filter-by-group"); 
+
+	let events = document.getElementsByClassName("event");
+	//console.log(events);
+
+	for (let index = 0; index < events.length; index++) {
+		let element = events[index];
+		console.log(element);
+		element.style.display = "flex";
+	}
+}
+
+function removeSelectedFilters() {
+	let daySelectElement = document.getElementById("filter-by-day"); 
+	let groupSelectElement = document.getElementById("filter-by-group"); 
+
+	daySelectElement.selectedIndex = 0;
+	groupSelectElement.selectedIndex = 0;
+}
+
+function filterEventsByGroup(events, groupFilter) {
+	for (let index = 0; index < events.length; index++) {
+		const event = events[index];
+		let eventGroup = event.getElementsByClassName("group-number")[0].innerText.split(" ")[1];
+
+		//console.log(eventDay);
+
+		if (eventGroup != groupFilter) {
+			hideEvent(event);
+		}
+	}
+}
+
+
+
+
 
 function loadPersonalEvents() {
 	const PERSONAL_SCHEDULE_URL = "php/api.php/loadPersonalSchedule";
