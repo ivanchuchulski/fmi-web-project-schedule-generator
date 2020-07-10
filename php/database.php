@@ -54,8 +54,8 @@ class Database
     public function insertPresentation($data)
     {
         try {
-            $sql = "INSERT INTO presentation (theme , presentDate, presenterName, place) 
-            VALUES(:theme, :presentDate, :presenterName, :place);";
+            $sql = "INSERT INTO presentation (theme , presentDate, dayNumber, presenterName, facultyNumber, groupNumber, place) 
+				VALUES(:theme, :presentDate, :dayNumber, :presenterName, :facultyNumber, :groupNumber, :place);";
 
             $insertStatement = $this->connection->prepare($sql);
             $result = $insertStatement->execute($data);

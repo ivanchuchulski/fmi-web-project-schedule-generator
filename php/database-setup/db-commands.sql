@@ -14,15 +14,15 @@ SELECT *
 FROM presentation 
 WHERE theme = :theme;
 
-INSERT INTO presentation (theme , presentDate, presenterName, place) 
-VALUES(:theme, :presentDate, :presenterName, :place);
+INSERT INTO presentation (theme , presentDate, dayNumber, presenterName, facultyNumber, groupNumber, , place) 
+VALUES(:theme, :presentDate, :dayNumber, :presenterName, :facultyNumber, groupNumber, :place);
 
 -- preference queries
 SELECT * 
 FROM preference 
 WHERE username=:username and presentationTheme=:presentationTheme;
 
-INSERT INTO presentation (username, presentationTheme, preferenceType) 
+INSERT INTO preference (username, presentationTheme, preferenceType) 
 VALUES(:username, :presentationTheme, :preferenceType);
 
 UPDATE preference

@@ -23,7 +23,10 @@ CREATE TABLE `user` (
 CREATE TABLE `presentation` (
   `theme` VARCHAR(255) NOT NULL,
   `presentDate` DATETIME NOT NULL,
+  `dayNumber` INT NOT NULL,
   `presenterName` VARCHAR(255) NOT NULL,
+  `facultyNumber` INT NOT NULL,
+  `groupNumber` INT NOT NULL,
   `place` VARCHAR(255) NOT NULL,
   CONSTRAINT `presentation_pk` PRIMARY KEY (`theme`)
 );
