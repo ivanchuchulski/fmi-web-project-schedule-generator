@@ -70,6 +70,10 @@ main {
 	color: white;
 }
 
+.hide {
+	display: none;
+}
+
 .event {
 	display: flex;
 	flex-direction: row;

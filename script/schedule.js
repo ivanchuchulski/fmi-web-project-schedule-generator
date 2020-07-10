@@ -32,8 +32,52 @@
 })();
 
 function generateScheduleByFilters() {
+	let daySelectElement = document.getElementById("filter-by-day"); 
+	let groupSelectElement = document.getElementById("filter-by-group"); 
+
+	let filterByDay = daySelectElement.options[daySelectElement.selectedIndex].value;
+    let filterByGroup = groupSelectElement.options[groupSelectElement.selectedIndex].value;
+
+
+	// console.log(filterByDay.slice(-1));
+	// console.log(filterByGroup);
+	
+	let events = document.getElementsByClassName("event");
+
+	if (filterByDay) {
+		filterEventsByDay(events, filterByDay.slice(-1));
+	}
+
+	if(filterByGroup) {
+		filterEventsByGroup(events, filterByGroup.slice(-1));
+	}
+}
+
+function filterEventsByDay(events, dayFilter) {
+	for (let index = 0; index < events.length; index++) {
+		const event = events[index];
+		let eventDay = event.getElementsByClassName("day-number")[0].innerText.split(" ")[1];
+
+		console.log(eventDay);
+
+		if (eventDay != dayFilter) {
+			hideEvent(event);
+		}
+	}
+}
+
+function hideEvent(event) {
+	event.className += " hide";
+}
+
+function showEvent(event) {
+	event.className = event.className.replace(" hide", "");
+}
+
+function filterEventsByGroup(events) {
 	
 }
+
 
 function loadEvents() {
 	const LOAD_SCHEDULE_URL = "php/api.php/loadSchedule";
