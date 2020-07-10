@@ -137,9 +137,11 @@ class Database
     public function selectPreferredPresentationsForUser(string &$username)
     {
         try {
-            $sql = "SELECT presentation.theme, DATE_FORMAT(presentation.presentDate, '%H:%i %d %M %Y') as presentDate, presentation.presenterName, presentation.place, preference.preferenceType
-					FROM preference INNER JOIN presentation ON preference.presentationTheme = presentation.theme
-					WHERE presentationTheme IN (SELECT preference.presentationTheme
+            $sql = "SELECT presentation.theme, DATE_FORMAT(presentation.presentDate, '%H:%i %d %M %Y') as presentDate,
+                    presentation.presenterName, presentation.place, preference.preferenceType, 
+                    presentation.groupNumber, presentation.facultyNumber, presentation.dayNumber
+			        FROM preference INNER JOIN presentation ON preference.presentationTheme = presentation.theme
+			        WHERE presentationTheme IN (SELECT preference.presentationTheme
 												FROM preference
 													WHERE username=:username);";
 

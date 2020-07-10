@@ -76,6 +76,11 @@ function drawPersonalEvents(response) {
 			let place = events[event].place;
 			let preferenceType = events[event].preferenceType;
 
+			let facultyNumber = events[event].facultyNumber;
+			let groupNumber = events[event].groupNumber;
+			let dayNumber = events[event].dayNumber;
+
+
 			let eventElement = document.createElement("div");
 
 			let details = document.createElement("div");
@@ -95,8 +100,12 @@ function drawPersonalEvents(response) {
 			couldGoButton.className += "preferenceButton couldAttend";
 			removeButton.className += "preferenceButton cancelAttend";
 
-			details.innerHTML = `<p class="presenter">${presenterName}</p> <p class="theme">${theme}</p>`;
-			timeinfo.innerHTML = `<p class="date">${presentDate}</p> <p class="presentationSite">${place}</p>`;
+			details.innerHTML = `<p class="theme">${theme}</p>
+			<p class="presenter">${presenterName}, ${facultyNumber}</p>
+			<p class="group-number"> Група ${groupNumber}</p>`;
+			timeinfo.innerHTML = `<p class="date">${presentDate}</p>
+			<p class="day-number">Ден ${dayNumber}</p>
+			<p class="presentationSite">${place}</p>`;
 
 			willGoButton.innerText += "ще отида";
 			couldGoButton.innerText += "може би ще отида";

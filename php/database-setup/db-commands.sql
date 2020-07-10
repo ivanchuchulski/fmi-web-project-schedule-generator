@@ -33,11 +33,13 @@ DELETE FROM preference
 WHERE username=:username and presentationTheme=:presentationTheme;
 
 -- get presentatios from preferences for a given username
-SELECT presentation.theme, presentation.presentDate, presentation.presenterName, presentation.place, preference.preferenceType, preference.username
+SELECT presentation.theme, DATE_FORMAT(presentation.presentDate, '%H:%i %d %M %Y') as presentDate,
+    presentation.presenterName, presentation.place, preference.preferenceType, 
+    presentation.groupNumber, presentation.facultyNumber, presentation.dayNumber
 FROM preference INNER JOIN presentation ON preference.presentationTheme = presentation.theme
 WHERE presentationTheme IN (SELECT preference.presentationTheme
-                                FROM preference
-                                WHERE username=:username);
+							FROM preference
+						    WHERE username=:username);
 
 -- get presentation from db with formatted date
 SELECT `theme`, DATE_FORMAT(`presentDate`, "%H:%i %d %M %Y"), `presenterName`, `place`
