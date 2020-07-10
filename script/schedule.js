@@ -40,7 +40,7 @@ function ajaxLoadRequest(url, method, data) {
 	xhr.addEventListener("load", () => ajaxLoadHandler(xhr));
 
 	xhr.open(method, url, true);
-	xhr.setRequestHeader("Content-type", "application/json");
+	xhr.setRequestHeader("Content-type", "application/presentations_data");
 	xhr.send(data);
 }
 
@@ -75,7 +75,7 @@ function drawEvents(response) {
 		let place = eventList[event].place;
 		let preferenceType = eventList[event].preferenceType;
 
-		// building date from json date
+		// building date from presentations_data date
 		let date = new Date(eventList[event].presentDate);
 
 		let time = date.toLocaleTimeString();

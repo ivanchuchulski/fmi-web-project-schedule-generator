@@ -8,11 +8,15 @@ function loadSchedule() {
 	try {
 		checkSessionSet();
 
-		$presentationsJSONString = file_get_contents("json/presentations.json");
+		$config = parse_ini_file("config/config.ini", true);
 
-		if (!isset($presentationsJSONString)) {
+		$presentationsFilePath = $config['presentations']['path'];
+
+		if (!file_exists($presentationsFilePath)) {
 			throw new Exception("грешка : файлът с презентациите не може да бъде намерен");
 		}
+
+		$presentationsJSONString = file_get_contents($presentationsFilePath);
 
 		$decodedPresentations = json_decode($presentationsJSONString, true);
 		$presentation = new Presentation();

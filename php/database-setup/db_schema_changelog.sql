@@ -1,5 +1,5 @@
 -- db ddl commands for creation
--- for db setup view the db-config.ini file in backend folder
+-- for db setup view the config.ini file in backend folder
 -- host=127.0.0.1
 -- name=62167_ivan_chuchulski
 -- user=root

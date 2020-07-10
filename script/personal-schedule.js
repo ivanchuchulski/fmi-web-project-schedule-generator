@@ -40,7 +40,7 @@ function ajaxLoadPersonalScheduleRequest(url, method, data) {
 	xhr.addEventListener("load", () => ajaxLoadPersonalScheduleHandler(xhr));
 
 	xhr.open(method, url, true);
-	xhr.setRequestHeader("Content-type", "application/json");
+	xhr.setRequestHeader("Content-type", "application/presentations_data");
 	xhr.send(data);
 }
 
