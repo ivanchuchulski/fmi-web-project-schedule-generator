@@ -35,16 +35,17 @@
 		.getElementById("reset-filter")
 		.addEventListener("click", removeFilters);
 
-
 })();
 
 function generateScheduleByFilters() {
 
 	let daySelectElement = document.getElementById("filter-by-day"); 
 	let groupSelectElement = document.getElementById("filter-by-group"); 
+	let preferenceSelectElement = document.getElementById("filter-by-preference");
 
 	let filterByDay = daySelectElement.options[daySelectElement.selectedIndex].value;
 	let filterByGroup = groupSelectElement.options[groupSelectElement.selectedIndex].value;
+	let filterByPreference = preferenceSelectElement.options[preferenceSelectElement.selectedIndex].value;
 		
 	let events = document.getElementsByClassName("event");
 
@@ -57,7 +58,12 @@ function generateScheduleByFilters() {
 	if(filterByGroup) {
 		filterEventsByGroup(events, filterByGroup.slice(-1));
 	}
+
+	if(filterByPreference) {
+		filterEventsByPreference(events, filterByPreference);
+	}
 }
+
 
 function filterEventsByDay(events, dayFilter) {
 	for (let index = 0; index < events.length; index++) {
@@ -118,8 +124,17 @@ function filterEventsByGroup(events, groupFilter) {
 	}
 }
 
+function filterEventsByPreference(events, preferenceFilter) {
+	for (let index = 0; index < events.length; index++) {
+		const event = events[index];
+		let activePreferenceButton = event.getElementsByClassName("active")[0];
+		let buttonPreference = activePreferenceButton.className.split(" ")[1];
 
-
+		if (buttonPreference !== preferenceFilter) {
+			hideEvent(event);
+		}
+	}
+}
 
 
 function loadPersonalEvents() {
