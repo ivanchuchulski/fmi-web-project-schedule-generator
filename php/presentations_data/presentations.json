@@ -14,7 +14,7 @@
         "dayNumber" : "1" ,
         "presenterName" : "Васил Жухов" ,
         "facultyNumber" : "62101",
-        "groupNumber" : "1",
+        "groupNumber" : "2",
         "place" : "https://meet.jit.si/presentation"
     } ,
     {
@@ -23,7 +23,7 @@
         "dayNumber" : "1" ,
         "presenterName" : "Петър Янакиев" ,
         "facultyNumber" : "62102",
-        "groupNumber" : "2",
+        "groupNumber" : "3",
         "place" : "https://meet.jit.si/referat-meeting"
     } ,
     {
@@ -32,7 +32,7 @@
         "dayNumber" : "1" ,
         "presenterName" : "Таня Христова" ,
         "facultyNumber" : "62103",
-        "groupNumber" : "2",
+        "groupNumber" : "4",
         "place" : "https://learn.fmi.uni-sofia.bg/mod/bigbluebuttonbn/view.php?id=143791"
     } ,
     {
@@ -50,7 +50,7 @@
         "dayNumber" : "2" ,
         "presenterName" : "Мария Варджиева" ,
         "facultyNumber" : "62105",
-        "groupNumber" : "2",
+        "groupNumber" : "1",
         "place" : "https://us04web.zoom.us/j/4122693844?pwd=eDluWi8zRTNqSGNUVFIzOXRlQkxldz09"
     } ,
     {
@@ -77,7 +77,7 @@
         "dayNumber" : "2" ,
         "presenterName" : "Даниел Димитров",
         "facultyNumber" : "62108",
-        "groupNumber" : "3",
+        "groupNumber" : "4",
         "place" : "https://learn.fmi.uni-sofia.bg/mod/bigbluebuttonbn/view.php?id=143791"
     } ,
     {
@@ -104,7 +104,7 @@
         "dayNumber" : "3" ,
         "presenterName" : "Биляна Йорданова" ,
         "facultyNumber" : "62111",
-        "groupNumber" : "3",
+        "groupNumber" : "2",
         "place" : "https://learn.fmi.uni-sofia.bg/mod/bigbluebuttonbn/view.php?id=143791"
     } ,
     {
@@ -122,7 +122,7 @@
         "dayNumber" : "3" ,
         "presenterName" : "Велин Клисуров" ,
         "facultyNumber" : "62113",
-        "groupNumber" : "4",
+        "groupNumber" : "1",
         "place" : "https://learn.fmi.uni-sofia.bg/mod/bigbluebuttonbn/view.php?id=143791"
     } ,
     {
