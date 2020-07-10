@@ -31,13 +31,13 @@ CREATE TABLE `presentation` (
   CONSTRAINT `presentation_pk` PRIMARY KEY (`theme`)
 );
 
--- preference for given user and event
-CREATE TABLE `preference` (
-  `preferenceId` INT NOT NULL AUTO_INCREMENT,
-  `username` VARCHAR(255) NOT NULL,
-  `presentationTheme` VARCHAR(255) NOT NULL, 
-  `preferenceType` ENUM('willAttend', 'couldAttend'),
-  CONSTRAINT `preference_pk` PRIMARY KEY (`preferenceId`),
-  CONSTRAINT `preference_fk_user` FOREIGN KEY (`username`) REFERENCES `user`(`username`) ON UPDATE CASCADE ON DELETE CASCADE,
-  CONSTRAINT `preference_fk_presentation` FOREIGN KEY (`presentationTheme`) REFERENCES `presentation`(`theme`) ON UPDATE CASCADE ON DELETE CASCADE
-);
+  -- preference for given user and event
+  CREATE TABLE `preference` (
+    `preferenceId` INT NOT NULL AUTO_INCREMENT,
+    `username` VARCHAR(255) NOT NULL,
+    `presentationTheme` VARCHAR(255) NOT NULL, 
+    `preferenceType` ENUM('willAttend', 'couldAttend'),
+    CONSTRAINT `preference_pk` PRIMARY KEY (`preferenceId`),
+    CONSTRAINT `preference_fk_user` FOREIGN KEY (`username`) REFERENCES `user`(`username`) ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT `preference_fk_presentation` FOREIGN KEY (`presentationTheme`) REFERENCES `presentation`(`theme`) ON UPDATE CASCADE ON DELETE CASCADE
+  );

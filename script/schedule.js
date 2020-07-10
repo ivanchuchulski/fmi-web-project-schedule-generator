@@ -25,7 +25,15 @@
 	let personalScheduleButton = document
 		.getElementById("make-personal")
 		.addEventListener("click", generatePersonalisedSchedule);
+
+	let applyFilterButton = document
+	.getElementById("apply-filter")
+	.addEventListener("click", generateScheduleByFilters);
 })();
+
+function generateScheduleByFilters() {
+	
+}
 
 function loadEvents() {
 	const LOAD_SCHEDULE_URL = "php/api.php/loadSchedule";
@@ -75,6 +83,11 @@ function drawEvents(response) {
 		let place = eventList[event].place;
 		let preferenceType = eventList[event].preferenceType;
 
+		let facultyNumber = eventList[event].facultyNumber;
+		let groupNumber = eventList[event].groupNumber;
+		let dayNumber = eventList[event].dayNumber;
+
+
 		// building date from presentations_data date
 		let date = new Date(eventList[event].presentDate);
 
@@ -103,8 +116,13 @@ function drawEvents(response) {
 		willGoButton.className += "preferenceButton willAttend";
 		couldGoButton.className += "preferenceButton couldAttend";
 
-		details.innerHTML = `<p class="presenter">${presenterName}</p> <p class="theme">${theme}</p>`;
-		timeinfo.innerHTML = `<p class="date">${presentDate}</p> <p class="presentationSite">${place}</p>`;
+		details.innerHTML = `<p class="theme">${theme}</p>
+		<p class="presenter">${presenterName}, ${facultyNumber}</p>
+		<p class="group-number"> Група ${groupNumber}</p>
+		`;
+		timeinfo.innerHTML = `<p class="date">${presentDate}</p>
+		<p class="day-number">Ден ${dayNumber}</p>
+		<p class="presentationSite">${place}</p>`;
 
 		willGoButton.innerText += "ще отида";
 		couldGoButton.innerText += "може би ще отида";
@@ -285,3 +303,5 @@ function logError(object) {
 	console.error("errors : ");
 	console.error(JSON.stringify(object, null, 4));
 }
+
+

@@ -24,6 +24,11 @@ function register(clickEvent) {
 		formData["passwordRegister"] = validatePassword("register-password");
 		let passwordRepeatedRegister = validatePasswordRepeated("register-password-repeated");
 
+		console.log(formData["passwordRegister"]);
+		console.log(passwordRepeatedRegister);
+
+
+
 		checkIfPasswordsMatch(formData["passwordRegister"], passwordRepeatedRegister);
 
 		console.log("formData :");
@@ -132,7 +137,7 @@ function validatePassword(elementId) {
 
 function validatePasswordRepeated(elementId) {
 	try {
-        validatePassword(elementId);
+        return validatePassword(elementId);
     } 
     catch (exception) {
         const pattern = `паролата`;
