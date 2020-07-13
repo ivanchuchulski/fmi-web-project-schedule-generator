@@ -33,7 +33,6 @@ header button {
     font-weight: bold;
 }
 
-
 #information {
 	grid-area: information;
 	text-align: center;
@@ -46,6 +45,38 @@ header button {
 	text-align: center;
     margin: 10px 10px;
     color: #2c6460;
+}
+
+#filter-options {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+
+	width: 770px;
+
+	font-size: 13px;
+	font-weight: bold;
+	margin: 5px;
+}
+
+#filters select {
+	box-sizing: border-box;
+	display: block;
+	width: 95%;
+	margin: 8px;
+}
+#filter-buttons {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	width: 55%;
+	margin: 5px auto;
+}
+
+#filter-buttons button {
+	display: block;
+	height: 27px;
+	margin: 0 10px;
 }
 
 #apply-changes {

@@ -10,8 +10,8 @@
 	<body>
 		<header>
 			<nav>
-				<button id="schedule-page-button">График на презентации</a></button>
-				<button id="personalised-schedule-button">Персонализиран график</a></button>
+				<button id="schedule-page-button">График на презентации</button>
+				<button id="personalised-schedule-button">Персонализиран график</button>
 				<button id="export-schedule">Разпечатай разписанието</button>
 				<button id="logout-button">Изход от системата</button>
 			</nav>
@@ -23,35 +23,44 @@
 			<label id="messageLabel"></label>
 		</section>
 		<section id="filters">
-			<select id="filter-by-day">
-				<optgroup label="Филтрирайте по ден на представяне">
-					<option disabled selected value></option>
-					<option value="day1">ден 1</option>
-					<option value="day2">ден 2</option>
-					<option value="day3">ден 3</option>
-				  </optgroup>
-				</select>
-				<select id="filter-by-group">
-					<optgroup label="Филтрирайте по група на представящия">
+			<div id="filter-options">
+				<label for="filter-by-day"
+					>Избери ден на представяне
+
+					<select id="filter-by-day">
+						<option disabled selected value></option>
+						<option value="day1">ден 1</option>
+						<option value="day2">ден 2</option>
+						<option value="day3">ден 3</option>
+					</select>
+				</label>
+				<label for="filter-by-group"
+					>Избери група на представящия
+
+					<select id="filter-by-group">
 						<option disabled selected value></option>
 						<option value="group1">група 1</option>
 						<option value="group2">група 2</option>
 						<option value="group3">група 3</option>
 						<option value="group4">група 4</option>
-					</optgroup>
-				</select>
-				<select id="filter-by-preference">
-					<optgroup label="Филтрирайте по предпочитание">
+					</select>
+				</label>
+				<label for="filter-by-preference"
+					>Избери предпочитание
+
+					<select id="filter-by-preference">
 						<option disabled selected value></option>
 						<option value="willAttend">ще отида</option>
 						<option value="couldAttend">може би ще отида</option>
-					</optgroup>
-				</select>
-			<button id="apply-filter">Приложете филтъра</button>
-			<button id="reset-filter">Изчистете филтъра</button>
+					</select>
+				</label>
+			</div>
+			<div id="filter-buttons">
+				<button id="apply-filter">Приложете филтъра</button>
+				<button id="reset-filter">Изчистете филтъра</button>
+			</div>
 		</section>
-		<main id="personal-events">
-		</main>
+		<main id="personal-events"></main>
 		<footer>
 			<p>Разработено от: Даниел Димитров, Виктор Христов, Иван Чучулски</p>
 		</footer>
