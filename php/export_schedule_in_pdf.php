@@ -33,13 +33,15 @@ function exportScheduleInPdf() {
 		
 			$pdf->Cell(200, 10, $decodedPresentation['place'],0,1);
 		}
-
+		
 		$filename = "download_files/output.pdf";
-		$pdf->Output("F", $filename);
+		$pdf->Output("I", $filename);
 
-		header("Content-type: application/octet-stream", true);
-		header("Content-disposition: attachment;filename=$filename");		
-		readfile($filename);
+		// $pdf->Output("F", $filename);
+
+//		header("Content-type: application/octet-stream", true);
+//		header("Content-disposition: attachment;filename=$filename");
+//		readfile($filename);
 	}
 	catch (Exception $exception) {
 		echo json_decode($exception->getMessage());

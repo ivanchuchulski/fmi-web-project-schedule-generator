@@ -13,7 +13,7 @@ $desc=array (
 );
 $up=-63;
 $ut=44;
-$ttffile='C:\Users\Asus\Desktop\Programming\XAMMP\htdocs\web-fmi\web-project\web-project\web-project-schedule-generator\php\tfpdf/font/unifont/DejaVuSansCondensed.ttf';
+$ttffile='C:\xampp\htdocs\uni-web\web-project-schedule-generator\php\tfpdf/font/unifont/DejaVuSansCondensed.ttf';
 $originalsize=680264;
 $fontkey='dejavu';
 ?>
