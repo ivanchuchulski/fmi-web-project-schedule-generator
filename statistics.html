@@ -17,55 +17,38 @@
 				<button id="logout-button">Изход от системата</button>
 			</nav>
 		</header>
-		<main id="event-list">
+		<main id="statistics-list">
 				<table>
 					<thead>
 						<tr>
-							<th style="text-align: right;">Snippet</th>
-							<th>Резултат</th>
+							<th>Критерии</th>
+							<th>Стойност</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody id="statistics-table-body">
 						<tr>
-							<td style="text-align: right;"><code>fre→</code></td>
-							<td>
-								forEach loop in ES6 syntax
-								<code>array.forEach(currentItem =&gt; {})</code>
-							</td>
+							<td class="text-center">Потребители</td>
+							<td id="user-count"></td>
 						</tr>
 						<tr>
-							<td style="text-align: right;"><code>fof→</code></td>
-							<td>for ... of loop <code>for(const item of object) {}</code></td>
+							<td class="text-center">Брой на Презентации</td>
+							<td id="presentation-count"></code></td>
 						</tr>
 						<tr>
-							<td style="text-align: right;"><code>fin→</code></td>
-							<td>for ... in loop <code>for(const item in object) {}</code></td>
+							<td class="text-center">Брой на Преференции</td>
+							<td id="preferention-count"></code></td>
 						</tr>
 						<tr>
-							<td style="text-align: right;"><code>cas→</code></td>
-							<td>
-								console alert method <code>console.assert(expression, object)</code>
-							</td>
+							<td class="text-center">Макс брой записване на потребител</td>
+							<td id="max-preferention-count"></code></td>
 						</tr>
 						<tr>
-							<td style="text-align: right;"><code>ccl→</code></td>
-							<td>console clear <code>console.clear()</code></td>
+							<td class="text-center">Среден брой преференции на потребител</td>
+							<td id="average-preferention-count"></td>
 						</tr>
 						<tr>
-							<td style="text-align: right;"><code>dob→</code></td>
-							<td>destructing object syntax <code>const {rename} = fs</code></td>
-						</tr>
-						<tr>
-							<td style="text-align: right;"><code>dar→</code></td>
-							<td>
-								destructing array syntax <code>const [first, second] = [1,2]</code>
-							</td>
-						</tr>
-						<tr>
-							<td style="text-align: right;"><code>sti→</code></td>
-							<td>
-								set interval helper method <code>setInterval(() =&gt; {});</code>
-							</td>
+							<td class="text-center">Най-популярна презентация</td>
+							<td id="most-popular-presentation"></td>
 						</tr>
 					</tbody>
 				</table>

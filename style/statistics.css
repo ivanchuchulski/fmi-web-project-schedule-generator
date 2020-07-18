@@ -39,7 +39,6 @@ main {
 }
 
 table {
-
 	width: 100%;
 	overflow: auto;
 	word-break: keep-all;
@@ -69,4 +68,8 @@ body footer {
 .active {
 	background-color: #666;
 	color: white;
+}
+
+.text-center {
+	text-align: center;
 }
