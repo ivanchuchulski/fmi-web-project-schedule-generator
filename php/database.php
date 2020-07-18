@@ -170,7 +170,8 @@ class Database
         }
     }
 
-    public function selectNumberOfUsers() {
+    public function selectNumberOfUsers()
+    {
         try {
             $sql = "SELECT COUNT(*) FROM user";
 
@@ -197,20 +198,34 @@ class Database
         }
     }
 
-        public function selectNumberOfAttendances() {
-            try {
-                $sql = "SELECT COUNT(*) FROM preference";
+    public function selectNumberOfAttendances()
+    {
+        try {
+            $sql = "SELECT COUNT(*) FROM preference";
 
-                $insertStatement = $this->connection->prepare($sql);
-                $result = $insertStatement->execute();
+            $insertStatement = $this->connection->prepare($sql);
+            $result = $insertStatement->execute();
 
-                return $result;
-            } catch (PDOException $exception) {
-                throw $exception;
-            }
+            return $result;
+        } catch (PDOException $exception) {
+            throw $exception;
+        }
     }
 
 
+    public function selectMaxNumberOfAttendancesForAUser()
+    {
+        try {
+            $sql = "SELECT COUNT(*) FROM preference";
+
+            $insertStatement = $this->connection->prepare($sql);
+            $result = $insertStatement->execute();
+
+            return $result;
+        } catch (PDOException $exception) {
+            throw $exception;
+        }
+    }
 
 
     private function initialize($host, $database, $user, $password)

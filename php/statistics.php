@@ -28,11 +28,11 @@ class Statistics
         return $query->fetch(PDO::FETCH_ASSOC);
     }
 
-//    private function getMaxNumberOfAttendance()
-//    {
-//        $query = $this->database->selectNumberOfUsers();
-//        return $query->fetch(PDO::FETCH_ASSOC);
-//    }
+    private function getMaxNumberOfAttendance()
+    {
+        $query = $this->database->selectNumberOfUsers();
+        return $query->fetch(PDO::FETCH_ASSOC);
+    }
 //
 //    private function getAverageNumberOfAttendance()
 //    {

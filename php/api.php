@@ -48,9 +48,9 @@ function start() {
 	elseif (preg_match("/exportScheduleInPdf$/", $requestURL)) {
 		exportScheduleInPdf();
 	}
-	elseif (preg_match("/statistics$/", $requestURL) {
-	    generateStatistics();
-    }
+//	elseif (preg_match("/statistics$/", $requestURL) {
+//	    generateStatistics();
+//    }
 	else {
 		echo json_encode(["error" => "грешка : не е намерен такъв URL"]);
 	}
