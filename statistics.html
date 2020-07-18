@@ -6,7 +6,6 @@
 		<title>Статистика</title>
 		<link rel="stylesheet" href="style/statistics.css" />
 		<script src="script/statistics.js" defer></script>
-
 	</head>
 	<body>
 		<header>
@@ -18,7 +17,60 @@
 				<button id="logout-button">Изход от системата</button>
 			</nav>
 		</header>
-		<main id="event-list"></main>
+		<main id="event-list">
+				<table>
+					<thead>
+						<tr>
+							<th style="text-align: right;">Snippet</th>
+							<th>Резултат</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td style="text-align: right;"><code>fre→</code></td>
+							<td>
+								forEach loop in ES6 syntax
+								<code>array.forEach(currentItem =&gt; {})</code>
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align: right;"><code>fof→</code></td>
+							<td>for ... of loop <code>for(const item of object) {}</code></td>
+						</tr>
+						<tr>
+							<td style="text-align: right;"><code>fin→</code></td>
+							<td>for ... in loop <code>for(const item in object) {}</code></td>
+						</tr>
+						<tr>
+							<td style="text-align: right;"><code>cas→</code></td>
+							<td>
+								console alert method <code>console.assert(expression, object)</code>
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align: right;"><code>ccl→</code></td>
+							<td>console clear <code>console.clear()</code></td>
+						</tr>
+						<tr>
+							<td style="text-align: right;"><code>dob→</code></td>
+							<td>destructing object syntax <code>const {rename} = fs</code></td>
+						</tr>
+						<tr>
+							<td style="text-align: right;"><code>dar→</code></td>
+							<td>
+								destructing array syntax <code>const [first, second] = [1,2]</code>
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align: right;"><code>sti→</code></td>
+							<td>
+								set interval helper method <code>setInterval(() =&gt; {});</code>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+		</main>
+
 		<footer>
 			<p>Разработено от: Даниел Димитров, Виктор Христов, Иван Чучулски</p>
 		</footer>

@@ -38,6 +38,30 @@ main {
 	width: 770px;
 }
 
+table {
+
+	width: 100%;
+	overflow: auto;
+	word-break: keep-all;
+	border-collapse: collapse;
+	border-spacing: 0;
+
+	border: 0;
+  }
+  
+  table th {
+	padding: 6px 13px;
+	border: 1px solid #ddd;
+  }
+  
+  td {
+	display: table-cell;
+	padding: 6px 13px;
+	border: 1px solid #ddd;
+	vertical-align: inherit;
+  }
+
+
 body footer {
 	grid-area: footer;
 }
