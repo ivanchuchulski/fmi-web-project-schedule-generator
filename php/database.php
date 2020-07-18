@@ -230,6 +230,24 @@ class Database
         }
     }
 
+    public function selectAverageNumberOfPreferences()
+    {
+        try {
+            $sql = " SELECT CAST(AVG(t1.userCount) as INT)
+                     FROM   (SELECT COUNT(username) as userCount 
+                             FROM preference
+                             GROUP BY username ) as t1";
+
+            $insertStatement = $this->connection->prepare($sql);
+            $result = $insertStatement->execute();
+
+            return $result;
+        } catch (PDOException $exception) {
+            throw $exception;
+        }
+    }
+
+
 
     private function initialize($host, $database, $user, $password)
     {
@@ -239,6 +257,8 @@ class Database
             throw $exception;
         }
     }
+
+
 }
 
 ?>

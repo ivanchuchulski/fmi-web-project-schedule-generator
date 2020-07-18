@@ -33,13 +33,14 @@ class Statistics
         $query = $this->database->selectMaxNumberOfAttendancesForAllUser();
         return $query->fetch(PDO::FETCH_ASSOC);
     }
-//
-//    public function getAverageNumberOfAttendance()
-//    {
-//        $query = $this->database->selectNumberOfUsers();
-//        return $query->fetch(PDO::FETCH_ASSOC);
-//    }
-//
+
+
+    public function getAverageNumberOfPreferences()
+    {
+        $query = $this->database->selectAverageNumberOfPreferences();
+        return $query->fetch(PDO::FETCH_ASSOC);
+    }
+
 //    public function getMostPopularPresentation()
 //    {
 //        $query = $this->database->selectNumberOfUsers();

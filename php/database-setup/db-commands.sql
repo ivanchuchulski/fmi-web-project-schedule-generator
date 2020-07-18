@@ -59,3 +59,9 @@ SELECT COUNT(*) FROM preference
  FROM (SELECT COUNT(username) as userCount
   	   FROM preference
   	   GROUP BY username ) as t1
+
+-- get average number of preferences
+SELECT CAST(AVG(t1.userCount) as INT)
+FROM   (SELECT COUNT(username) as userCount
+       FROM preference
+       GROUP BY username ) as t1
