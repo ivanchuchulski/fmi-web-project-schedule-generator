@@ -56,8 +56,8 @@ main {
 }
 
 .export-option {
-	width: 160px;
-	height: 50px;
+	width: 200px;
+	height: 60px;
 	padding: 10px 10px;
 	color: #2c6460;
     font-weight: bold;
@@ -71,4 +71,5 @@ main {
 
 body footer {
 	grid-area: footer;
+	font-size: 16px;
 }

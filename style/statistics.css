@@ -63,6 +63,7 @@ table {
 
 body footer {
 	grid-area: footer;
+	font-size: 16px;
 }
 
 .active {

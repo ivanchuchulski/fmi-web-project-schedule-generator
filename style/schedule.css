@@ -136,7 +136,7 @@ main {
 	background-color: #2c6460;
 }
 
-p {
+main p {
 	padding-left: 15px;
 	padding-right: 5px;
 	color: white;
@@ -162,4 +162,5 @@ p {
 
 body footer {
 	grid-area: footer;
+	font-size: 16px;
 }

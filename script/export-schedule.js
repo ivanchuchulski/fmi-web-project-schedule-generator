@@ -77,3 +77,7 @@ function createLinkAndDownloadPdf() {
 
 	link.dispatchEvent(new MouseEvent("click"));
 }
+
+function goToLoginPage(loginPageUrl) {
+	window.location = loginPageUrl;
+}
