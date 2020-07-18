@@ -72,7 +72,7 @@ function ajaxLogoutHandler(xhr) {
 
 function createLinkAndDownloadPdf() {
 	const link = document.createElement("a");
-	link.href = "php/api.php/exportScheduleInPdf";
+	link.href = "php/api.php/exportFullScheduleToCSV";
 	link.download = "";
 
 	link.dispatchEvent(new MouseEvent("click"));
