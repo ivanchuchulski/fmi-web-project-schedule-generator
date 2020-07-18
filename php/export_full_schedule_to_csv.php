@@ -17,7 +17,7 @@ function exportFullScheduleToCSV() {
 		$decodedPresentations = json_decode($presentationsJSONString, true);
 
 		$output = fopen("php://output","w");
-		$filename = "presentations.csv";
+		$filename = "fullSchedule.csv";
 		//header("Content-type: application/octet-stream", true);
 		header("Content-Type:application/csv"); 
 		header("Content-disposition: attachment;filename=$filename"); 

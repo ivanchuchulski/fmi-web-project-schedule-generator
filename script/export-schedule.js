@@ -2,9 +2,13 @@
 (function () {
 	navigationButtonHandlers();
 
-	let exportScheduleOption = document
-		.getElementById("export-pdf")
-		.addEventListener("click", createLinkAndDownloadPdf);
+	let exportFullScheduleOption = document
+		.getElementById("export-full-csv")
+		.addEventListener("click", downloadFullScheduleAsCSV);
+
+	let exportPersonalScheduleOption = document
+		.getElementById("export-personal-csv")
+		.addEventListener("click", downloadPersonalScheduleAsCSV);
 })();
 
 function navigationButtonHandlers() {
@@ -28,7 +32,7 @@ function navigationButtonHandlers() {
 		.addEventListener("click", () => {
 			window.location = "statistics.html";
 		});
-		
+
 	let logoutButton = document
 		.getElementById("logout-button")
 		.addEventListener("click", logoutRequest);
@@ -70,9 +74,17 @@ function ajaxLogoutHandler(xhr) {
 	}
 }
 
-function createLinkAndDownloadPdf() {
+function downloadFullScheduleAsCSV() {
 	const link = document.createElement("a");
 	link.href = "php/api.php/exportFullScheduleToCSV";
+	link.download = "";
+
+	link.dispatchEvent(new MouseEvent("click"));
+}
+
+function downloadPersonalScheduleAsCSV() {
+	const link = document.createElement("a");
+	link.href = "php/api.php/exportPersonalScheduleToCSV";
 	link.download = "";
 
 	link.dispatchEvent(new MouseEvent("click"));

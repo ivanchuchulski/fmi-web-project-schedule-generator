@@ -13,6 +13,7 @@ require_once "generate_personal_schedule.php";
 require_once "load_personal_schedule.php";
 require_once "updatePersonalSchedule.php";
 require_once "export_full_schedule_to_csv.php";
+require_once "export_personal_schedule_to_csv.php";
 require_once "generateStatistics.php";
 
 start();
@@ -47,6 +48,9 @@ function start() {
 	}
 	elseif (preg_match("/exportFullScheduleToCSV$/", $requestURL)) {
 		exportFullScheduleToCSV();
+	}
+	elseif (preg_match("/exportPersonalScheduleToCSV$/", $requestURL)) {
+		exportPersonalScheduleToCSV();
 	}
 	elseif (preg_match("/statistics$/", $requestURL)) {
 	    generateStatistics();
