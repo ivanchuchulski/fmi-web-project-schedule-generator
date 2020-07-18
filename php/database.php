@@ -198,7 +198,7 @@ class Database
         }
     }
 
-    public function selectNumberOfAttendances()
+    public function selectNumberOfPreferences()
     {
         try {
             $sql = "SELECT COUNT(*) FROM preference";
@@ -213,10 +213,13 @@ class Database
     }
 
 
-    public function selectMaxNumberOfAttendancesForAUser()
+    public function selectMaxNumberOfAttendancesForAllUser()
     {
         try {
-            $sql = "SELECT COUNT(*) FROM preference";
+            $sql = " SELECT MAX(t1.userCount) 
+                     FROM (SELECT COUNT(username) as userCount
+  	                       FROM preference 
+  	                       GROUP BY username ) as t1";
 
             $insertStatement = $this->connection->prepare($sql);
             $result = $insertStatement->execute();
@@ -226,6 +229,24 @@ class Database
             throw $exception;
         }
     }
+
+    public function selectAverageNumberOfPreferences()
+    {
+        try {
+            $sql = " SELECT CAST(AVG(t1.userCount) as INT)
+                     FROM   (SELECT COUNT(username) as userCount 
+                             FROM preference
+                             GROUP BY username ) as t1";
+
+            $insertStatement = $this->connection->prepare($sql);
+            $result = $insertStatement->execute();
+
+            return $result;
+        } catch (PDOException $exception) {
+            throw $exception;
+        }
+    }
+
 
 
     private function initialize($host, $database, $user, $password)
@@ -236,6 +257,8 @@ class Database
             throw $exception;
         }
     }
+
+
 }
 
 ?>
