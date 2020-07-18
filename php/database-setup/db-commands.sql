@@ -70,3 +70,8 @@ FROM   (SELECT COUNT(username) as userCount
  		FROM (SELECT COUNT(presentationTheme) as presentationCount, presentationTheme
   	   	FROM preference
   	   	GROUP BY presentationTheme ) as t1
+-- get top 5 presentations
+ SELECT COUNT(preferenceId) as count, presentationTheme
+ FROM preference
+ GROUP BY presentationTheme
+ ORDER BY count DESC LIMIT 5

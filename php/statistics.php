@@ -45,6 +45,12 @@ class Statistics
         $query = $this->database->selectMostPreferredPresentation();
         return $query->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function getTopFivePresentations() {
+        $query = $this->database->selectTopFivePresentations();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 }
 
 ?>

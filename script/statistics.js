@@ -90,6 +90,23 @@ function drawStatistics(statisticsList) {
 
     let mostPopularPresentationTableData = document.getElementById("most-popular-presentation");
     mostPopularPresentationTableData.innerText += mostPreferredPresentation;
+
+
+	let array = ["first-place", "second-place", "third-place", "fourth-place", "fifth-place"];
+	for (let i = 0; i < array.length; i++) {
+		let iterationPresentation = " " + statisticsList[i].theme;
+		let iterationPlaceTableData = document.getElementById(array[i]);
+		iterationPlaceTableData.innerText += iterationPresentation;
+	}
+
+	let arrayForCount = ["first-place-count", "second-place-count", "third-place-count", "fourth-place-count",
+		"fifth-place-count"];
+	for (let i = 0; i < arrayForCount.length ; i++) {
+		let iterationPresentation = " " + statisticsList[i].count;
+		let iterationPlaceTableData = document.getElementById(arrayForCount[i]);
+		iterationPlaceTableData.innerText += iterationPresentation;
+	}
+
 }
 
 

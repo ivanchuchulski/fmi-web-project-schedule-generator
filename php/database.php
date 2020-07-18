@@ -263,6 +263,24 @@ class Database
         }
     }
 
+    public function selectTopFivePresentations()
+    {
+        try {
+            $sql = " SELECT COUNT(preferenceId) as count, presentationTheme as theme
+                     FROM preference
+                     GROUP BY presentationTheme
+                     ORDER BY count DESC LIMIT 5";
+
+            $selectStatement = $this->connection->prepare($sql);
+            $selectStatement->execute();
+
+            return $selectStatement;
+        } catch (PDOException $exception) {
+            throw $exception;
+        }
+
+    }
+
 
     private function initialize($host, $database, $user, $password)
     {
@@ -272,7 +290,6 @@ class Database
             throw $exception;
         }
     }
-
 
 }
 

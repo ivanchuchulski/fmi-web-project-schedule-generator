@@ -17,6 +17,8 @@ require_once "statistics.php";
 		 $stats += $statistics->getAverageNumberOfPreferences();
 		 $stats += $statistics->getMostPreferredPresentation();
 
+		 $stats += $statistics->getTopFivePresentations();
+
 		 $response = ['success' => true, 'data' => $stats];
 		 echo json_encode($response);
 	 }
