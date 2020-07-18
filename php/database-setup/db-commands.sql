@@ -34,12 +34,11 @@ WHERE username=:username and presentationTheme=:presentationTheme;
 
 -- get presentations from preferences for a given username
 SELECT presentation.theme, DATE_FORMAT(presentation.presentDate, '%H:%i %d %M %Y') as presentDate,
-    presentation.presenterName, presentation.place, preference.preferenceType, 
-    presentation.groupNumber, presentation.facultyNumber, presentation.dayNumber
-FROM preference INNER JOIN presentation ON preference.presentationTheme = presentation.theme
-WHERE presentationTheme IN (SELECT preference.presentationTheme
+    presentation.presenterName, presentation.place,  presentation.groupNumber, 
+	presentation.facultyNumber, presentation.dayNumber, userPref.prefType
+FROM  (SELECT preference.presentationTheme as presTheme, preference.preferenceType as prefType
 							FROM preference
-						    WHERE username=:username);
+						    WHERE username=:username) as userPref INNER JOIN presentation ON userPref.presTheme = presentation.theme		
 
 -- get presentation from db with formatted date
 SELECT `theme`, DATE_FORMAT(`presentDate`, "%H:%i %d %M %Y"), `presenterName`, `place`

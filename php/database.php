@@ -138,12 +138,11 @@ class Database
     {
         try {
             $sql = "SELECT presentation.theme, DATE_FORMAT(presentation.presentDate, '%H:%i %d %M %Y') as presentDate,
-                    presentation.presenterName, presentation.place, preference.preferenceType, 
-                    presentation.groupNumber, presentation.facultyNumber, presentation.dayNumber
-			        FROM preference INNER JOIN presentation ON preference.presentationTheme = presentation.theme
-			        WHERE presentationTheme IN (SELECT preference.presentationTheme
-												FROM preference
-													WHERE username=:username);";
+   						presentation.presenterName, presentation.place,  presentation.groupNumber, 
+						presentation.facultyNumber, presentation.dayNumber, userPref.prefType
+					FROM  (SELECT preference.presentationTheme as presTheme, preference.preferenceType as prefType
+							FROM preference
+						    WHERE username=:username) as userPref INNER JOIN presentation ON userPref.presTheme = presentation.theme	";
 
             $selectStatement = $this->connection->prepare($sql);
 

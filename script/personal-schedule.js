@@ -187,7 +187,7 @@ function drawPersonalEvents(response) {
 			let presentDate = events[event].presentDate;
 			let presenterName = events[event].presenterName;
 			let place = events[event].place;
-			let preferenceType = events[event].preferenceType;
+			let preferenceType = events[event].prefType;
 
 			let facultyNumber = events[event].facultyNumber;
 			let groupNumber = events[event].groupNumber;
