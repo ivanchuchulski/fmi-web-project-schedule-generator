@@ -65,3 +65,9 @@ SELECT CAST(AVG(t1.userCount) as INT)
 FROM   (SELECT COUNT(username) as userCount
        FROM preference
        GROUP BY username ) as t1
+
+-- get most preferred presentation and number of attendance to it
+ SELECT MAX(t1.presentationCount), t1.presentationTheme
+ 		FROM (SELECT COUNT(presentationTheme) as presentationCount, presentationTheme
+  	   	FROM preference
+  	   	GROUP BY presentationTheme ) as t1

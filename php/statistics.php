@@ -41,11 +41,11 @@ class Statistics
         return $query->fetch(PDO::FETCH_ASSOC);
     }
 
-//    public function getMostPopularPresentation()
-//    {
-//        $query = $this->database->selectNumberOfUsers();
-//        return $query->fetch(PDO::FETCH_ASSOC);
-//    }
+    public function getMostPreferredPresentation()
+    {
+        $query = $this->database->selectMostPreferredPresentation();
+        return $query->fetch(PDO::FETCH_ASSOC);
+    }
 }
 
 ?>

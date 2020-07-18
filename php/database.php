@@ -247,6 +247,22 @@ class Database
         }
     }
 
+    public function selectMostPreferredPresentation()
+    {
+        try {
+            $sql = "  SELECT MAX(t1.presentationCount), t1.presentationTheme
+ 		              FROM (SELECT COUNT(presentationTheme) as presentationCount, presentationTheme
+  	   	                    FROM preference
+  	   	                    GROUP BY presentationTheme ) as t1";
+
+            $insertStatement = $this->connection->prepare($sql);
+            $result = $insertStatement->execute();
+
+            return $result;
+        } catch (PDOException $exception) {
+            throw $exception;
+        }
+    }
 
 
     private function initialize($host, $database, $user, $password)
