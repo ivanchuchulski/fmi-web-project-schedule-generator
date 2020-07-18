@@ -10,37 +10,37 @@ class Statistics
         $this->database = new Database();
     }
 
-    private function getNumberOfUsers()
+    public function getNumberOfUsers()
     {
         $query = $this->database->selectNumberOfUsers();
         return $query->fetch(PDO::FETCH_ASSOC);
     }
 
-    private function getNumberOfPresentations()
+    public function getNumberOfPresentations()
     {
         $query = $this->database->selectNumberOfPresentations();
         return $query->fetch(PDO::FETCH_ASSOC);
     }
 
-    private function getNumberOfAttendances()
+    public function getNumberOfAttendances()
     {
         $query = $this->database->selectNumberOfAttendances();
         return $query->fetch(PDO::FETCH_ASSOC);
     }
 
-    private function getMaxNumberOfAttendance()
+    public function getMaxNumberOfAttendance()
     {
         $query = $this->database->selectNumberOfUsers();
         return $query->fetch(PDO::FETCH_ASSOC);
     }
 //
-//    private function getAverageNumberOfAttendance()
+//    public function getAverageNumberOfAttendance()
 //    {
 //        $query = $this->database->selectNumberOfUsers();
 //        return $query->fetch(PDO::FETCH_ASSOC);
 //    }
 //
-//    private function getMostPopularPresentation()
+//    public function getMostPopularPresentation()
 //    {
 //        $query = $this->database->selectNumberOfUsers();
 //        return $query->fetch(PDO::FETCH_ASSOC);
