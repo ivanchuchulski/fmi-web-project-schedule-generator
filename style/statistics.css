@@ -1,0 +1,48 @@
+body {
+	display: grid;
+	grid-template-columns: 100%;
+	grid-template-rows: 150px auto 80px;
+	grid-template-areas: "header" "main" "footer";
+
+	justify-items: center;
+	align-items: center;
+
+	margin: 15px 50px;
+
+	font-size: 12px;
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+header {
+	grid-area: header;
+	width: 750px;
+}
+
+header nav {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+
+header button {
+	width: 180px;
+	height: 60px;
+	padding: 5px 5px;
+	color: #2c6460;
+	font-weight: bold;
+}
+
+main {
+	grid-area: main;
+	width: 770px;
+}
+
+body footer {
+	grid-area: footer;
+}
+
+.active {
+	background-color: #666;
+	color: white;
+}

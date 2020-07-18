@@ -2,6 +2,22 @@
 (function () {
 	window.onload = () => loadEvents();
 
+	navigationButtonHandlers();
+
+	let personalScheduleButton = document
+		.getElementById("make-personal")
+		.addEventListener("click", generatePersonalisedSchedule);
+
+	let applyFilterButton = document
+		.getElementById("apply-filter")
+		.addEventListener("click", generateScheduleByFilters);
+
+	let resetFilterButton = document
+		.getElementById("reset-filter")
+		.addEventListener("click", removeFilters);
+})();
+
+function navigationButtonHandlers() {
 	let schedulePageButton = document.getElementById("schedule-page-button");
 	schedulePageButton.addEventListener("click", goToSchedulePage.bind(null, "schedule.html"));
 	addHighlight(schedulePageButton);
@@ -18,22 +34,16 @@
 			window.location = "export-schedule.html";
 		});
 
+	let statisticsButton = document
+		.getElementById("view-statistics")
+		.addEventListener("click", () => {
+			window.location = "statistics.html";
+		});
+
 	let logoutButton = document
 		.getElementById("logout-button")
 		.addEventListener("click", logoutRequest);
-
-	let personalScheduleButton = document
-		.getElementById("make-personal")
-		.addEventListener("click", generatePersonalisedSchedule);
-
-	let applyFilterButton = document
-		.getElementById("apply-filter")
-		.addEventListener("click", generateScheduleByFilters);
-
-	let resetFilterButton = document
-		.getElementById("reset-filter")
-		.addEventListener("click", removeFilters);
-})();
+}
 
 function generateScheduleByFilters() {
 	let daySelectElement = document.getElementById("filter-by-day");
