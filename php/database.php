@@ -170,6 +170,49 @@ class Database
         }
     }
 
+    public function selectNumberOfUsers() {
+        try {
+            $sql = "SELECT COUNT(*) FROM user";
+
+            $insertStatement = $this->connection->prepare($sql);
+            $result = $insertStatement->execute();
+
+            return $result;
+        } catch (PDOException $exception) {
+            throw $exception;
+        }
+    }
+
+    public function selectNumberOfPresentations()
+    {
+        try {
+            $sql = "SELECT COUNT(*) FROM presentation";
+
+            $insertStatement = $this->connection->prepare($sql);
+            $result = $insertStatement->execute();
+
+            return $result;
+        } catch (PDOException $exception) {
+            throw $exception;
+        }
+    }
+
+        public function selectNumberOfAttendances() {
+            try {
+                $sql = "SELECT COUNT(*) FROM preference";
+
+                $insertStatement = $this->connection->prepare($sql);
+                $result = $insertStatement->execute();
+
+                return $result;
+            } catch (PDOException $exception) {
+                throw $exception;
+            }
+    }
+
+
+
+
     private function initialize($host, $database, $user, $password)
     {
         try {
