@@ -172,12 +172,12 @@ class Database
     public function selectNumberOfUsers()
     {
         try {
-            $sql = "SELECT COUNT(*) FROM user";
+            $sql = "SELECT COUNT(*) as numberOfUsers FROM user";
 
-            $insertStatement = $this->connection->prepare($sql);
-            $result = $insertStatement->execute();
+            $selectStatement = $this->connection->prepare($sql);
+            $selectStatement->execute();
 
-            return $result;
+            return $selectStatement;
         } catch (PDOException $exception) {
             throw $exception;
         }
@@ -186,12 +186,12 @@ class Database
     public function selectNumberOfPresentations()
     {
         try {
-            $sql = "SELECT COUNT(*) FROM presentation";
+            $sql = "SELECT COUNT(*) as numberOfPresentations FROM presentation";
 
-            $insertStatement = $this->connection->prepare($sql);
-            $result = $insertStatement->execute();
+            $selectStatement = $this->connection->prepare($sql);
+            $selectStatement->execute();
 
-            return $result;
+            return $selectStatement;
         } catch (PDOException $exception) {
             throw $exception;
         }
@@ -200,12 +200,12 @@ class Database
     public function selectNumberOfPreferences()
     {
         try {
-            $sql = "SELECT COUNT(*) FROM preference";
+            $sql = "SELECT COUNT(*) as numberOfPreferences FROM preference";
 
-            $insertStatement = $this->connection->prepare($sql);
-            $result = $insertStatement->execute();
+            $selectStatement = $this->connection->prepare($sql);
+            $selectStatement->execute();
 
-            return $result;
+            return $selectStatement;
         } catch (PDOException $exception) {
             throw $exception;
         }
@@ -215,15 +215,15 @@ class Database
     public function selectMaxNumberOfAttendancesForAllUser()
     {
         try {
-            $sql = " SELECT MAX(t1.userCount) 
+            $sql = " SELECT MAX(t1.userCount) as maxNumberOfPreference
                      FROM (SELECT COUNT(username) as userCount
   	                       FROM preference 
   	                       GROUP BY username ) as t1";
 
-            $insertStatement = $this->connection->prepare($sql);
-            $result = $insertStatement->execute();
+            $selectStatement = $this->connection->prepare($sql);
+            $selectStatement->execute();
 
-            return $result;
+            return $selectStatement;
         } catch (PDOException $exception) {
             throw $exception;
         }
@@ -232,15 +232,15 @@ class Database
     public function selectAverageNumberOfPreferences()
     {
         try {
-            $sql = " SELECT CAST(AVG(t1.userCount) as INT)
+            $sql = " SELECT CAST(AVG(t1.userCount) as INT) as averageNumberOfPreference
                      FROM   (SELECT COUNT(username) as userCount 
                              FROM preference
                              GROUP BY username ) as t1";
 
-            $insertStatement = $this->connection->prepare($sql);
-            $result = $insertStatement->execute();
+            $selectStatement = $this->connection->prepare($sql);
+            $selectStatement->execute();
 
-            return $result;
+            return $selectStatement;
         } catch (PDOException $exception) {
             throw $exception;
         }
@@ -249,15 +249,15 @@ class Database
     public function selectMostPreferredPresentation()
     {
         try {
-            $sql = "  SELECT MAX(t1.presentationCount), t1.presentationTheme
+            $sql = "  SELECT MAX(t1.presentationCount) as mostPreferredPresentation
  		              FROM (SELECT COUNT(presentationTheme) as presentationCount, presentationTheme
   	   	                    FROM preference
   	   	                    GROUP BY presentationTheme ) as t1";
 
-            $insertStatement = $this->connection->prepare($sql);
-            $result = $insertStatement->execute();
+            $selectStatement = $this->connection->prepare($sql);
+            $selectStatement->execute();
 
-            return $result;
+            return $selectStatement;
         } catch (PDOException $exception) {
             throw $exception;
         }

@@ -10,14 +10,14 @@ require_once "statistics.php";
 		 $stats = [];
 		 $statistics = new Statistics();
 
-		 $stats['numberOfUsers'] = $statistics->getNumberOfUsers();
-		 $stats['numberOfPresentations'] = $statistics->getNumberOfPresentations();
-		 $stats['numberOfPreferences'] = $statistics->getNumberOfPreferences();
-		 $stats['maxNumberOfPreference'] = $statistics->getMaxNumberOfPreferencesFromAllUsers();
-		 $stats['averageNumberOfPreference'] = $statistics->getAverageNumberOfPreferences();
-		 $stats['mostPreferredPresentation'] = $statistics->getMostPreferredPresentation();
+		 $stats += $statistics->getNumberOfUsers();
+		 $stats += $statistics->getNumberOfPresentations();
+		 $stats += $statistics->getNumberOfPreferences();
+		 $stats += $statistics->getMaxNumberOfPreferencesFromAllUsers();
+		 $stats += $statistics->getAverageNumberOfPreferences();
+		 $stats += $statistics->getMostPreferredPresentation();
 
-		 $response = ['success' => true, 'data' => json_encode($stats)];
+		 $response = ['success' => true, 'data' => $stats];
 		 echo json_encode($response);
 	 }
 	 catch (Exception $exception) {
