@@ -22,15 +22,15 @@ class Statistics
         return $query->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function getNumberOfAttendances()
+    public function getNumberOfPreferences()
     {
-        $query = $this->database->selectNumberOfAttendances();
+        $query = $this->database->selectNumberOfPreferences();
         return $query->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function getMaxNumberOfAttendance()
+    public function getMaxNumberOfPreferencesFromAllUsers()
     {
-        $query = $this->database->selectNumberOfUsers();
+        $query = $this->database->selectMaxNumberOfAttendancesForAllUser();
         return $query->fetch(PDO::FETCH_ASSOC);
     }
 //

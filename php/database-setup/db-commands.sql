@@ -53,3 +53,9 @@ SELECT COUNT(*) FROM presentation
 
 -- get number of preferences from db
 SELECT COUNT(*) FROM preference
+
+-- get max number of preference from all users from db
+ SELECT MAX(t1.userCount)
+ FROM (SELECT COUNT(username) as userCount
+  	   FROM preference
+  	   GROUP BY username ) as t1
