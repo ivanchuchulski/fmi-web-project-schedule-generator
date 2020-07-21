@@ -17,9 +17,7 @@ CREATE TABLE `user` (
   CONSTRAINT `users_pk` PRIMARY KEY (`username`)
 );
 
--- event, in our case presentation
--- SELECT DATE_FORMAT("2017-06-15 15:15:30", "%M %d %Y %H_%i_%s");
--- to take the time
+-- presentation
 CREATE TABLE `presentation` (
   `theme` VARCHAR(255) NOT NULL,
   `presentDate` DATETIME NOT NULL,
