@@ -14,7 +14,7 @@ require_once "load_personal_schedule.php";
 require_once "update_personal_schedule.php";
 require_once "export_full_schedule_to_csv.php";
 require_once "export_personal_schedule_to_csv.php";
-require_once "generateStatistics.php";
+require_once "generate_statistics.php";
 
 start();
 
