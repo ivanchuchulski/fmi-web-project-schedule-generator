@@ -43,6 +43,12 @@ main {
 	align-items: center;
 }
 
+h2 {
+	color: #2c6460;
+	font-size: 18px;
+
+}
+
 table {
 	width: 70%;
 	overflow: auto;
@@ -51,19 +57,21 @@ table {
 	border-spacing: 0;
 
 	border: 0;
-
+	background-color: #2c6460;
+	color: #ececec;
+	font-size: 14px;
 	text-align: center;
 }
 
 table th {
 	padding: 6px 13px;
-	border: 1px solid #ddd;
+	border: 1px solid #ececec;
 }
 
 td {
 	display: table-cell;
 	padding: 6px 13px;
-	border: 1px solid #ddd;
+	border: 1px solid #ececec;
 	vertical-align: inherit;
 }
 
