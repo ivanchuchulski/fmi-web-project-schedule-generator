@@ -36,30 +36,36 @@ header button {
 main {
 	grid-area: main;
 	width: 770px;
+
+	display: flex;
+	flex-direction: column;
+	justify-items: center;
+	align-items: center;
 }
 
 table {
-	width: 100%;
+	width: 70%;
 	overflow: auto;
 	word-break: keep-all;
 	border-collapse: collapse;
 	border-spacing: 0;
 
 	border: 0;
-  }
-  
-  table th {
+
+	text-align: center;
+}
+
+table th {
 	padding: 6px 13px;
 	border: 1px solid #ddd;
-  }
-  
-  td {
+}
+
+td {
 	display: table-cell;
 	padding: 6px 13px;
 	border: 1px solid #ddd;
 	vertical-align: inherit;
-  }
-
+}
 
 body footer {
 	grid-area: footer;
