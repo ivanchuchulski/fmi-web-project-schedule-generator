@@ -41,6 +41,12 @@ class Preference
 		return $query->fetch(PDO::FETCH_ASSOC);
 	}
 
+	public function getAllNumberOfPreferencesForAGivenPresentation(string &$presentationTheme) {
+		$query = $this->database->selectAllNumberOfPreferencesForAGivenPresentation($presentationTheme);
+
+		return $query->fetch(PDO::FETCH_ASSOC);
+	}
+
 	public function getPreferredPresentationsForUser(string& $username) {
 		$query = $this->database->selectPreferredPresentationsForUser($username);
 

@@ -158,7 +158,7 @@ function drawEvents(response) {
 	let eventsData = response.data;
 	let eventList = JSON.parse(eventsData);
 
-	// console.log(eventList);
+	console.log(eventList);
 
 	let eventParent = document.getElementById("event-list");
 
@@ -186,9 +186,11 @@ function drawEvents(response) {
 		let presentDate = time + " " + ymd;
 
 		let eventElement = document.createElement("div");
+
 		let details = document.createElement("div");
 		let timeinfo = document.createElement("div");
 		let preference = document.createElement("div");
+
 		let willGoButton = document.createElement("button");
 		let couldGoButton = document.createElement("button");
 
@@ -202,11 +204,16 @@ function drawEvents(response) {
 
 		details.innerHTML = `<p class="theme">${theme}</p>
 		<p class="presenter">${presenterName}, ${facultyNumber}</p>
-		<p class="group-number"> Група ${groupNumber}</p>
-		`;
+		<p class="group-number"> Група ${groupNumber}</p>`;
+		
 		timeinfo.innerHTML = `<p class="date">${presentDate}</p>
 		<p class="day-number">Ден ${dayNumber}</p>
 		<p class="presentationSite"><a href=${place} target="_blank">Място на провеждане</p>`;
+		
+		if (response.displayNumberOfPreferences) {
+			let numberOfPreferences = eventList[event].numberOfPreferences;
+			timeinfo.innerHTML += `<p>Брой хора, проявяващи интерес : ${numberOfPreferences}</p>`;
+		}
 
 		willGoButton.innerText += "ще отида";
 		couldGoButton.innerText += "може би ще отида";

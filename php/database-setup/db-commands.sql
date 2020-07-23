@@ -40,6 +40,11 @@ FROM  (SELECT preference.presentationTheme as presTheme, preference.preferenceTy
 							FROM preference
 						    WHERE username=:username) as userPref INNER JOIN presentation ON userPref.presTheme = presentation.theme		
 
+--  select number of preferences for a given presentation
+SELECT COUNT(*) as numberOfPreferences
+FROM preference
+WHERE preference.presentationTheme = :presentationTheme
+
 -- get presentation from db with formatted date
 SELECT `theme`, DATE_FORMAT(`presentDate`, "%H:%i %d %M %Y"), `presenterName`, `place`
 FROM presentation
