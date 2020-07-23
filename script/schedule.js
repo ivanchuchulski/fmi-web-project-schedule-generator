@@ -206,7 +206,7 @@ function drawEvents(response) {
 		`;
 		timeinfo.innerHTML = `<p class="date">${presentDate}</p>
 		<p class="day-number">Ден ${dayNumber}</p>
-		<p class="presentationSite">${place}</p>`;
+		<p class="presentationSite"><a href=${place} target="_blank">Място на провеждане</p>`;
 
 		willGoButton.innerText += "ще отида";
 		couldGoButton.innerText += "може би ще отида";

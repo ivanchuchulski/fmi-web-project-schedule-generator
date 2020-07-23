@@ -148,6 +148,10 @@ main p {
 	font-weight: bold;
 }
 
+.presentationSite a {
+	color: white;
+}
+
 .theme {
 	font-size: 14px;
 	font-weight: bold;
