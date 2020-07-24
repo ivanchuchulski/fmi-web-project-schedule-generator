@@ -179,72 +179,105 @@ function drawPersonalEvents(response) {
 
 	if (events.length === 0) {
 		displayMessage("Нямате избрани презентации!");
+
 		let applyChangesButton = document.getElementById("apply-changes");
 		applyChangesButton.style.display = "none";
-	} else {
-		Object.keys(events).forEach((event) => {
-			let theme = events[event].theme;
-			let presentDate = events[event].presentDate;
-			let presenterName = events[event].presenterName;
-			let place = events[event].place;
-			let preferenceType = events[event].prefType;
 
-			let facultyNumber = events[event].facultyNumber;
-			let groupNumber = events[event].groupNumber;
-			let dayNumber = events[event].dayNumber;
+		return;
+	}
 
-			let eventElement = document.createElement("div");
+	Object.keys(events).forEach((event) => {
+		let theme = events[event].theme;
+		let presentDate = events[event].presentDate;
+		let presenterName = events[event].presenterName;
+		let place = events[event].place;
+		let preferenceType = events[event].prefType;
 
-			let details = document.createElement("div");
-			let timeinfo = document.createElement("div");
-			let preference = document.createElement("div");
+		let facultyNumber = events[event].facultyNumber;
+		let groupNumber = events[event].groupNumber;
+		let dayNumber = events[event].dayNumber;
 
-			let willGoButton = document.createElement("button");
-			let couldGoButton = document.createElement("button");
-			let removeButton = document.createElement("button");
+		let eventElement = document.createElement("div");
 
-			eventElement.className += "event";
-			details.className += "details";
-			timeinfo.className += "timeinfo";
-			preference.className += "preference";
+		let details = document.createElement("div");
+		let timeinfo = document.createElement("div");
+		let preference = document.createElement("div");
 
-			willGoButton.className += "preferenceButton willAttend";
-			couldGoButton.className += "preferenceButton couldAttend";
-			removeButton.className += "preferenceButton cancelAttend";
+		let willGoButton = document.createElement("button");
+		let couldGoButton = document.createElement("button");
+		let removeButton = document.createElement("button");
 
-			details.innerHTML = `<p class="theme">${theme}</p>
+		eventElement.className += "event";
+		details.className += "details";
+		timeinfo.className += "timeinfo";
+		preference.className += "preference";
+
+		willGoButton.className += "preferenceButton willAttend";
+		couldGoButton.className += "preferenceButton couldAttend";
+		removeButton.className += "preferenceButton cancelAttend";
+
+		details.innerHTML = `
+			<p class="theme">${theme}</p>
 			<p class="presenter">${presenterName}, ${facultyNumber}</p>
 			<p class="group-number"> Група ${groupNumber}</p>`;
-			timeinfo.innerHTML = `<p class="date">${presentDate}</p>
+
+		timeinfo.innerHTML = `
+			<p class="date">${presentDate}</p>
 			<p class="day-number">Ден ${dayNumber}</p>
-			<p class="presentationSite"><a href=${place} target="_blank">Място на провеждане</p>`;
+			<p class="presentationSite">
+				<a href=${place} target="_blank">
+				<span class="place-message">Място на провеждане</span>
+				<span class="place-address">${place}</span>
+			</p>`;
 
-			willGoButton.innerText += "ще отида";
-			couldGoButton.innerText += "може би ще отида";
-			removeButton.innerText += "премахни събитието";
+		willGoButton.innerText += "ще отида";
+		couldGoButton.innerText += "може би ще отида";
+		removeButton.innerText += "премахни събитието";
 
-			eventParent.appendChild(eventElement);
+		eventParent.appendChild(eventElement);
 
-			eventElement.appendChild(details);
-			eventElement.appendChild(timeinfo);
-			eventElement.appendChild(preference);
+		eventElement.appendChild(details);
+		eventElement.appendChild(timeinfo);
+		eventElement.appendChild(preference);
 
-			preference.appendChild(willGoButton);
-			preference.appendChild(couldGoButton);
-			preference.appendChild(removeButton);
+		preference.appendChild(willGoButton);
+		preference.appendChild(couldGoButton);
+		preference.appendChild(removeButton);
 
-			// set the button highlight preference
-			if (preferenceType === "willAttend") {
-				addHighlight(willGoButton);
-			} else {
-				addHighlight(couldGoButton);
-			}
+		// set the button highlight preference
+		if (preferenceType === "willAttend") {
+			addHighlight(willGoButton);
+		} 
+		else {
+			addHighlight(couldGoButton);
+		}
 
-			willGoButton.addEventListener("click", addToPreferences);
-			couldGoButton.addEventListener("click", addToPreferences);
-			removeButton.addEventListener("click", addToPreferences);
-		});
-	}
+		willGoButton.addEventListener("click", addToPreferences);
+		couldGoButton.addEventListener("click", addToPreferences);
+		removeButton.addEventListener("click", addToPreferences);
+
+		// by default hide the place address link
+		timeinfo.getElementsByClassName("place-address")[0].style.display = "none";
+
+		timeinfo.addEventListener("mouseover", showAddressOnHover);
+		timeinfo.addEventListener("mouseleave", showMessageOnLeave);
+	});
+}
+
+function showAddressOnHover() {
+	let placeMessageElement = this.getElementsByClassName('place-message')[0];
+	let placeAddressElement = this.getElementsByClassName("place-address")[0];
+	
+	placeMessageElement.style.display = "none";
+	placeAddressElement.style.display = "inline";
+}
+
+function showMessageOnLeave() {
+	let placeMessageElement = this.getElementsByClassName('place-message')[0];
+	let placeAddressElement = this.getElementsByClassName("place-address")[0];
+	
+	placeMessageElement.style.display = "inline";
+	placeAddressElement.style.display = "none";
 }
 
 function addToPreferences() {

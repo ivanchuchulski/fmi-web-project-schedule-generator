@@ -158,8 +158,6 @@ function drawEvents(response) {
 	let eventsData = response.data;
 	let eventList = JSON.parse(eventsData);
 
-	console.log(eventList);
-
 	let eventParent = document.getElementById("event-list");
 
 	Object.keys(eventList).forEach((event) => {
@@ -199,16 +197,23 @@ function drawEvents(response) {
 		details.className += "details";
 		timeinfo.className += "timeinfo";
 		preference.className += "preference";
+
 		willGoButton.className += "preferenceButton willAttend";
 		couldGoButton.className += "preferenceButton couldAttend";
 
-		details.innerHTML = `<p class="theme">${theme}</p>
+		details.innerHTML = `
+		<p class="theme">${theme}</p>
 		<p class="presenter">${presenterName}, ${facultyNumber}</p>
 		<p class="group-number"> Група ${groupNumber}</p>`;
-		
-		timeinfo.innerHTML = `<p class="date">${presentDate}</p>
+
+		timeinfo.innerHTML = `
+		<p class="date">${presentDate}</p>
 		<p class="day-number">Ден ${dayNumber}</p>
-		<p class="presentationSite"><a href=${place} target="_blank">Място на провеждане</p>`;
+		<p class="presentationSite">
+			<a href=${place} target="_blank">
+			<span class="place-message">Място на провеждане</span>
+			<span class="place-address">${place}</span>
+		</p>`;
 		
 		if (response.displayNumberOfPreferences) {
 			let numberOfPreferences = eventList[event].numberOfPreferences;
@@ -230,22 +235,47 @@ function drawEvents(response) {
 		willGoButton.addEventListener("click", addToPreferences);
 		couldGoButton.addEventListener("click", addToPreferences);
 
-		// variant 1 : hide the other button and remove the event listener for the active button
+		// hide the other button and remove the event listener for the active button
 		if (preferenceType === "willAttend") {
 			addHighlight(willGoButton);
 
 			willGoButton.removeEventListener("click", addToPreferences);
 
 			couldGoButton.style.display = "none";
-		} else if (preferenceType === "couldAttend") {
+		} 
+		else if (preferenceType === "couldAttend") {
 			addHighlight(couldGoButton);
 
 			couldGoButton.removeEventListener("click", addToPreferences);
 
 			willGoButton.style.display = "none";
-		} else {
 		}
+		else {
+		}
+
+		// by default hide the place address link
+		timeinfo.getElementsByClassName('place-address')[0].style.display = "none";
+
+		timeinfo.addEventListener("mouseover", showAddressOnHover);
+		timeinfo.addEventListener("mouseleave", showMessageOnLeave);
+
 	});
+}
+
+function showAddressOnHover() {
+	let placeMessageElement = this.getElementsByClassName('place-message')[0];
+	let placeAddressElement = this.getElementsByClassName("place-address")[0];
+	
+	placeMessageElement.style.display = "none";
+	placeAddressElement.style.display = "inline";
+}
+
+function showMessageOnLeave() {
+	let placeMessageElement = this.getElementsByClassName('place-message')[0];
+	let placeAddressElement = this.getElementsByClassName("place-address")[0];
+	
+	placeMessageElement.style.display = "inline";
+	placeAddressElement.style.display = "none";
 }
 
 function addToPreferences() {
