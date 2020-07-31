@@ -5,7 +5,7 @@ require_once "user.php";
 
 function login() {
 	try {
-		checkServerRequestMethod();
+		checkIfServerRequestMethodIsPOST();
 		$formFields = getLoginFormFields();
 
 		$user = new User();

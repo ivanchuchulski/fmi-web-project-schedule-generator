@@ -1,8 +1,8 @@
 <?php
 
-function checkServerRequestMethod() {
+function checkIfServerRequestMethodIsPOST() {
 	if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-		throw new Exception("error : use post method");
+		throw new Exception("error : use POST method must be used");
 	}
 }
 
