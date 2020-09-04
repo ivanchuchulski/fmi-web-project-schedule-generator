@@ -1,8 +1,8 @@
 body {
 	display: grid;
 	grid-template-columns: 100%;
-	grid-template-rows: 150px auto auto 80px;
-	grid-template-areas: "header" "information" "main" "footer";
+	grid-template-rows: 150px auto auto auto 80px;
+	grid-template-areas: "header" "information" "filters" "main" "footer";
 
 	justify-items: center;
 	align-items: center;
@@ -40,6 +40,7 @@ header button {
 	color: #2c6460;
 }
 
+<<<<<<< HEAD
 #apply-changes {
 	width: 160px;
 	height: 45px;
@@ -52,12 +53,68 @@ main {
 	grid-area: main;
 	width: 750px;
 	background-color: #ececec;
+=======
+#filters {
+	grid-area: filters;
+	text-align: center;
+    margin: 10px 10px;
+    color: #2c6460;
+}
+
+#filter-options {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+
+	width: 770px;
+
+	font-size: 13px;
+	font-weight: bold;
+	margin: 5px;
+>>>>>>> master
+}
+
+#filters select {
+	box-sizing: border-box;
+	display: block;
+	width: 95%;
+	margin: 8px;
+}
+#filter-buttons {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	width: 55%;
+	margin: 5px auto;
+}
+
+<<<<<<< HEAD
+=======
+#filter-buttons button {
+	display: block;
+	height: 27px;
+	margin: 0 10px;
+}
+
+#apply-changes {
+	width: 160px;
+	height: 45px;
+	padding: 10px 10px;
+	color: #2c6460;
+    font-weight: bold;
 }
 
 #messageLabel {
+	display: block;
 	font-size: 16pt;
 }
 
+main {
+	grid-area: main;
+	width: 770px;
+}
+
+>>>>>>> master
 .active {
 	background-color: #666;
 	color: white;
@@ -68,7 +125,13 @@ main {
 	flex-direction: row;
 	align-items: stretch;
 	justify-content: space-between;
+<<<<<<< HEAD
 	border: 1px solid black;
+=======
+	margin: 10px 0px;
+	background-color: #ececec;
+	border: 2px solid black;
+>>>>>>> master
 }
 
 .details {
@@ -87,6 +150,7 @@ main {
 
 .preference {
 	display: flex;
+<<<<<<< HEAD
 	flex-direction: column;
 	width: 200px;
 	margin: 5px 5px;
@@ -95,6 +159,18 @@ main {
 }
 
 p {
+=======
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 150px;
+	margin: 5px 5px;
+	border: 2px solid black;
+    background-color: #2c6460;
+}
+
+main p {
+>>>>>>> master
 	padding-left: 15px;
 	padding-right: 5px;
 	color: white;
@@ -106,16 +182,26 @@ p {
 	font-weight: bold;
 }
 
+<<<<<<< HEAD
+=======
+.presentationSite a {
+	color: white;
+}
+
+>>>>>>> master
 .theme {
 	font-size: 14px;
 	font-weight: bold;
 }
 
-.preference .preferenceButton {
+.preferenceButton {
+    width: 140px;
+    height: 35px;
 	margin: 5px 3px;
 	padding: 5px 3px;
 }
 
 body footer {
 	grid-area: footer;
+	font-size: 16px;
 }

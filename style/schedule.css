@@ -1,14 +1,20 @@
 body {
 	display: grid;
 	grid-template-columns: 100%;
-	grid-template-rows: 150px auto auto 80px;
-	grid-template-areas: "header" "information" "main" "footer";
+	grid-template-rows: 150px auto auto auto 80px;
+	grid-template-areas: "header" "information" "filters" "main" "footer";
 
 	justify-items: center;
 	align-items: center;
+<<<<<<< HEAD
 
     margin: 15px 50px;
 
+=======
+
+	margin: 15px 50px;
+
+>>>>>>> master
 	font-size: 12px;
 	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -22,20 +28,31 @@ header nav {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+<<<<<<< HEAD
     justify-content: center;
+=======
+	justify-content: center;
+>>>>>>> master
 }
 
 header button {
 	width: 180px;
 	height: 60px;
+<<<<<<< HEAD
     padding: 5px 5px;
     color: #2c6460;
     font-weight: bold;
+=======
+	padding: 5px 5px;
+	color: #2c6460;
+	font-weight: bold;
+>>>>>>> master
 }
 
 #information {
 	grid-area: information;
 	text-align: center;
+<<<<<<< HEAD
     margin: 10px 10px;
     color: #2c6460;
 }
@@ -48,6 +65,61 @@ main {
 
 #messageLabel {
 	font-size: 16pt;
+=======
+	margin: 10px 10px;
+	color: #2c6460;
+}
+
+#filter-options {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+
+	width: 770px;
+
+	font-size: 13px;
+	font-weight: bold;
+	margin: 5px;
+	color: #2c6460;
+}
+
+#filters select {
+	box-sizing: border-box;
+	display: block;
+	width: 95%;
+	margin: 8px;
+}
+#filter-buttons {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	width: 55%;
+	margin: 5px auto;
+}
+
+#filter-buttons button {
+	display: block;
+	height: 27px;
+	margin: 0 10px;
+}
+
+#make-personal {
+	width: 280px;
+	height: 40px;
+	padding: 10px 10px;
+	color: #2c6460;
+	font-weight: bold;
+}
+
+#messageLabel {
+	display: block;
+	font-size: 16pt;
+}
+
+main {
+	grid-area: main;
+	width: 770px;
+>>>>>>> master
 }
 
 .active {
@@ -55,30 +127,53 @@ main {
 	color: white;
 }
 
+<<<<<<< HEAD
+=======
+.hide {
+	display: none;
+}
+
+>>>>>>> master
 .event {
 	display: flex;
 	flex-direction: row;
 	align-items: stretch;
 	justify-content: space-between;
+<<<<<<< HEAD
 	border: 1px solid black;
+=======
+	height: 150px;
+	margin: 10px 0px;
+	background-color: #ececec;
+	border: 2px solid black;
+>>>>>>> master
 }
 
 .details {
 	margin: 5px 5px;
 	width: 300px;
 	border: 2px solid black;
+<<<<<<< HEAD
     background-color: #2c6460;
+=======
+	background-color: #2c6460;
+>>>>>>> master
 }
 
 .timeinfo {
 	margin: 5px 5px;
 	width: 400px;
 	border: 2px solid black;
+<<<<<<< HEAD
     background-color: #2c6460;
+=======
+	background-color: #2c6460;
+>>>>>>> master
 }
 
 .preference {
 	display: flex;
+<<<<<<< HEAD
     flex-direction: column;
 	margin: 5px 5px;
 	border: 2px solid black;
@@ -89,6 +184,21 @@ p {
 	padding-left: 15px;
     padding-right: 5px;
     color: white;
+=======
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	width: 150px;
+	margin: 5px 5px;
+	border: 2px solid black;
+	background-color: #2c6460;
+}
+
+main p {
+	padding-left: 15px;
+	padding-right: 5px;
+	color: white;
+>>>>>>> master
 }
 
 .presenter,
@@ -97,16 +207,35 @@ p {
 	font-weight: bold;
 }
 
+<<<<<<< HEAD
 .theme {
 	font-size: 14px;
 	font-weight: bold;
 }
 
 .preference .preferenceButton {
+=======
+.presentationSite a {
+	color: white;
+}
+
+.theme {
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.preferenceButton {
+	width: 110px;
+	height: 45px;
+>>>>>>> master
 	margin: 5px 3px;
 	padding: 5px 3px;
 }
 
 body footer {
 	grid-area: footer;
+<<<<<<< HEAD
+=======
+	font-size: 16px;
+>>>>>>> master
 }

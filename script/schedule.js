@@ -2,24 +2,123 @@
 (function () {
 	window.onload = () => loadEvents();
 
-	let preferenceButtons = document.getElementsByClassName("preferenceButton");
+	navigationButtonHandlers();
 
-	for (let i = 0; i < preferenceButtons.length; i++) {
-		preferenceButtons[i].addEventListener("click", addToPreferences);
-	}
-
-	let schedulePageButton = document
-	.getElementById("schedule-page-button")
-	.addEventListener("click", goToSchedulePage.bind(null, "schedule.html"));
-
-	let personalisedScheduleButton = document
-		.getElementById("personalised-schedule-button")
+	let personalScheduleButton = document
+		.getElementById("make-personal")
 		.addEventListener("click", generatePersonalisedSchedule);
+
+	let applyFilterButton = document
+		.getElementById("apply-filter")
+		.addEventListener("click", generateScheduleByFilters);
+
+	let resetFilterButton = document
+		.getElementById("reset-filter")
+		.addEventListener("click", removeFilters);
+})();
+
+function navigationButtonHandlers() {
+	let schedulePageButton = document.getElementById("schedule-page-button");
+	schedulePageButton.addEventListener("click", goToSchedulePage.bind(null, "schedule.html"));
+	addHighlight(schedulePageButton);
+
+	let personalSchedule = document
+		.getElementById("personalised-schedule-button")
+		.addEventListener("click", () => {
+			window.location = "personal-schedule.html";
+		});
+
+	let exportScheduleButton = document
+		.getElementById("export-schedule")
+		.addEventListener("click", () => {
+			window.location = "export-schedule.html";
+		});
+
+	let statisticsButton = document
+		.getElementById("view-statistics")
+		.addEventListener("click", () => {
+			window.location = "statistics.html";
+		});
 
 	let logoutButton = document
 		.getElementById("logout-button")
 		.addEventListener("click", logoutRequest);
-})();
+}
+
+function generateScheduleByFilters() {
+	let daySelectElement = document.getElementById("filter-by-day");
+	let groupSelectElement = document.getElementById("filter-by-group");
+
+	let filterByDay = daySelectElement.options[daySelectElement.selectedIndex].value;
+	let filterByGroup = groupSelectElement.options[groupSelectElement.selectedIndex].value;
+
+	let events = document.getElementsByClassName("event");
+
+	displayAllEvents();
+
+	if (filterByDay) {
+		filterEventsByDay(events, filterByDay.slice(-1));
+	}
+
+	if (filterByGroup) {
+		filterEventsByGroup(events, filterByGroup.slice(-1));
+	}
+}
+
+function filterEventsByDay(events, dayFilter) {
+	for (let index = 0; index < events.length; index++) {
+		const event = events[index];
+
+		let eventDay = event.getElementsByClassName("day-number")[0].innerText.split(" ")[1];
+
+		if (eventDay != dayFilter) {
+			hideEvent(event);
+		}
+	}
+}
+
+function hideEvent(event) {
+	event.style.display = "none";
+}
+
+function removeFilters() {
+	displayAllEvents();
+	removeSelectedFilters();
+}
+
+function displayAllEvents() {
+	let daySelectElement = document.getElementById("filter-by-day");
+	let groupSelectElement = document.getElementById("filter-by-group");
+
+	let events = document.getElementsByClassName("event");
+	//console.log(events);
+
+	for (let index = 0; index < events.length; index++) {
+		let element = events[index];
+		element.style.display = "flex";
+	}
+}
+
+function removeSelectedFilters() {
+	let daySelectElement = document.getElementById("filter-by-day");
+	let groupSelectElement = document.getElementById("filter-by-group");
+
+	daySelectElement.selectedIndex = 0;
+	groupSelectElement.selectedIndex = 0;
+}
+
+function filterEventsByGroup(events, groupFilter) {
+	for (let index = 0; index < events.length; index++) {
+		const event = events[index];
+		let eventGroup = event.getElementsByClassName("group-number")[0].innerText.split(" ")[1];
+
+		//console.log(eventDay);
+
+		if (eventGroup != groupFilter) {
+			hideEvent(event);
+		}
+	}
+}
 
 function loadEvents() {
 	const LOAD_SCHEDULE_URL = "php/api.php/loadSchedule";
@@ -34,7 +133,7 @@ function ajaxLoadRequest(url, method, data) {
 	xhr.addEventListener("load", () => ajaxLoadHandler(xhr));
 
 	xhr.open(method, url, true);
-	xhr.setRequestHeader("Content-type", "application/json");
+	xhr.setRequestHeader("Content-type", "application/presentations_data");
 	xhr.send(data);
 }
 
@@ -55,25 +154,41 @@ function ajaxLoadHandler(xhr) {
 function drawEvents(response) {
 	let username = response.username;
 	document.getElementById("username").innerText += " " + username + "!";
-	
+
 	let eventsData = response.data;
 	let eventList = JSON.parse(eventsData);
-	
-	// console.log(JSON.stringify(eventList, null, 4));
-	// console.log(eventList);
 
 	let eventParent = document.getElementById("event-list");
 
 	Object.keys(eventList).forEach((event) => {
 		let theme = eventList[event].theme;
-		let presentDate = eventList[event].presentDate;
 		let presenterName = eventList[event].presenterName;
 		let place = eventList[event].place;
+		let preferenceType = eventList[event].preferenceType;
+
+		let facultyNumber = eventList[event].facultyNumber;
+		let groupNumber = eventList[event].groupNumber;
+		let dayNumber = eventList[event].dayNumber;
+
+		// building date from presentations_data date
+		let date = new Date(eventList[event].presentDate);
+
+		let time = date.toLocaleTimeString();
+		let temp = time.split(":");
+		time = temp[0] + ":" + temp[1];
+
+		let ymd = date.toDateString();
+		let tempYMD = ymd.split(" ");
+		ymd = `${tempYMD[2]} ${tempYMD[1]} ${tempYMD[3]}`;
+
+		let presentDate = time + " " + ymd;
 
 		let eventElement = document.createElement("div");
+
 		let details = document.createElement("div");
 		let timeinfo = document.createElement("div");
 		let preference = document.createElement("div");
+
 		let willGoButton = document.createElement("button");
 		let couldGoButton = document.createElement("button");
 
@@ -82,11 +197,28 @@ function drawEvents(response) {
 		details.className += "details";
 		timeinfo.className += "timeinfo";
 		preference.className += "preference";
+
 		willGoButton.className += "preferenceButton willAttend";
 		couldGoButton.className += "preferenceButton couldAttend";
 
-		details.innerHTML = `<p class="presenter">${presenterName}</p> <p class="theme">${theme}</p>`;
-		timeinfo.innerHTML = `<p class="date">${presentDate}</p> <p class="presentationSite">${place}</p>`;
+		details.innerHTML = `
+		<p class="theme">${theme}</p>
+		<p class="presenter">${presenterName}, ${facultyNumber}</p>
+		<p class="group-number"> Група ${groupNumber}</p>`;
+
+		timeinfo.innerHTML = `
+		<p class="date">${presentDate}</p>
+		<p class="day-number">Ден ${dayNumber}</p>
+		<p class="presentationSite">
+			<a href=${place} target="_blank">
+			<span class="place-message">Място на провеждане</span>
+			<span class="place-address">${place}</span>
+		</p>`;
+		
+		if (response.displayNumberOfPreferences) {
+			let numberOfPreferences = eventList[event].numberOfPreferences;
+			timeinfo.innerHTML += `<p>Брой хора, проявяващи интерес : ${numberOfPreferences}</p>`;
+		}
 
 		willGoButton.innerText += "ще отида";
 		couldGoButton.innerText += "може би ще отида";
@@ -102,7 +234,48 @@ function drawEvents(response) {
 
 		willGoButton.addEventListener("click", addToPreferences);
 		couldGoButton.addEventListener("click", addToPreferences);
+
+		// hide the other button and remove the event listener for the active button
+		if (preferenceType === "willAttend") {
+			addHighlight(willGoButton);
+
+			willGoButton.removeEventListener("click", addToPreferences);
+
+			couldGoButton.style.display = "none";
+		} 
+		else if (preferenceType === "couldAttend") {
+			addHighlight(couldGoButton);
+
+			couldGoButton.removeEventListener("click", addToPreferences);
+
+			willGoButton.style.display = "none";
+		}
+		else {
+		}
+
+		// by default hide the place address link
+		timeinfo.getElementsByClassName('place-address')[0].style.display = "none";
+
+		timeinfo.addEventListener("mouseover", showAddressOnHover);
+		timeinfo.addEventListener("mouseleave", showMessageOnLeave);
+
 	});
+}
+
+function showAddressOnHover() {
+	let placeMessageElement = this.getElementsByClassName('place-message')[0];
+	let placeAddressElement = this.getElementsByClassName("place-address")[0];
+	
+	placeMessageElement.style.display = "none";
+	placeAddressElement.style.display = "inline";
+}
+
+function showMessageOnLeave() {
+	let placeMessageElement = this.getElementsByClassName('place-message')[0];
+	let placeAddressElement = this.getElementsByClassName("place-address")[0];
+	
+	placeMessageElement.style.display = "inline";
+	placeAddressElement.style.display = "none";
 }
 
 function addToPreferences() {
@@ -148,7 +321,7 @@ function generatePersonalisedSchedule() {
 
 	if (preferences.length === 0) {
 		// displayMessage("не сте избрали никакви събития!");
-		goToPersonalSchedulePage('personal-schedule.html');
+		goToPersonalSchedulePage("personal-schedule.html");
 		return;
 	}
 
@@ -173,9 +346,8 @@ function generatePreferenceDetails(preferenceButton) {
 
 	let preferenceObj = {
 		presentationTheme: event.getElementsByClassName(THEME_CLASSNAME)[0].innerText,
-		preferenceType: preferenceButton.classList[PREFERENCE_CLASSNAME_INDEX]
+		preferenceType: preferenceButton.classList[PREFERENCE_CLASSNAME_INDEX],
 	};
-
 
 	return preferenceObj;
 }

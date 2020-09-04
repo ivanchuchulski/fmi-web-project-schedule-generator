@@ -5,10 +5,9 @@ require_once "user.php";
 
 function registration() {
 	try {
-		checkServerRequestMethod();
+		checkIfServerRequestMethodIsPOST();
 
 		$formFields = getRegisterFormFields();
-		$formFields['passwordRegister'] = password_hash($formFields['passwordRegister'], PASSWORD_DEFAULT);
 		$user = new User();
 
 		$user->checkIfUserIsRegistered($formFields);
@@ -30,6 +29,7 @@ function getRegisterFormFields(): array {
 		$formFields['emailRegister'] = validateEmail('emailRegister');
 		$formFields['usernameRegister'] = validateUsername('usernameRegister');
 		$formFields['passwordRegister'] = validatePassword('passwordRegister');
+		$formFields['passwordRegister'] = password_hash($formFields['passwordRegister'], PASSWORD_DEFAULT);
 
 		return $formFields;
 	}

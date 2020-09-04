@@ -2,91 +2,136 @@
     {
         "theme" : "WebSocket" ,
         "presentDate" : "2020-04-29 10:15:00" ,
+        "dayNumber" : "1",
         "presenterName" : "Иван Лучев",
+        "facultyNumber" : "62100",
+        "groupNumber" : "1",
         "place" : "https://learn.fmi.uni-sofia.bg/mod/bigbluebuttonbn/view.php?id=143791"
     } ,
     {
         "theme" : "Компресиране на изображения в уеб" ,
         "presentDate" : "2020-04-29 10:30:00" ,
+        "dayNumber" : "1" ,
         "presenterName" : "Васил Жухов" ,
+        "facultyNumber" : "62101",
+        "groupNumber" : "2",
         "place" : "https://meet.jit.si/presentation"
     } ,
     {
         "theme" : "HTTPS и HTTP - сигурност в PHP" ,
         "presentDate" : "2020-04-29 10:45:00" ,
+        "dayNumber" : "1" ,
         "presenterName" : "Петър Янакиев" ,
+        "facultyNumber" : "62102",
+        "groupNumber" : "3",
         "place" : "https://meet.jit.si/referat-meeting"
     } ,
     {
         "theme" : "Laravel Web Framework" ,
         "presentDate" : "2020-04-29 11:00:00" ,
+        "dayNumber" : "1" ,
         "presenterName" : "Таня Христова" ,
+        "facultyNumber" : "62103",
+        "groupNumber" : "4",
         "place" : "https://learn.fmi.uni-sofia.bg/mod/bigbluebuttonbn/view.php?id=143791"
     } ,
     {
         "theme" : "Оценка на JavaScript приложенията" ,
         "presentDate" : "2020-04-29 11:15:00" ,
+        "dayNumber" : "1" ,
         "presenterName" : "Радост Дрънгова",
+        "facultyNumber" : "62104",
+        "groupNumber" : "2",
         "place" : "https://us04web.zoom.us/j/74439367979?pwd=SCtPQ1BnMWJLUHowS2NzaTNnVHBHQT09"
     } ,
     {
         "theme" : "Уязвимости в уеб приложения - излагане на чуствителни данни (OWASP-A3)" ,
         "presentDate" : "2020-05-13 08:15:00" ,
+        "dayNumber" : "2" ,
         "presenterName" : "Мария Варджиева" ,
+        "facultyNumber" : "62105",
+        "groupNumber" : "1",
         "place" : "https://us04web.zoom.us/j/4122693844?pwd=eDluWi8zRTNqSGNUVFIzOXRlQkxldz09"
     } ,
     {
         "theme" : "React JS" ,
         "presentDate" : "2020-05-13 08:30:00" ,
+        "dayNumber" : "2" ,
         "presenterName" : "Александра Йовкова" ,
+        "facultyNumber" : "62106",
+        "groupNumber" : "2",
         "place" : "https://zoom.us/j/96620417000?pwd=aDhhR1graUxZSmlkYk9wenpaVmxMQT09"
     } ,
     {
         "theme" : "JavaScript Lint" ,
         "presentDate" : "2020-05-13 08:45:00" ,
+        "dayNumber" : "2" ,
         "presenterName" : "Иван Чучулски" ,
+        "facultyNumber" : "62107",
+        "groupNumber" : "3",
         "place" : "https://learn.fmi.uni-sofia.bg/mod/bigbluebuttonbn/view.php?id=143791"
     } ,
     {
         "theme" : "Полезни разширения за VS Code" ,
         "presentDate" : "2020-05-13 09:00:00" ,
+        "dayNumber" : "2" ,
         "presenterName" : "Даниел Димитров",
+        "facultyNumber" : "62108",
+        "groupNumber" : "4",
         "place" : "https://learn.fmi.uni-sofia.bg/mod/bigbluebuttonbn/view.php?id=143791"
     } ,
     {
         "theme" : "Инструменти за стрес-тестове на уеб приложения" ,
         "presentDate" : "2020-05-13 09:15:00" ,
+        "dayNumber" : "2" ,
         "presenterName" : "Виктор Христов" ,
+        "facultyNumber" : "62109",
+        "groupNumber" : "3",
         "place" : "https://learn.fmi.uni-sofia.bg/mod/bigbluebuttonbn/view.php?id=143791"
     } ,
     {
         "theme" : "NativeScript" ,
         "presentDate" : "2020-05-20 09:30:00" ,
+        "dayNumber" : "3" ,
         "presenterName" : "Александър Стефанов" ,
+        "facultyNumber" : "62110",
+        "groupNumber" : "3",
         "place" : "https://learn.fmi.uni-sofia.bg/mod/bigbluebuttonbn/view.php?id=143791"
     } ,
     {
         "theme" : "CoffeeScript" ,
         "presentDate" : "2020-05-20 09:45:00" ,
+        "dayNumber" : "3" ,
         "presenterName" : "Биляна Йорданова" ,
+        "facultyNumber" : "62111",
+        "groupNumber" : "2",
         "place" : "https://learn.fmi.uni-sofia.bg/mod/bigbluebuttonbn/view.php?id=143791"
     } ,
     {
         "theme" : "CSS: стилове, класове, селектори" ,
         "presentDate" : "2020-05-20 10:00:00" ,
+        "dayNumber" : "3" ,
         "presenterName" : "Десислава Кръстева",
+        "facultyNumber" : "62112",
+        "groupNumber" : "4",
         "place" : "https://learn.fmi.uni-sofia.bg/mod/bigbluebuttonbn/view.php?id=143791"
     } ,
     {
         "theme" : "Web Workers" ,
         "presentDate" : "2020-05-20 10:15:00" ,
+        "dayNumber" : "3" ,
         "presenterName" : "Велин Клисуров" ,
+        "facultyNumber" : "62113",
+        "groupNumber" : "1",
         "place" : "https://learn.fmi.uni-sofia.bg/mod/bigbluebuttonbn/view.php?id=143791"
     } ,
     {
         "theme" : "Аудио филтри за уеб. Примери" ,
         "presentDate" : "2020-05-20 10:30:00" ,
+        "dayNumber" : "3" ,
         "presenterName" : "Иван Христов" ,
+        "facultyNumber" : "62114",
+        "groupNumber" : "4",
         "place" : "https://learn.fmi.uni-sofia.bg/mod/bigbluebuttonbn/view.php?id=143791"
     }
 ]

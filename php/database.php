@@ -5,7 +5,7 @@ class Database
 	private $connection;
 
 	public function __construct() {
-		$config = parse_ini_file("database-setup/db-config.ini", true);
+		$config = parse_ini_file("config/config.ini", true);
 
 		$host = $config['db']['host'];
 		$dbname = $config['db']['name'];
@@ -51,8 +51,8 @@ class Database
 	//	presentation queries
 	public function insertPresentation($data) {
 		try {
-			$sql = "INSERT INTO presentation (theme , presentDate, presenterName, place) 
-            VALUES(:theme, :presentDate, :presenterName, :place);";
+			$sql = "INSERT INTO presentation (theme , presentDate, dayNumber, presenterName, facultyNumber, groupNumber, place) 
+				VALUES(:theme, :presentDate, :dayNumber, :presenterName, :facultyNumber, :groupNumber, :place);";
 
 			$insertStatement = $this->connection->prepare($sql);
 			$result = $insertStatement->execute($data);
@@ -66,7 +66,9 @@ class Database
 
 	public function selectPresentationByTheme(string &$theme) {
 		try {
-			$sql = "SELECT * FROM presentation WHERE theme = :theme;";
+			$sql = "SELECT `theme`, `presentDate`, `presenterName`, `place`
+                    FROM presentation 
+                    WHERE theme = :theme;";
 
 			$selectStatement = $this->connection->prepare($sql);
 
@@ -99,7 +101,7 @@ class Database
 
 	public function deletePreference(array &$preferenceDetails) {
 		try {
-//			var_dump($preferenceDetails);
+
 			$sql = "DELETE FROM preference
 					WHERE username=:username and presentationTheme=:presentationTheme;";
 
@@ -129,14 +131,31 @@ class Database
 			throw $exception;
 		}
 	}
+	public function selectAllNumberOfPreferencesForAGivenPresentation(string &$presentationTheme) {
+		try {
+			$sql = "SELECT COUNT(*) as numberOfPreferences
+					FROM preference
+					WHERE preference.presentationTheme = :presentationTheme";
+
+			$selectStatement = $this->connection->prepare($sql);
+
+			$selectStatement->execute(array("presentationTheme" => $presentationTheme));
+
+			return $selectStatement;
+		}
+		catch (PDOException $exception) {
+			throw $exception;
+		}
+	}
 
 	public function selectPreferredPresentationsForUser(string &$username) {
 		try {
-			$sql = "SELECT presentation.theme, presentation.presentDate, presentation.presenterName, presentation.place, preference.preferenceType
-					FROM preference INNER JOIN presentation ON preference.presentationTheme = presentation.theme
-					WHERE presentationTheme IN (SELECT preference.presentationTheme
-												FROM preference
-													WHERE username=:username);";
+			$sql = "SELECT presentation.theme, DATE_FORMAT(presentation.presentDate, '%H:%i %d %M %Y') as presentDate,
+   						presentation.presenterName, presentation.place,  presentation.groupNumber, 
+						presentation.facultyNumber, presentation.dayNumber, userPref.prefType
+					FROM  (SELECT preference.presentationTheme as presTheme, preference.preferenceType as prefType
+							FROM preference
+						    WHERE username=:username) as userPref INNER JOIN presentation ON userPref.presTheme = presentation.theme	";
 
 			$selectStatement = $this->connection->prepare($sql);
 
@@ -164,6 +183,119 @@ class Database
 		}
 	}
 
+	public function selectNumberOfUsers() {
+		try {
+			$sql = "SELECT COUNT(*) as numberOfUsers FROM user";
+
+			$selectStatement = $this->connection->prepare($sql);
+			$selectStatement->execute();
+
+			return $selectStatement;
+		}
+		catch (PDOException $exception) {
+			throw $exception;
+		}
+	}
+
+	public function selectNumberOfPresentations() {
+		try {
+			$sql = "SELECT COUNT(*) as numberOfPresentations FROM presentation";
+
+			$selectStatement = $this->connection->prepare($sql);
+			$selectStatement->execute();
+
+			return $selectStatement;
+		}
+		catch (PDOException $exception) {
+			throw $exception;
+		}
+	}
+
+	public function selectNumberOfPreferences() {
+		try {
+			$sql = "SELECT COUNT(*) as numberOfPreferences FROM preference";
+
+			$selectStatement = $this->connection->prepare($sql);
+			$selectStatement->execute();
+
+			return $selectStatement;
+		}
+		catch (PDOException $exception) {
+			throw $exception;
+		}
+	}
+
+
+	public function selectMaxNumberOfAttendancesForAllUser() {
+		try {
+			$sql = " SELECT MAX(t1.userCount) as maxNumberOfPreference
+                     FROM (SELECT COUNT(username) as userCount
+  	                       FROM preference 
+  	                       GROUP BY username ) as t1";
+
+			$selectStatement = $this->connection->prepare($sql);
+			$selectStatement->execute();
+
+			return $selectStatement;
+		}
+		catch (PDOException $exception) {
+			throw $exception;
+		}
+	}
+
+	public function selectAverageNumberOfPreferences() {
+		try {
+			$sql = " SELECT CAST(AVG(t1.userCount) as INT) as averageNumberOfPreference
+                     FROM   (SELECT COUNT(username) as userCount 
+                             FROM preference
+                             GROUP BY username ) as t1";
+
+			$selectStatement = $this->connection->prepare($sql);
+			$selectStatement->execute();
+
+			return $selectStatement;
+		}
+		catch (PDOException $exception) {
+			throw $exception;
+		}
+	}
+
+	public function selectMostPreferredPresentation() {
+		try {
+			$sql = "  SELECT MAX(t1.presentationCount) as mostPreferredPresentation
+ 		              FROM (SELECT COUNT(presentationTheme) as presentationCount, presentationTheme
+  	   	                    FROM preference
+  	   	                    GROUP BY presentationTheme ) as t1";
+
+			$selectStatement = $this->connection->prepare($sql);
+			$selectStatement->execute();
+
+			return $selectStatement;
+		}
+		catch (PDOException $exception) {
+			throw $exception;
+		}
+	}
+
+	public function selectTopFivePresentations() {
+		try {
+			$sql = " SELECT COUNT(preferenceId) as count, presentationTheme as theme
+                     FROM preference
+                     GROUP BY presentationTheme
+                     ORDER BY count DESC LIMIT 5";
+
+			$selectStatement = $this->connection->prepare($sql);
+			$selectStatement->execute();
+
+			return $selectStatement;
+		}
+		catch (PDOException $exception) {
+			throw $exception;
+		}
+
+	}
+
+
 	private function initialize($host, $database, $user, $password) {
 		try {
 			$this->connection = new PDO("mysql:host=$host;dbname=$database", $user, $password, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
@@ -172,6 +304,7 @@ class Database
 			throw $exception;
 		}
 	}
+
 }
 
 ?>

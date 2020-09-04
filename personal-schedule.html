@@ -10,19 +10,62 @@
 	<body>
 		<header>
 			<nav>
-				<button id="schedule-page-button">График на презентации</a></button>
-				<button id="personalised-schedule-button">Направете персонализиран график</a></button>
-				<button>Разпечатай разписанието</button>
+				<button id="schedule-page-button">График на презентации</button>
+				<button id="personalised-schedule-button">Персонализиран график</button>
+				<button id="export-schedule">Разпечатай разписанието</button>
+				<button id="view-statistics">Статистика</button>
 				<button id="logout-button">Изход от системата</button>
 			</nav>
 		</header>
 		<section id="information">
+<<<<<<< HEAD
 			<h2 id="username">Здравей,</h2>
+=======
+			<h2 id="username">Здравейте</h2>
+			<h2 id="username">Това е вашият персонален график.</h2>
+>>>>>>> master
 			<button id="apply-changes">Приложи промените</button>
-		</section>
-		<main id="personal-events">
 			<label id="messageLabel"></label>
-		</main>
+		</section>
+		<section id="filters">
+			<div id="filter-options">
+				<label for="filter-by-day"
+					>Избери ден на представяне
+
+					<select id="filter-by-day">
+						<option disabled selected value></option>
+						<option value="day1">ден 1</option>
+						<option value="day2">ден 2</option>
+						<option value="day3">ден 3</option>
+					</select>
+				</label>
+				<label for="filter-by-group"
+					>Избери група на представящия
+
+					<select id="filter-by-group">
+						<option disabled selected value></option>
+						<option value="group1">група 1</option>
+						<option value="group2">група 2</option>
+						<option value="group3">група 3</option>
+						<option value="group4">група 4</option>
+					</select>
+				</label>
+				<label for="filter-by-preference"
+					>Избери предпочитание
+
+					<select id="filter-by-preference">
+						<option disabled selected value></option>
+						<option value="willAttend">ще отида</option>
+						<option value="couldAttend">може би ще отида</option>
+					</select>
+				</label>
+			</div>
+			<div id="filter-buttons">
+				<button id="apply-filter">Приложете филтъра</button>
+				<button id="reset-filter">Изчистете филтъра</button>
+			</div>
+		</section>
+		<main id="personal-events"></main>
 		<footer>
 			<p>Разработено от: Даниел Димитров, Виктор Христов, Иван Чучулски</p>
 		</footer>
