@@ -1,94 +1,25 @@
+* {
+	/*font-family: Helvetica, sans-serif;*/
+}
+
+html {
+	height: 100%;
+	width: 100%;
+}
+
 body {
 	display: grid;
 	grid-template-columns: 100%;
-	grid-template-rows: 150px auto auto auto 80px;
-	grid-template-areas: "header" "information" "filters" "main" "footer";
+	grid-template-rows: 10rem auto auto auto 5rem;
+	grid-template-areas: "nav" "information" "filters" "main" "footer";
 
+	align-items: center;
 	justify-items: center;
-	align-items: center;
 
-	margin: 15px 50px;
+	margin: 1rem 3rem;
 
-	font-size: 12px;
+	font-size: 16px;
 	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-}
-
-header {
-	grid-area: header;
-	width: 750px;
-}
-
-header nav {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: center;
-}
-
-header button {
-	width: 180px;
-	height: 60px;
-	padding: 5px 5px;
-	color: #2c6460;
-	font-weight: bold;
-}
-
-#information {
-	grid-area: information;
-	text-align: center;
-	margin: 10px 10px;
-	color: #2c6460;
-}
-
-#filter-options {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-evenly;
-
-	width: 770px;
-
-	font-size: 13px;
-	font-weight: bold;
-	margin: 5px;
-	color: #2c6460;
-}
-
-#filters select {
-	box-sizing: border-box;
-	display: block;
-	width: 95%;
-	margin: 8px;
-}
-#filter-buttons {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	width: 55%;
-	margin: 5px auto;
-}
-
-#filter-buttons button {
-	display: block;
-	height: 27px;
-	margin: 0 10px;
-}
-
-#make-personal {
-	width: 280px;
-	height: 40px;
-	padding: 10px 10px;
-	color: #2c6460;
-	font-weight: bold;
-}
-
-#messageLabel {
-	display: block;
-	font-size: 16pt;
-}
-
-main {
-	grid-area: main;
-	width: 770px;
 }
 
 .active {
@@ -96,31 +27,154 @@ main {
 	color: white;
 }
 
-.hide {
-	display: none;
+.active a {
+	color: white;
 }
+
+nav {
+	grid-area: nav;
+	width: 50rem;
+
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+
+nav button {
+	width: 15rem;
+	height: 4rem;
+
+	padding: 0.3rem;
+
+	color: #2c6460;
+	font-weight: bold;
+}
+
+nav a {
+	text-decoration: none;
+	color: #2c6460;
+	font-weight: bold;
+}
+
+#information {
+	grid-area: information;
+
+	margin: 0.625rem;
+
+	color: #2c6460;
+
+	text-align: center;
+}
+
+#make-personal {
+	width: 18rem;
+	height: 2.8rem;
+
+	color: #2c6460;
+	font-weight: bold;
+}
+
+#message-label {
+	display: block;
+}
+
+#filters {
+	grid-area: filters;
+
+	width: 50rem;
+
+	margin: 1rem 0;
+
+	text-align: center;
+}
+
+#filter-options {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+
+	margin: 0.625rem;
+
+	font-weight: bold;
+	color: #2c6460;
+}
+
+#filters select {
+	box-sizing: border-box;
+
+	display: block;
+
+	width: 95%;
+
+	margin: 0.5rem;
+}
+
+#filter-buttons {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+
+	margin: 0.3rem auto;
+}
+
+#filter-buttons button {
+	display: block;
+
+	height: 1.7rem;
+
+	margin: 0 1rem;
+}
+
+main {
+	grid-area: main;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	flex-wrap: wrap;
+
+	width: 95rem;
+}
+
 
 .event {
 	display: flex;
 	flex-direction: row;
 	align-items: stretch;
 	justify-content: space-between;
-	height: 150px;
-	margin: 10px 0px;
+
+	height: 10rem;
+	width: 45rem;
+
+	margin: 0.8rem 0.8rem;
+
 	background-color: #ececec;
 	border: 2px solid black;
 }
 
 .details {
-	margin: 5px 5px;
-	width: 300px;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+
+	width: 18rem;
+
+	margin: 0.3rem;
+
 	border: 2px solid black;
 	background-color: #2c6460;
 }
 
 .timeinfo {
-	margin: 5px 5px;
-	width: 400px;
+	display: flex;
+	flex-direction: column;
+	align-content: stretch;
+
+	width: 18rem;
+
+	margin: 0.3rem;
+
 	border: 2px solid black;
 	background-color: #2c6460;
 }
@@ -130,21 +184,32 @@ main {
 	flex-direction: column;
 	justify-content: space-around;
 	align-items: center;
-	width: 150px;
-	margin: 5px 5px;
+
+	width: 7rem;
+
+	margin: 0.3rem;
+
 	border: 2px solid black;
 	background-color: #2c6460;
 }
 
+
 main p {
-	padding-left: 15px;
-	padding-right: 5px;
+	padding-left: 1rem;
+	padding-right: 0.3rem;
+
+	font-size: 0.9rem;
 	color: white;
+}
+
+.theme {
+	font-size: 0.875rem;
+	font-weight: bold;
 }
 
 .presenter,
 .date {
-	font-size: 13px;
+	font-size: 0.8rem;
 	font-weight: bold;
 }
 
@@ -152,19 +217,144 @@ main p {
 	color: white;
 }
 
-.theme {
-	font-size: 14px;
-	font-weight: bold;
+.placeAddress {
+	font-size: 0.65rem;
 }
 
 .preferenceButton {
-	width: 110px;
-	height: 45px;
-	margin: 5px 3px;
-	padding: 5px 3px;
+	width: 6rem;
+	height: 3rem;
+
+	margin: 0.25rem;
+	padding: 0.25rem;
 }
 
-body footer {
+footer {
 	grid-area: footer;
-	font-size: 16px;
+}
+
+@media only screen and (max-width: 1480px) {
+	body {
+		grid-template-rows: auto auto auto auto auto;
+		margin: 1rem;
+	}
+
+	nav {
+		width: 28rem;
+	}
+
+	nav button {
+		font-size: 0.7rem;
+		height: 3.5rem;
+	}
+
+	#filters {
+		width: auto;
+		height: 12rem;
+
+		margin: 0.6rem 0;
+	}
+
+	#filter-buttons {
+
+		margin: 0.8rem auto;
+	}
+
+	#filter-buttons button {
+		height: 2.3rem;
+
+	}
+
+	main {
+		flex-direction: column;
+		flex-wrap: nowrap;
+		align-items: center;
+		justify-content: center;
+		width: 38rem;
+	}
+
+	.event {
+		width: 38rem;
+		font-size: 0.6rem;
+	}
+
+	.details {
+		width: 15rem;
+	}
+
+	.timeinfo {
+		width: 15rem;
+
+	}
+
+	.preference {
+		width: 7rem;
+	}
+
+	.preferenceButton {
+		width: 5rem;
+		height: 3rem;
+	}
+}
+
+@media only screen and (max-width: 640px) {
+	body {
+		margin: 0.7rem;
+	}
+
+	nav {
+		width: 23rem;
+	}
+
+	nav button {
+		font-size: 0.7rem;
+		height: 2.5rem;
+	}
+
+	.event {
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+
+		width: 24rem;
+		height: 22rem;
+	}
+
+	.details {
+		width: 24rem;
+		height: 10rem;
+
+		margin: 0;
+
+		border: none;
+
+		text-align: center;
+	}
+
+	.timeinfo {
+		width: 24rem;
+		height: 10rem;
+
+		margin: 0;
+
+		border: none;
+
+		text-align: center;
+	}
+
+	.preference {
+		flex-direction: row;
+
+		width: 24rem;
+		height: 10rem;
+
+		margin: 0;
+
+		border: none;
+	}
+
+	.preferenceButton {
+		width: 8rem;
+		height: 3rem;
+	}
 }

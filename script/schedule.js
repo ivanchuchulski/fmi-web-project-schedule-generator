@@ -1,51 +1,41 @@
-// using the javascript immediately-invoked function expression (IIFE)
+'use strict';
 (function () {
-	window.onload = () => loadEvents();
-
-	navigationButtonHandlers();
-
-	let personalScheduleButton = document
-		.getElementById("make-personal")
-		.addEventListener("click", generatePersonalisedSchedule);
-
-	let applyFilterButton = document
-		.getElementById("apply-filter")
-		.addEventListener("click", generateScheduleByFilters);
-
-	let resetFilterButton = document
-		.getElementById("reset-filter")
-		.addEventListener("click", removeFilters);
+	addNavbarHandlers();
+	addActionButtonsHandlers();
+	loadEvents();
 })();
 
-function navigationButtonHandlers() {
-	let schedulePageButton = document.getElementById("schedule-page-button");
-	schedulePageButton.addEventListener("click", goToSchedulePage.bind(null, "schedule.html"));
-	addHighlight(schedulePageButton);
+function addNavbarHandlers() {
+	const NAVBAR_BUTTONS_HANDLERS = {
+		"schedule-page-button": () => window.location = "schedule.html",
+		"personalised-schedule-button": () => window.location = "personal-schedule.html",
+		"export-schedule": () => window.location = "personal-schedule.html",
+		"view-statistics": () => window.location = "statistics.html",
+		"logout-button": logoutRequest
+	};
 
-	let personalSchedule = document
-		.getElementById("personalised-schedule-button")
-		.addEventListener("click", () => {
-			window.location = "personal-schedule.html";
-		});
+	for (let buttonID in NAVBAR_BUTTONS_HANDLERS) {
+		document.getElementById(buttonID)
+				.addEventListener("click", NAVBAR_BUTTONS_HANDLERS[buttonID]);
+	}
 
-	let exportScheduleButton = document
-		.getElementById("export-schedule")
-		.addEventListener("click", () => {
-			window.location = "export-schedule.html";
-		});
-
-	let statisticsButton = document
-		.getElementById("view-statistics")
-		.addEventListener("click", () => {
-			window.location = "statistics.html";
-		});
-
-	let logoutButton = document
-		.getElementById("logout-button")
-		.addEventListener("click", logoutRequest);
+	addHighlight(document.getElementById("schedule-page-button"));
 }
 
-function generateScheduleByFilters() {
+function addActionButtonsHandlers() {
+	const ACTION_BUTTONS_HANDLERS = {
+		"make-personal": generatePersonalisedSchedule,
+		"apply-filter" : applyFiltersToEvents,
+		"reset-filter" : removeFilters
+	};
+
+	for (let actionButtonID in ACTION_BUTTONS_HANDLERS) {
+		document.getElementById(actionButtonID)
+				.addEventListener("click", ACTION_BUTTONS_HANDLERS[actionButtonID]);
+	}
+}
+
+function applyFiltersToEvents() {
 	let daySelectElement = document.getElementById("filter-by-day");
 	let groupSelectElement = document.getElementById("filter-by-group");
 
