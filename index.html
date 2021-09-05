@@ -2,6 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Влизане в системата</title>
 		<link rel="stylesheet" href="style/index.css" />
 		<script src="script/index.js" defer></script>
@@ -13,33 +14,30 @@
 				За да разгледате разписанието създайте нов акаунт или влезте в съществуващ такъв
 			</h4>
 		</header>
-
-		<article id="container">
+		<main>
 			<section id="registration">
 				<h2 id="registration-heading">Регистрация</h2>
 				<form id="registration-form">
-					<label id="registration-error"></label>
-					<input type="email" name="email" id="register-email" placeholder="E-mail" />
-					<input type="text" id="register-username" placeholder="Потребителско име" />
-					<input type="password" id="register-password" placeholder="Парола" />
-					<input type="password"	id="register-password-repeated"	placeholder="Потвърди паролата" />
+					<label id="registration-message"></label>
+					<input type="email" id="register-email" name="email"  placeholder="E-mail" />
+					<input type="text" id="register-username" name="registerUsername" placeholder="Потребителско име" />
+					<input type="password" id="register-password" name="registerPassword" placeholder="Парола" />
+					<input type="password"	id="register-password-repeated" name="registerRepeatedPassword"	placeholder="Потвърди паролата" />
 					<input type="submit" value="Регистрирай се" id="register-button" />
 				</form>
 			</section>
-
 			<section id="login">
 				<h2 id="login-heading">Вход</h2>
 				<form id="login-form">
-					<label id="login-error"></label>
-					<input type="text" id="login-username" placeholder="Потребителско име" />
-					<input type="password" id="login-password" placeholder="Парола" />
+					<label id="login-message"></label>
+					<input type="text" id="login-username" name="loginUsername" placeholder="Потребителско име" />
+					<input type="password" id="login-password" name="loginPassword" placeholder="Парола" />
 					<input type="submit" value="Влез" id="enter-button" />
 				</form>
 			</section>
-		</article>
-
+		</main>
 		<footer>
-			<p>Разработено от: Даниел Димитров, Виктор Христов, Иван Чучулски</p>
+			<p>Разработено за курса по "Web технологии" във Факултета по математика и информатика</p>
 		</footer>
 	</body>
 </html>

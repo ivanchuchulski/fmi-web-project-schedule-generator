@@ -1,124 +1,139 @@
+* {
+    /*font-family: Helvetica, sans-serif;*/
+}
+
+html {
+    height: 100%;
+    width: 100%;
+}
+
 body {
 	display: grid;
 	grid-template-columns: 100%;
-	grid-template-rows: 150px auto 80px;
+	grid-template-rows: 10rem auto 5rem;
     grid-template-areas: "header" "main" "footer";
 
     justify-items: center;
     align-items: center;
 
-    margin: 15px 50px;
+    margin: 3rem;
 
+    font-size: 16px;
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 header {
     grid-area: header;
-    width: 720px;
+
+    width: 45rem;
+
     text-align: center;
 }
 
-#container {
+main {
     grid-area: main;
-    width: 700px;
-    height: 390px;
-    margin: 10px auto;
-    padding: 20px 10px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    width: 44rem;
+    height: 24rem;
+
+    margin: 1rem auto;
+    padding: 2rem 1rem;
 
     background-color: #ececec;
     border: 1px solid #2c6460;
 }
 
 h2 {
-    font-size: 25px;
+    font-size: 1.5rem;
     color: #2c6460;
 }
 
 h4 {
-    font-size: 18px;
+    font-size: 1rem;
     font-weight: normal;
     color: black;
 }
 
 #registration {
-    float: left;
-    width: 314px;
-    height: 360px;
-    margin-left: 15px;
+    width: 19.5rem;
+    height: 22.5rem;
+
+    margin-left: 1rem;
 }
 
-#registration-heading {
-    width: 285px;
-    height: 35px;
+#login {
+    width: 19.5rem;
+    height: 22.5rem;
+
+    margin-right: 1rem;
+
+    background-color: #2c6460;
+}
+
+#registration-heading, #login-heading {
+    width: 18rem;
+    height: 2rem;
 
     margin: auto;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 
-    color: #2c6460;
-    font-size: 23px;
+    font-size: 1.5rem;
     text-transform: uppercase;
     text-align: center;
 }
 
+#registration-heading {
+    color: #2c6460;
+}
 
-#registration-error, #login-error {
+#login-heading {
+    color: white;
+}
+
+#registration-message, #login-message {
     display: block;
     padding: 7px;
 
-    font-size: 17px;
+    font-size: 14px;
     font-weight: bold;
     text-align: center;
     color: red;
 }
 
-#login {
-    float: right;
-    width: 314px;
-    height: 320px;
-    margin-right: 18px;
-
-    background-color: #2c6460;
-}
-
-#login-heading {
-    width: 285px;
-    height: 35px;
-
-    margin: auto;
-    padding-top: 10px;
-    padding-bottom: 10px;
-
-    color: white;
-    font-size: 23px;
-    text-transform: uppercase;
-    text-align: center;
-}
-
 input {
     box-sizing: border-box;
     display: block;
-    width: 285px;
-    height: 35px;
-    margin: 15px;
+    width: 17.5rem;
+    height: 2rem;
+    margin: 1rem;
 }
 
 #register-button {
     border: 3px solid #2c6460;
+
     color: #2c6460;
+
     font-size: 16px;
     font-weight: bold;
 }
 
 #register-button:hover {
-    background-color: #2c6460;
     color: white;
+    background-color: #2c6460;
 }
 
 #enter-button {
     border: 3px solid white;
-    background-color: #2c6460;
+
     color: white;
+    background-color: #2c6460;
+
     font-size: 16px;
     font-weight: bold;
 }
@@ -128,6 +143,42 @@ input {
     color: #2c6460;
 }
 
-body footer {
+footer {
     grid-area: footer;
+    text-align: center;
+}
+
+@media only screen and (max-width: 890px) {
+    body {
+        grid-template-rows: auto auto auto;
+        margin: 0.8rem;
+    }
+
+    header {
+        width: 25rem;
+
+        margin: 1rem 0;
+    }
+
+    main {
+        flex-direction: column;
+
+        width: 24rem;
+        height: 50rem;
+
+        padding: 0;
+    }
+
+    #registration {
+        width: 20rem;
+
+        margin-left: 0;
+    }
+
+    #login {
+        width: 20rem;
+
+        margin-right: 0;
+    }
+
 }

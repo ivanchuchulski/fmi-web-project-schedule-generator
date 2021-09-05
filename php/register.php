@@ -29,6 +29,7 @@ function getRegisterFormFields(): array {
 		$formFields['emailRegister'] = validateEmail('emailRegister');
 		$formFields['usernameRegister'] = validateUsername('usernameRegister');
 		$formFields['passwordRegister'] = validatePassword('passwordRegister');
+		
 		$formFields['passwordRegister'] = password_hash($formFields['passwordRegister'], PASSWORD_DEFAULT);
 
 		return $formFields;
@@ -40,7 +41,7 @@ function getRegisterFormFields(): array {
 
 
 function validateEmail($nameOfTheField) {
-	$lowerLimit = 5;
+	$lowerLimit = 3;
 	$upperLimit = 50;
 	$pattern = "/^[A-Za-z0-9_-]{{$lowerLimit},{$upperLimit}}@[a-z]+\.[a-z]+$/";
 

@@ -1,5 +1,4 @@
-// TODO
-// make error messages in bulgarian
+'use strict';
 (function () {
 	let registerButton = document.getElementById("register-button");
 	let enterButton = document.getElementById("enter-button");
@@ -12,37 +11,20 @@ function register(clickEvent) {
 	try {
 		clickEvent.preventDefault();
 
-		let formData = {
-			emailRegister: null,
-			usernameRegister: null,
-			passwordRegister: null,
-		};
+		let formData = {};
+		formData["emailRegister"] = validateRegistrationEmail("register-email");
+		formData["usernameRegister"] = validateRegistrationUsername("register-username");
+		formData["passwordRegister"] = validateRegistrationPassword("register-password");
 
-		// Qwerty1234
-		formData["emailRegister"] = validateEmail("register-email");
-		formData["usernameRegister"] = validateUsername("register-username");
-		formData["passwordRegister"] = validatePassword("register-password");
-		let passwordRepeatedRegister = validatePasswordRepeated("register-password-repeated");
-
-		console.log(formData["passwordRegister"]);
-		console.log(passwordRepeatedRegister);
-
-
-
+		let passwordRepeatedRegister = getRegistrationPasswordRepeated("register-password-repeated");
 		checkIfPasswordsMatch(formData["passwordRegister"], passwordRepeatedRegister);
 
-		console.log("formData :");
-		printObject(formData);
-
-		const REGISTER_REQUEST_URL = "php/api.php/registration";
 		const REGISTER_METHOD = "POST";
-		sendRegistrationRequest(
-			REGISTER_REQUEST_URL,
-			REGISTER_METHOD,
-			`formData=${JSON.stringify(formData)}`
-		);
+        const REGISTER_REQUEST_URL = "php/api.php/registration";
+
+		sendRegistrationRequest(REGISTER_REQUEST_URL, REGISTER_METHOD, `formData=${JSON.stringify(formData)}`);
 	} catch (exception) {
-		displayRegistrationError(exception);
+		displayRegistrationErrorMessage(exception);
 	}
 }
 
@@ -50,19 +32,12 @@ function login(clickEvent) {
 	try {
 		clickEvent.preventDefault();
 
-		let formData = {
-			usernameLogin: null,
-			passwordLogin: null,
-		};
-
+		let formData = {};
 		formData["usernameLogin"] = validateLoginUsername("login-username");
 		formData["passwordLogin"] = validateLoginPassword("login-password");
 
-		console.log("formData :");
-		printObject(formData);
-
-		const LOGIN_REQUEST_URL = "php/api.php/login";
 		const LOGIN_METHOD = "POST";
+		const LOGIN_REQUEST_URL = "php/api.php/login";
 
 		sendLoginRequest(LOGIN_REQUEST_URL, LOGIN_METHOD, `formData=${JSON.stringify(formData)}`);
 	} catch (exception) {
@@ -70,11 +45,11 @@ function login(clickEvent) {
 	}
 }
 
-function validateEmail(elementId) {
-	const lowerLimit = 5;
-	const upperLimit = 50;
-	const pattern = `^[A-Za-z0-9_-]{${lowerLimit},${upperLimit}}@[a-z]+\.[a-z]+$`;
-	const regex = new RegExp(pattern);
+function validateRegistrationEmail(elementId) {
+	const EMAIL_LENGTH_LOWER_LIMIT = 3;
+	const EMAIL_LENGTH_UPPER_LIMIT = 50;
+	const EMAIL_PATTERN = `^[A-Za-z0-9_-]{${EMAIL_LENGTH_LOWER_LIMIT},${EMAIL_LENGTH_UPPER_LIMIT}}@[a-z]+\.[a-z]+$`;
+	const EMAIL_REGEX = new RegExp(EMAIL_PATTERN);
 
 	let email = document.getElementById(`${elementId}`).value;
 
@@ -82,18 +57,18 @@ function validateEmail(elementId) {
 		throw "грешка: имейлът е задължително поле";
 	}
 
-	if (!email.match(regex)) {
-		throw "грешка: имейлът трябва да е във формат example@domain.com";
+	if (!email.match(EMAIL_REGEX)) {
+		throw "грешка: имейлът трябва да е във формат example0123-_@domain.com";
 	}
 
 	return formatInput(email);
 }
 
-function validateUsername(elementId) {
-	const lowerLimit = 3;
-	const upperLimit = 50;
-	const pattern = `^[A-Za-z0-9_-]{${lowerLimit},${upperLimit}}$`;
-	const regex = new RegExp(pattern);
+function validateRegistrationUsername(elementId) {
+	const USERNAME_LENGTH_LOWER_LIMIT = 3;
+	const USERNAME_LENGTH_UPPER_LIMIT = 50;
+	const USERNAME_PATTERN = `^[A-Za-z0-9_-]{${USERNAME_LENGTH_LOWER_LIMIT},${USERNAME_LENGTH_UPPER_LIMIT}}$`;
+	const USERNAME_REGEX = new RegExp(USERNAME_PATTERN);
 
 	let username = document.getElementById(`${elementId}`).value;
 
@@ -101,18 +76,18 @@ function validateUsername(elementId) {
 		throw "грешка: потребителското име е задължително поле";
 	}
 
-	if (!username.match(regex)) {
+	if (!username.match(USERNAME_REGEX)) {
 		throw `грешка: потребителското име трябва да съдържа само букви, цифри, _ и -`;
 	}
 
 	return formatInput(username);
 }
 
-function validatePassword(elementId) {
-	const lowerLimit = 6;
-	const upperLimit = 20;
-	const pattern = `^[A-Za-z0-9]{${lowerLimit},${upperLimit}}$`;
-	const regex = new RegExp(pattern);
+function validateRegistrationPassword(elementId) {
+	const PASSWORD_LOWER_LIMIT = 6;
+	const PASSWORD_UPPER_LIMIT = 20;
+	const PASSWORD_PATTERN = `^[A-Za-z0-9]{${PASSWORD_LOWER_LIMIT},${PASSWORD_UPPER_LIMIT}}$`;
+	const PASSWORD_REGEX = new RegExp(PASSWORD_PATTERN);
 
 	let password = document.getElementById(`${elementId}`).value;
 
@@ -128,25 +103,27 @@ function validatePassword(elementId) {
 		throw `грешка: паролата трябва да съдържа поне една цифра`;
 	}
 
-	if (!password.match(regex)) {
-		throw `грешка: паролата трябва да има дължина между ${lowerLimit} и ${upperLimit} символа`;
+	if (!password.match(PASSWORD_REGEX)) {
+		throw `грешка: паролата трябва да има дължина между ${PASSWORD_LOWER_LIMIT} и ${PASSWORD_UPPER_LIMIT} символа`;
 	}
 
 	return formatInput(password);
 }
 
-function validatePasswordRepeated(elementId) {
-	try {
-        return validatePassword(elementId);
-    } 
-    catch (exception) {
-        const pattern = `паролата`;
-        const regex = new RegExp(pattern);
+function getRegistrationPasswordRepeated(elementId) {
+	let passwordRepeated = document.getElementById(`${elementId}`).value;
 
-        let temp = exception.replace(pattern, 'повторената парола');
-        console.log(temp);
-        throw temp;
-    }
+	if (passwordRepeated === "") {
+		throw `грешка: повторената парола е задължително поле`;
+	}
+
+	return formatInput(passwordRepeated);
+}
+
+function checkIfPasswordsMatch(password, passwordRepeated) {
+	if (password !== passwordRepeated) {
+		throw "грешка: паролите трябва да съвпадат";
+	}
 }
 
 function validateLoginUsername(elementId) {
@@ -167,12 +144,6 @@ function validateLoginPassword(elementId) {
 	}
 
 	return formatInput(password);
-}
-
-function checkIfPasswordsMatch(password, passwordRepeated) {
-	if (password !== passwordRepeated) {
-		throw "грешка: паролите трябва да съвпадат";
-	}
 }
 
 function formatInput(formField) {
@@ -200,7 +171,7 @@ function removeSlashes(str) {
 }
 
 function removeHTMLSpecialCharacters(str) {
-	let htmlSpecialCharactersMap = {
+	const HTML_SPECIAL_CHARACTERS_MAP = {
 		"&": "&amp;",
 		"<": "&lt;",
 		">": "&gt;",
@@ -208,25 +179,13 @@ function removeHTMLSpecialCharacters(str) {
 		"'": "&#039;",
 	};
 
-	return str.replace(/[&<>"']/g, function (symbol) {
-		return htmlSpecialCharactersMap[symbol];
-	});
+	return str.replace(/[&<>"']/g, symbol => HTML_SPECIAL_CHARACTERS_MAP[symbol]);
 }
 
 function sendRegistrationRequest(url, method, data) {
 	let xhr = new XMLHttpRequest();
 
-	xhr.addEventListener("load", (r) => registrationRequestHandler(xhr));
-
-	xhr.open(method, url, true);
-	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xhr.send(data);
-}
-
-function sendLoginRequest(url, method, data) {
-	let xhr = new XMLHttpRequest();
-
-	xhr.addEventListener("load", (r) => loginRequestHandler(xhr));
+	xhr.addEventListener("load", () => registrationRequestHandler(xhr));
 
 	xhr.open(method, url, true);
 	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -234,27 +193,39 @@ function sendLoginRequest(url, method, data) {
 }
 
 function registrationRequestHandler(xhr) {
-	let response = JSON.parse(xhr.responseText);
+	const OK_RESPONSE_CODE = 200;
 
-	if (response.success) {
-		console.log("success");
-		//changed from 'registration' to match form id
-		let regForm = document.getElementById("registration-form");
-		regForm.reset();
-		displayRegistrationError("успешна регистрация");
+	let responseStatusCode = xhr.status;
+
+	if (responseStatusCode === OK_RESPONSE_CODE && JSON.parse(xhr.responseText).success) {
+		displayRegistrationSuccessMessage("успешна регистрация!");
+
+		let registrationForm = document.getElementById("registration-form");
+		registrationForm.reset();
 	} else {
-		displayRegistrationError(response.error);
+		displayRegistrationErrorMessage('неуспешна регистация!');
 	}
 }
 
-function loginRequestHandler(xhr) {
-	let response = JSON.parse(xhr.responseText);
+function sendLoginRequest(url, method, data) {
+	let xhr = new XMLHttpRequest();
 
-	if (response.success) {
-		console.log("success");
+	xhr.addEventListener("load", () => loginRequestHandler(xhr));
+
+	xhr.open(method, url, true);
+	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhr.send(data);
+}
+
+function loginRequestHandler(xhr) {
+	const OK_RESPONSE_CODE = 200;
+
+	let responseStatusCode = xhr.status;
+
+	if (responseStatusCode === OK_RESPONSE_CODE && JSON.parse(xhr.responseText).success) {
 		displaySchedulePage("schedule.html");
 	} else {
-		displayLoginError(response.error);
+		displayLoginError('неуспешено влизане в системата');
 	}
 }
 
@@ -262,14 +233,24 @@ function displaySchedulePage(pageURL) {
 	window.location = pageURL;
 }
 
-function displayRegistrationError(error) {
-	let errorLabel = document.getElementById("registration-error");
-	errorLabel.innerHTML = error;
+function displayRegistrationSuccessMessage(message) {
+	let errorLabel = document.getElementById("registration-message");
+
+	errorLabel.style.color = "green";
+	errorLabel.innerHTML = message;
 }
 
-function displayLoginError(error) {
-	let errorLabel = document.getElementById("login-error");
-	errorLabel.innerHTML = error;
+function displayRegistrationErrorMessage(message) {
+	let errorLabel = document.getElementById("registration-message");
+
+	errorLabel.style.color = "red";
+	errorLabel.innerHTML = message;
+}
+
+function displayLoginError(message) {
+	let errorLabel = document.getElementById("login-message");
+
+	errorLabel.innerHTML = message;
 }
 
 function printObject(object) {
