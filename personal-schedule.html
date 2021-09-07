@@ -8,26 +8,22 @@
 		<script src="script/personal-schedule.js" defer></script>
 	</head>
 	<body>
-		<header>
-			<nav>
-				<button id="schedule-page-button">График на презентации</button>
-				<button id="personalised-schedule-button">Персонализиран график</button>
-				<button id="export-schedule">Разпечатай разписанието</button>
-				<button id="view-statistics">Статистика</button>
-				<button id="logout-button">Изход от системата</button>
-			</nav>
-		</header>
+		<nav>
+			<button id="schedule-page-button">График на презентации</button>
+			<button id="personalised-schedule-button">Персонализиран график</button>
+			<button id="export-schedule">Разпечатай разписанието</button>
+			<button id="view-statistics">Статистика</button>
+			<button id="logout-button">Изход от системата</button>
+		</nav>
 		<section id="information">
 			<h2 id="username">Здравейте</h2>
-			<h2 id="username">Това е вашият персонален график.</h2>
+			<h4>Това е вашият персонален график.</h4>
 			<button id="apply-changes">Приложи промените</button>
 			<label id="messageLabel"></label>
 		</section>
 		<section id="filters">
 			<div id="filter-options">
-				<label for="filter-by-day"
-					>Избери ден на представяне
-
+				<label for="filter-by-day">Избери ден на представяне
 					<select id="filter-by-day">
 						<option disabled selected value></option>
 						<option value="day1">ден 1</option>
@@ -35,9 +31,7 @@
 						<option value="day3">ден 3</option>
 					</select>
 				</label>
-				<label for="filter-by-group"
-					>Избери група на представящия
-
+				<label for="filter-by-group">Избери група на представящия
 					<select id="filter-by-group">
 						<option disabled selected value></option>
 						<option value="group1">група 1</option>
@@ -46,9 +40,7 @@
 						<option value="group4">група 4</option>
 					</select>
 				</label>
-				<label for="filter-by-preference"
-					>Избери предпочитание
-
+				<label for="filter-by-preference">Избери предпочитание
 					<select id="filter-by-preference">
 						<option disabled selected value></option>
 						<option value="willAttend">ще отида</option>
@@ -63,7 +55,7 @@
 		</section>
 		<main id="personal-events"></main>
 		<footer>
-			<p>Разработено от: Даниел Димитров, Виктор Христов, Иван Чучулски</p>
+			<p>Разработено за курса по "Web технологии" във Факултета по математика и информатика</p>
 		</footer>
 	</body>
 </html>
