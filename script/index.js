@@ -234,17 +234,17 @@ function displaySchedulePage(pageURL) {
 }
 
 function displayRegistrationSuccessMessage(message) {
-	let errorLabel = document.getElementById("registration-message");
+	let messageLabel = document.getElementById("registration-message");
 
-	errorLabel.style.color = "green";
-	errorLabel.innerHTML = message;
+	messageLabel.style.color = "green";
+	messageLabel.innerHTML = message;
 }
 
 function displayRegistrationErrorMessage(message) {
-	let errorLabel = document.getElementById("registration-message");
+	let messageLabel = document.getElementById("registration-message");
 
-	errorLabel.style.color = "red";
-	errorLabel.innerHTML = message;
+	messageLabel.style.color = "red";
+	messageLabel.innerHTML = message;
 }
 
 function displayLoginError(message) {

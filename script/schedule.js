@@ -11,7 +11,7 @@ function addNavbarHandlers() {
 		"personalised-schedule-button": () => window.location = "personal-schedule.html",
 		"export-schedule": () => window.location = "personal-schedule.html",
 		"view-statistics": () => window.location = "statistics.html",
-		"logout-button": logoutRequest
+		"logout-button": logout
 	};
 
 	for (let buttonID in NAVBAR_BUTTONS_HANDLERS) {
@@ -57,10 +57,8 @@ function ajaxLoadHandler(xhr) {
 	let response = JSON.parse(xhr.responseText);
 
 	if (response.success) {
-		console.log("success load schedule");
 		drawEvents(response);
 	} else {
-		console.log("error : load schedule");
 		displayMessage(
 			"грешка : не е започната сесия или сесията е изтелкла(или файлът със събитията не може да бъде зареден)"
 		);
@@ -73,8 +71,6 @@ function drawEvents(responseText) {
 
 	let eventList = JSON.parse(responseText.data);
 	let eventParent = document.getElementById("event-list");
-
-	console.log(eventList);
 
 	for (let event of eventList) {
 		let {theme, presenterName, place, facultyNumber, groupNumber, dayNumber, presentDate, numberOfPreferences
@@ -322,17 +318,13 @@ function generatePersonalisedSchedule() {
 
 	if (preferences.length === 0) {
 		displayMessage("грешка : не сте избрали никакви събития!");
-		// window.location = "personal-schedule.html";
 		return;
 	}
-
-	// console.log("preferences");
-	// console.log(preferences);
 
 	const LOAD_SCHEDULE_URL = "php/api.php/generatePersonalSchedule";
 	const LOAD_SCHEDULE_METHOD = "POST";
 
-	ajaxPersonalScheduleRequest(
+	updatePersonalScheduleRequest(
 		LOAD_SCHEDULE_URL,
 		LOAD_SCHEDULE_METHOD,
 		`preferencesData=${JSON.stringify(preferences)}`
@@ -351,17 +343,17 @@ function generatePreferenceDetails(preferenceButton) {
 	};
 }
 
-function ajaxPersonalScheduleRequest(url, method, data) {
+function updatePersonalScheduleRequest(url, method, data) {
 	let xhr = new XMLHttpRequest();
 
-	xhr.addEventListener("load", () => ajaxPersonalScheduleHandler(xhr));
+	xhr.addEventListener("load", () => updatePersonalScheduleHandler(xhr));
 
 	xhr.open(method, url, true);
 	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhr.send(data);
 }
 
-function ajaxPersonalScheduleHandler(xhr) {
+function updatePersonalScheduleHandler(xhr) {
 	let response = JSON.parse(xhr.responseText);
 
 	if (response.success) {
@@ -377,40 +369,31 @@ function goToPersonalSchedulePage(pageUrl) {
 	window.location = pageUrl;
 }
 
-function logoutRequest() {
+function logout() {
 	const LOGOUT_URL = "php/api.php/logout";
 	const LOGOUT_METHOD = "POST";
 
-	ajaxLogoutRequest(LOGOUT_URL, LOGOUT_METHOD);
+	logoutRequest(LOGOUT_URL, LOGOUT_METHOD);
 }
 
-function ajaxLogoutRequest(url, method, data) {
+function logoutRequest(url, method, data) {
 	let xhr = new XMLHttpRequest();
 
-	xhr.addEventListener("load", () => ajaxLogoutHandler(xhr));
+	xhr.addEventListener("load", () => logoutRequestHandler(xhr));
 
 	xhr.open(method, url, true);
 	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhr.send(data);
 }
 
-function ajaxLogoutHandler(xhr) {
+function logoutRequestHandler(xhr) {
 	let response = JSON.parse(xhr.responseText);
 
 	if (response.success) {
-		console.log("success : logout request");
-		goToLoginPage("index.html");
+		window.location = "index.html";
 	} else {
-		console.log("error : logout request");
+		displayMessage("грешка при опит за излизане от системата");
 	}
-}
-
-function goToLoginPage(loginPageUrl) {
-	window.location = loginPageUrl;
-}
-
-function goToSchedulePage(schedulePageUrl) {
-	window.location = schedulePageUrl;
 }
 
 function displayMessage(text) {
