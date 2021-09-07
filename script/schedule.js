@@ -9,7 +9,7 @@ function addNavbarHandlers() {
 	const NAVBAR_BUTTONS_HANDLERS = {
 		"schedule-page-button": () => window.location = "schedule.html",
 		"personalised-schedule-button": () => window.location = "personal-schedule.html",
-		"export-schedule": () => window.location = "personal-schedule.html",
+		"export-schedule": () => window.location = "export-schedule.html",
 		"view-statistics": () => window.location = "statistics.html",
 		"logout-button": logout
 	};
@@ -49,7 +49,7 @@ function loadEventsRequest(url, method, data) {
 	xhr.addEventListener("load", () => ajaxLoadHandler(xhr));
 
 	xhr.open(method, url, true);
-	xhr.setRequestHeader("Content-type", "application/presentations_data");
+	xhr.setRequestHeader("Content-type", "application/json");
 	xhr.send(data);
 }
 
@@ -71,6 +71,8 @@ function drawEvents(responseText) {
 
 	let eventList = JSON.parse(responseText.data);
 	let eventParent = document.getElementById("event-list");
+
+	console.log(eventList);
 
 	for (let event of eventList) {
 		let {theme, presenterName, place, facultyNumber, groupNumber, dayNumber, presentDate, numberOfPreferences
@@ -225,6 +227,20 @@ function applyFiltersToEvents() {
 	if (filterByGroup) {
 		filterEventsByGroup(events, filterByGroup.slice(-1));
 	}
+
+	let allEventsAreHidden = true;
+	for (let event of events) {
+		if (event.style.display !== "none") {
+			allEventsAreHidden = false;
+			break;
+		}
+	}
+
+	if (allEventsAreHidden) {
+		displayMessage("няма събития, които да отговарят на критериите Ви");
+	} else {
+		clearMessage();
+	}
 }
 
 function displayAllEvents() {
@@ -237,7 +253,6 @@ function displayAllEvents() {
 
 function filterEventsByDay(events, dayFilter) {
 	for (let event of events) {
-		// let eventDay = event.getElementsByClassName("dayNumber")[0].innerText.split(" ")[1];
 		let eventDay = event.getElementsByClassName("date")[0].innerText.slice(-1);
 
 		if (eventDay !== dayFilter) {
@@ -400,6 +415,12 @@ function displayMessage(text) {
 	let messageLabel = document.getElementById("message-label");
 
 	messageLabel.innerText = text;
+}
+
+function clearMessage() {
+	let messageLabel = document.getElementById("message-label");
+
+	messageLabel.innerText = "";
 }
 
 function logError(object) {
