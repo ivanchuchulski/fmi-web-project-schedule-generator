@@ -1,40 +1,45 @@
+* {
+    /*font-family: Helvetica, sans-serif;*/
+}
+
+html {
+    height: 100%;
+    width: 100%;
+}
+
 body {
 	display: grid;
 	grid-template-columns: 100%;
-	grid-template-rows: 150px auto 80px;
-    grid-template-areas: "header" "main" "footer";
+	grid-template-rows: 10rem auto 5rem;
+    grid-template-areas: "nav" "infromation" "footer";
 
     justify-items: center;
     align-items: center;
 
     margin: 15px 50px;
     
-	font-size: 12px;
+	font-size: 16px;
 	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-header {
-    grid-area: header;
-    width: 750px;
-}
+nav {
+    grid-area: nav;
+    width: 50rem;
 
-header nav {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
 }
 
-header button {
-    /* position: relative; */
-    width: 180px;
-    height: 60px;
-    padding: 15px 10px;
-}
+nav button {
+    width: 15rem;
+    height: 4rem;
 
-button a {
-	text-decoration: none;
-    color: black;
+    padding: 0.3rem;
+
+    color: #2c6460;
+    font-weight: bold;
 }
 
 main {
@@ -42,6 +47,6 @@ main {
     width: 750px;
 }
 
-body footer {
+footer {
     grid-area: footer;
 }

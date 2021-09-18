@@ -1,28 +1,30 @@
-// using the javascript immediately-invoked function expression (IIFE)
+'use strict';
 (function () {
-	let logoutButton = document
-		.getElementById("logout-button")
-		.addEventListener("click", logoutRequest);
+	addNavbarHandlers();
 })();
 
-function logoutRequest() {
+function addNavbarHandlers() {
+	document.getElementById("logout-button").addEventListener("click", logout);
+}
+
+function logout() {
 	const LOGOUT_URL = "php/api.php/logout";
 	const LOGOUT_METHOD = "POST";
 
-	ajaxLogoutRequest(LOGOUT_URL, LOGOUT_METHOD);
+	logoutRequest(LOGOUT_URL, LOGOUT_METHOD);
 }
 
-function ajaxLogoutRequest(url, method, data) {
+function logoutRequest(url, method, data) {
 	let xhr = new XMLHttpRequest();
 
-	xhr.addEventListener("load", () => ajaxLogoutHandler(xhr));
+	xhr.addEventListener("load", () => logoutHandler(xhr));
 
 	xhr.open(method, url, true);
 	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhr.send(data);
 }
 
-function ajaxLogoutHandler(xhr) {
+function logoutHandler(xhr) {
 	let response = JSON.parse(xhr.responseText);
 
 	if (response.success) {
