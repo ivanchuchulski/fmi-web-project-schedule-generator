@@ -1,36 +1,45 @@
+* {
+	/*font-family: Helvetica, sans-serif;*/
+}
+
+html {
+	height: 100%;
+	width: 100%;
+}
+
 body {
 	display: grid;
 	grid-template-columns: 100%;
-	grid-template-rows: 150px auto auto 80px;
-	grid-template-areas: "header" "information" "main" "footer";
+	grid-template-rows: 10rem auto auto 5rem;
+	grid-template-areas: "nav" "information" "main" "footer";
 
-	justify-items: center;
 	align-items: center;
+	justify-items: center;
 
-	margin: 15px 50px;
+	margin: 1rem 3rem;
 
-	font-size: 12px;
+	font-size: 16px;
 	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-header {
-	grid-area: header;
-	width: 750px;
-}
+nav {
+	grid-area: nav;
+	width: 50rem;
 
-header nav {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
 }
 
-header button {
-	width: 180px;
-	height: 60px;
-    padding: 5px 5px;
-    color: #2c6460;
-    font-weight: bold;
+nav button {
+	width: 15rem;
+	height: 4rem;
+
+	padding: 0.3rem;
+
+	color: #2c6460;
+	font-weight: bold;
 }
 
 #information {
@@ -40,25 +49,26 @@ header button {
 	color: #2c6460;
 }
 
-#messageLabel {
+#message-label {
 	display: block;
-	font-size: 16pt;
 }
 
 main {
-    grid-area: main;
-    
-    display: flex;
+	grid-area: main;
+
+	display: flex;
 	flex-direction: row;
-	align-items: center;
 	justify-content: center;
-    width: 770px;   
+	flex-wrap: wrap;
+
+	width: 95rem;
 }
 
 .export-option {
 	width: 200px;
 	height: 60px;
 	padding: 10px 10px;
+	margin: 5px;
 	color: #2c6460;
     font-weight: bold;
 }
@@ -69,7 +79,53 @@ main {
 }
 
 
-body footer {
+footer {
 	grid-area: footer;
-	font-size: 16px;
+}
+
+@media only screen and (max-width: 1480px) {
+	body {
+		grid-template-rows: auto auto auto auto auto;
+		margin: 1rem;
+	}
+
+	nav {
+		width: 28rem;
+	}
+
+	nav button {
+		font-size: 0.7rem;
+		height: 3.5rem;
+	}
+
+	#greeting {
+		font-size: 16px;
+	}
+
+	main {
+		flex-direction: column;
+		flex-wrap: nowrap;
+		align-items: center;
+		justify-content: center;
+		width: 38rem;
+	}
+
+	footer {
+		font-size: 12px;
+	}
+}
+
+@media only screen and (max-width: 640px) {
+	body {
+		margin: 0.7rem;
+	}
+
+	nav {
+		width: 23rem;
+	}
+
+	nav button {
+		font-size: 0.7rem;
+		height: 2.5rem;
+	}
 }

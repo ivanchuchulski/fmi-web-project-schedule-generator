@@ -117,7 +117,7 @@ footer {
 	font-size: 16px;
 }
 
-@media only screen and (max-width: 1280px) {
+@media only screen and (max-width: 1480px) {
 	body {
 		grid-template-rows: auto auto auto auto;
 
@@ -136,6 +136,11 @@ footer {
 	main {
 		width: 30rem;
 	}
+
+	footer {
+		font-size: 12px;
+	}
+
 }
 
 @media only screen and (max-width: 640px) {

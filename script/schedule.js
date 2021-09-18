@@ -67,7 +67,7 @@ function ajaxLoadHandler(xhr) {
 
 function drawEvents(responseText) {
 	let username = responseText.username;
-	document.getElementById("username").innerText += ", " + username + "!";
+	document.getElementById("username").innerText += " " + username + "!";
 
 	let eventList = JSON.parse(responseText.data);
 	let eventParent = document.getElementById("event-list");
