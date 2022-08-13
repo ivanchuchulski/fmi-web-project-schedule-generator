@@ -1,4 +1,7 @@
 'use strict';
+
+import { foo } from "./utils.js";
+
 (function () {
 	let registerButton = document.getElementById("register-button");
 	let enterButton = document.getElementById("enter-button");
@@ -10,6 +13,8 @@
 function register(clickEvent) {
 	try {
 		clickEvent.preventDefault();
+		
+		foo();
 
 		let formData = {};
 		formData["emailRegister"] = validateRegistrationEmail("register-email");
@@ -200,6 +205,8 @@ function registrationRequestHandler(xhr) {
 	if (responseStatusCode === OK_RESPONSE_CODE && JSON.parse(xhr.responseText).success) {
 		displayRegistrationSuccessMessage("успешна регистрация!");
 
+		clearLoginError();
+
 		let registrationForm = document.getElementById("registration-form");
 		registrationForm.reset();
 	} else {
@@ -251,6 +258,12 @@ function displayLoginError(message) {
 	let errorLabel = document.getElementById("login-message");
 
 	errorLabel.innerHTML = message;
+}
+
+function clearLoginError() {
+	let errorLabel = document.getElementById("login-message");
+
+	errorLabel.innerHTML = "";
 }
 
 function printObject(object) {
