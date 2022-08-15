@@ -2,7 +2,7 @@
 
 require_once "utility.php";
 require_once "preference.php";
-require_once "presentation.php";
+require_once "repository/presentation.php";
 
 function loadPersonalSchedule() {
 	try {

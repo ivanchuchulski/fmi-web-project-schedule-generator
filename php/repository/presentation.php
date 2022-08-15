@@ -1,5 +1,8 @@
 <?php
+// because database.php contains a class, we don't need to provide relative path to the file
 require_once "database.php";
+// otherwise we can do that
+//require_once ".." . DIRECTORY_SEPARATOR . "database.php";
 
 class Presentation
 {

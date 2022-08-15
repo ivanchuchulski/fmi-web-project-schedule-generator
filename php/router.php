@@ -1,7 +1,7 @@
 <?php
-require_once "register.php";
-require_once "login.php";
-require_once "logout.php";
+require_once "user_access" . DIRECTORY_SEPARATOR . "register.php";
+require_once "user_access" . DIRECTORY_SEPARATOR . "login.php";
+require_once "user_access" . DIRECTORY_SEPARATOR . "logout.php";
 require_once "load_schedule.php";
 require_once "generate_personal_schedule.php";
 require_once "load_personal_schedule.php";
