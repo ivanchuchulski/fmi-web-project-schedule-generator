@@ -10,7 +10,7 @@ require_once "export_full_schedule_to_csv.php";
 require_once "export_personal_schedule_to_csv.php";
 require_once "generate_statistics.php";
 
-class Interactor
+class Router
 {
 	public function performAction($requestURL) {
 		header("Content-type: application/json");

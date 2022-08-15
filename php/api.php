@@ -1,11 +1,11 @@
 <?php
 
-require_once "interactor.php";
+require_once "router.php";
 
-$interactor = new Interactor();
+$router = new Router();
 
 $requestURL = $_SERVER["REQUEST_URI"];
 
-$interactor->performAction($requestURL);
+$router->performAction($requestURL);
 
 ?>

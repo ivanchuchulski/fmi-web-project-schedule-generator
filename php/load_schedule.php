@@ -12,15 +12,7 @@ function loadSchedule() {
 
 		$presentationsFilePath = $config['presentations']['path'];
 		$show = $config['showPreferencesOnMainPage']['show'];
-		$displayNumberOfPreferences = null;
-
-		// if the value of $show is missing, 0, FALSE it is considered empty
-		if (empty($show)) {
-			$displayNumberOfPreferences = FALSE;
-		}
-		else {
-			$displayNumberOfPreferences = TRUE;
-		}
+		$displayNumberOfPreferences = !empty($show);
 
 		if (!file_exists($presentationsFilePath)) {
 			throw new Exception("грешка : файлът с презентациите не може да бъде намерен");
@@ -39,7 +31,7 @@ function loadSchedule() {
 				$presentation->addPresentationData($decodedPresentation);
 			}
 
-			// here  $decodedPresentation['theme'] is from the JSON
+			// here $decodedPresentation['theme'] is from the JSON
 			$preferenceDetails = array('username' => $username, 'presentationTheme' => $decodedPresentation['theme']);
 			$presentationPreference = $preference->getPreferenceByUsernameAndTheme($preferenceDetails);
 
