@@ -1,8 +1,8 @@
 <?php
 
 require_once "utility.php";
-require_once "preference.php";
-require_once "repository/presentation.php";
+require_once "repository" . DIRECTORY_SEPARATOR . "preference.php";
+require_once "repository" . DIRECTORY_SEPARATOR . "presentation.php";
 
 function loadPersonalSchedule() {
 	try {

@@ -2,13 +2,13 @@
 require_once "user_access" . DIRECTORY_SEPARATOR . "register.php";
 require_once "user_access" . DIRECTORY_SEPARATOR . "login.php";
 require_once "user_access" . DIRECTORY_SEPARATOR . "logout.php";
-require_once "load_schedule.php";
-require_once "generate_personal_schedule.php";
-require_once "load_personal_schedule.php";
-require_once "update_personal_schedule.php";
-require_once "export_full_schedule_to_csv.php";
-require_once "export_personal_schedule_to_csv.php";
-require_once "generate_statistics.php";
+require_once "content_manager" . DIRECTORY_SEPARATOR . "load_schedule.php";
+require_once "content_manager" . DIRECTORY_SEPARATOR . "generate_personal_schedule.php";
+require_once "content_manager" . DIRECTORY_SEPARATOR . "load_personal_schedule.php";
+require_once "content_manager" . DIRECTORY_SEPARATOR . "update_personal_schedule.php";
+require_once "report_presenter" . DIRECTORY_SEPARATOR . "export_full_schedule_to_csv.php";
+require_once "report_presenter" . DIRECTORY_SEPARATOR . "export_personal_schedule_to_csv.php";
+require_once "report_presenter" . DIRECTORY_SEPARATOR . "generate_statistics.php";
 
 class Router
 {

@@ -1,9 +1,9 @@
 <?php
 
 require_once "utility.php";
-require_once "preference.php";
+require_once "repository" . DIRECTORY_SEPARATOR . "preference.php"; 
 
-function generatePersonalSchedule() {
+function updatePersonalSchedule() {
 	try {
 		checkSessionSet();
 
@@ -14,14 +14,21 @@ function generatePersonalSchedule() {
 		$preference = new Preference();
 
 		$username = $_SESSION['username'];
+		$CANCEL_PREFERENCE = "cancelAttend";
 
 		foreach ($preferencesData as $preferenceDetails) {
+			$preferenceType = $preferenceDetails['preferenceType'];
 			$preferenceDetails['username'] = $username;
 
 			$preferencesRow = $preference->getPreferenceByUsernameAndTheme($preferenceDetails);
 
 			if (empty($preferencesRow)) {
-				$preference->addPreferenceData($preferenceDetails);
+				throw new Exception("грешка : преференцията не съществува");
+			}
+
+			if (strcmp($preferenceType, $CANCEL_PREFERENCE) == 0) {
+				$removeDetails = array('username' => $username, 'presentationTheme' => $preferenceDetails['presentationTheme']);
+				$preference->removeUserPreference($removeDetails);
 			}
 			else {
 				$preference->updateUserPreference($preferenceDetails);
@@ -34,7 +41,9 @@ function generatePersonalSchedule() {
 	catch (Exception $exception) {
 		$response = ['success' => false, 'error' => $exception->getMessage()];
 		echo json_encode($response);
-	}
+	};
+
 }
+
 
 ?>

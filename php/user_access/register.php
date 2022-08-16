@@ -1,7 +1,7 @@
 <?php
 
 require_once "utility.php";
-require_once "user.php";
+require_once "repository" . DIRECTORY_SEPARATOR ."user.php";
 
 function registration() {
 	try {

@@ -1,6 +1,6 @@
 <?php
 
-require_once "statistics.php";
+require_once "repository" . DIRECTORY_SEPARATOR . "statistics.php";
 
 function generateStatistics()
 {
